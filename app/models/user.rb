@@ -3,6 +3,8 @@ class User < ApplicationRecord
     validates :email, :session_token, :uniquenes: true 
     validates :password, length: { minimum: 6 }, allow_nil: true
 
+    attr_reader :password
+
     after_initialize :ensure_session_token
 
     def self.find_by_credentials(email, password)
@@ -19,7 +21,7 @@ class User < ApplicationRecord
         Bcrypt::Password.new(self.password_digest).is_password?(password)
     end
 
-    def reset_session_token!!
+    def reset_session_token!
         generate_unique_session_token
         save!
         self.session_token
