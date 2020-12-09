@@ -3,6 +3,7 @@ import * as APIUtil from "../util/session_api_util";
 export const FETCH_CURRENT_USER = "FETCH_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
+export const RECEIVE_EMAIL_CHECK = "RECEIVE_EMAIL_CHECK";
 
 export const fetchCurrentUser = (currentUser) => ({
   type: FETCH_CURRENT_USER,
@@ -17,6 +18,15 @@ export const receiveSessionErrors = (errors) => ({
   type: RECEIVE_SESSION_ERRORS,
   payload: errors,
 });
+
+const receiveEmailCheck = emailCheck => ({
+  type: RECEIVE_EMAIL_CHECK,
+  payload: emailCheck
+})
+
+export const emailCheck = (email) => (dispatch) =>
+  APIUtil.checkEmail(email)
+    .then(emailExists => dispatch(receiveEmailCheck(emailExists)))
 
 export const signup = (user) => (dispatch) =>
   APIUtil.signup(user)

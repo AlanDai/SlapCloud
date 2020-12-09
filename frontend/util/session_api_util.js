@@ -17,3 +17,10 @@ export const logout = () =>
     url: "/api/session",
     method: "DELETE",
   });
+
+export const checkEmail = email => (
+  $.ajax({
+    url: '/api/user/email',
+    data: { email: email }
+  })
+)
