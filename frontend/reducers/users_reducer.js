@@ -1,19 +1,19 @@
-import { FETCH_CURRENT_USER } from '../actions/session_actions';
+import { FETCH_CURRENT_USER } from "../actions/session_actions";
 
 const initialState = {
   id: null,
-  email: null
-}
+  email: null,
+};
 
 export default userReducer = (state = initialState, action) => {
   Object.freeze(state);
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_CURRENT_USER:
       return {
         ...state,
-        [action.payload.id]: action.payload
-      }
+        [action.payload.id]: action.payload,
+      };
     default:
       return state;
   }
-}
+};

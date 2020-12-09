@@ -11,11 +11,6 @@ class Api::UsersController < ApplicationController
         end
     end
 
-    def email
-        emailExists = User.find_by(email: params[:email]) ? true : false
-        render json: { emailExists: emailExists }
-    end
-
     private
 
     def user_params
