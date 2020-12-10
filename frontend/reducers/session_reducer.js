@@ -1,6 +1,7 @@
 import {
   FETCH_CURRENT_USER,
   LOGOUT_CURRENT_USER,
+  RECEIVE_EMAIL_CHECK
 } from "../actions/session_actions";
 
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
   emailExists: null
 };
 
-export default sessionReducer = (state = initialState, action) => {
+const sessionReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case FETCH_CURRENT_USER:
@@ -21,3 +22,5 @@ export default sessionReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default sessionReducer;
