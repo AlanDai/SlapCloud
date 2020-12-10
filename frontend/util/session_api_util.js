@@ -7,7 +7,7 @@ export const login = (user) =>
 
 export const signup = (user) =>
   $.ajax({
-    url: "/api/user",
+    url: "/api/user/email",
     method: "POST",
     data: { user },
   });
@@ -18,9 +18,9 @@ export const logout = () =>
     method: "DELETE",
   });
 
-export const checkEmail = email => (
+export const checkEmail = (email) =>
   $.ajax({
-    url: '/api/user/email',
-    data: { email: email }
-  })
-)
+    url: "/api/user/email",
+    method: "POST",
+    data: { email: email },
+  });

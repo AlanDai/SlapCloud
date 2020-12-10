@@ -12,7 +12,7 @@ class Api::UsersController < ApplicationController
     end
 
     def checkEmail
-        emailExists = !!User.find_by(email: params[:email])
+        emailExists = User.find_by(email: params[:email]) ? true : false
         render json: { emailExists: emailExists }
     end
 

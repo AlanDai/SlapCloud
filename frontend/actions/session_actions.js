@@ -4,6 +4,7 @@ export const FETCH_CURRENT_USER = "FETCH_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const RECEIVE_EMAIL_CHECK = "RECEIVE_EMAIL_CHECK";
+export const REMOVE_EMAIL_CHECK = "REMOVE_EMAIL_CHECK";
 
 export const fetchCurrentUser = (currentUser) => ({
   type: FETCH_CURRENT_USER,
@@ -19,24 +20,29 @@ export const receiveSessionErrors = (errors) => ({
   payload: errors,
 });
 
-const receiveEmailCheck = emailCheck => ({
+const receiveEmailCheck = (email, emailExists) => ({
   type: RECEIVE_EMAIL_CHECK,
-  payload: emailCheck
+  payload: { email, emailExists }
+});
+
+export const emailUncheck = () => ({
+  type: REMOVE_EMAIL_CHECK,
 })
 
 export const emailCheck = (email) => (dispatch) =>
-  APIUtil.checkEmail(email)
-    .then(emailExists => dispatch(receiveEmailCheck(emailExists)))
+  APIUtil.checkEmail(email).then((emailExists) =>
+    dispatch(receiveEmailCheck(email, emailExists.emailExists))
+  );
 
 export const signup = (user) => (dispatch) =>
   APIUtil.signup(user)
     .then((userRes) => dispatch(fetchCurrentUser(userRes)))
-    .catch((errors) => dispatch(receiveSessionErrors(errors)));
+    // .catch((errors) => dispatch(receiveSessionErrors(errors)));
 
 export const login = (user) => (dispatch) =>
   APIUtil.login(user)
     .then((user) => dispatch(fetchCurrentUser(user)))
-    .catch((errors) => dispatch(receiveSessionErrors(errors)));
+    // .catch((errors) => dispatch(receiveSessionErrors(errors)));
 
 export const logout = () => (dispatch) =>
   APIUtil.logout()
