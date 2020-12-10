@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 
 import UserModal from './user_modal';
 
-const mapStateToProps = ({ modal }) => ({
-  isOpen: modal.user,
-  emailExists: state.modal.emailExists
+const mapStateToProps = ({ session }) => ({
+  emailExists: session.emailExists
 });
 
 const mapDispatchToProps = dispatch => ({

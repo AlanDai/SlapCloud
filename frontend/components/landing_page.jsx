@@ -8,6 +8,8 @@ class LandingPage extends React.Component {
     this.state = {
       openModal: false
     }
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
@@ -20,8 +22,8 @@ class LandingPage extends React.Component {
 
     return (
       <div>
-        <button className="signin-btn" onClick={handleClick}>Sign in</button>
-        <button className="signup-btn" onClick={handleClick}>Create account</button>
+        <button className="signin-btn" onClick={this.handleClick}>Sign in</button>
+        <button className="signup-btn" onClick={this.handleClick}>Create account</button>
         { openModal &&
           <UserModalContainer />
         }
