@@ -1,7 +1,17 @@
 import React from "react";
-import { Switch } from "react-router-dom";
-import UserModalContainer from "modal/user/user_modal_container";
+import { Route, Switch } from "react-router-dom";
 
-const App = () => <UserModalContainer />;
+import { AuthRoute } from '../util.route_util';
+import LandingPage from "./landing_page";
+
+const App = () => (
+  <div>
+    <Switch>
+      <AuthRoute exact path="/" component={LandingPage} />
+      <Route path="/" render={<h1>Discover</h1>}/>
+    </Switch>
+  </div>
+)
+
 
 export default App;
