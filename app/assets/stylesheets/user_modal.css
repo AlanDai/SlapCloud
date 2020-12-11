@@ -1,0 +1,116 @@
+/* both forms */
+
+.connect-form, .session-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 400px;
+  position: absolute;
+  margin: auto;
+  top:0; left:0; bottom:0; right:0;
+  z-index: 11;
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px 20px 10px 20px;
+}
+
+.connect-input-form input[type="email"], .session-form button {
+  color: black;
+  font-family: 'Overpass', sans-serif;
+  font-size: 18px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 7px 10px 7px 0;
+  margin: 10px 0 10px 0;
+}
+
+.connect-input-form input[type="email"]:focus, .session-input-form input:focus {
+  outline: none;
+}
+
+.demo-input button:focus, .connect-submit:focus, .session-input-form button:focus {
+  outline: none;
+}
+
+/* connect form */
+
+.media-btn-container {
+  border-bottom: 2px solid black;
+}
+
+.demo-input {
+  padding-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+
+.demo-input button {
+  background-color: #383838;
+}
+
+.connect-submit {
+  background-color: #FF4500;
+}
+
+.connect-input-form {
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.connect-input-form input[type="email"] {
+  width: 388px;
+}
+
+.connect-input-form input[type="email"]::placeholder {
+  color: lightgray;
+}
+
+.connect-submit, .demo-input button {
+  width: 400px;
+  height: 44px;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  padding: 11px 5px 11px 5px;
+}
+
+/* session form */
+
+.session-form button {
+  width: 400px;
+  margin-bottom: 10px;
+  background-color: white;
+  text-align: left;
+}
+
+.session-input-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.session-input-form input[type="password"] {
+  width: 394px;
+  height: 41px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: black;
+  font-family: 'Overpass', sans-serif;
+  font-size: 15px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.session-input-form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 1px solid #FF4500;
+  background-color: #FF4500;
+}
