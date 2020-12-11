@@ -5,7 +5,7 @@ const initialState = {
   email: null,
 };
 
-export default userReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case FETCH_CURRENT_USER:
@@ -17,3 +17,5 @@ export default userReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default usersReducer;

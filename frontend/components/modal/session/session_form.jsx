@@ -25,16 +25,18 @@ class SessionForm extends React.Component {
     const { email, submitText } = this.props;
 
     return(
-      <div>
+      <div className="session-form">
         <div>
           <button onClick={this.handleClick}>{"\u25C0"}{email}</button>
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="password" placeholder="Your Password"/>
-          <button type="submit" className="signin-submit" type="submit">
-            {submitText}
-          </button>
-        </form>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <input type="password" placeholder="Your Password"/>
+            <button type="submit" className="signin-submit" type="submit">
+              {submitText}
+            </button>
+          </form>
+        </div>
       </div>
     )
   }
