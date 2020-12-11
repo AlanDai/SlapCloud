@@ -1,0 +1,10 @@
+.errors {
+  font-family: 'Overpass', sans-serif;
+  font-size: 13px;
+  color: #e60000;
+  margin: 3px;
+}
+
+.connect-form .errors {
+  margin-top: 15px;
+}

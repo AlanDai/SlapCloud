@@ -1,1 +1,10 @@
+<% if logged_in? %>
+  <script id="bootstrap-current-user" type="text/javascript">
+  	window.currentUser = <%= render("api/users/user.json.jbuilder",
+  		user: current_user).html_safe %>
+  </script>
+<% end %>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+
 <main id="root"></main>
