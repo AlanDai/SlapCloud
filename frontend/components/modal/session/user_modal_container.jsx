@@ -10,6 +10,7 @@ const UserModal = ({ emailExists, email, emailCheck, emailUncheck, signup, login
   if (emailExists === null) {
     return <ConnectForm
       emailCheck={emailCheck}
+      login={login}
     />;
   } else if (emailExists === false) {
     return <SessionForm
@@ -30,9 +31,10 @@ const UserModal = ({ emailExists, email, emailCheck, emailUncheck, signup, login
   }
 };
 
-const mapStateToProps = ({ session, ui }) => ({
+const mapStateToProps = ({ session, errors }) => ({
   emailExists: session.emailExists,
   email: session.email,
+  errors: errors.session,
 });
 
 const mapDispatchToProps = (dispatch) => ({

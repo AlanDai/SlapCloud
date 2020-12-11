@@ -24,17 +24,16 @@ class NavBar extends React.Component {
   }
 
   userButtons() {
-    if(loggedIn){
+    if(this.props.currentUser){
       return (
-        <div>
-          <button>Upload</button>
-          <button>{this.props.username}</button>
+        <div className="user-btns">
+          <button>{this.props.currentUser.email}</button>
           <button onClick={this.handleLogout}>Logout</button>
         </div>
       )
     } else {
       return (
-        <div>
+        <div className="session-btns">
           <button onClick={this.handleClick}>Sign in</button>
           <button onClick={this.handleClick}>Create account</button>
         </div>
@@ -45,10 +44,12 @@ class NavBar extends React.Component {
   render() {
     return(
       <div className="navbar">
-        <img src="https://seeklogo.com/images/S/soundcloud-logo-DBFE84F880-seeklogo.com.png"/>
-        <Link to="/discover">Home</Link>
-        <Link to="/discover">Stream</Link>
-        <Link to="/discover">Library</Link>
+        <Link to="/discover">
+          <img className="logo" src="https://vignette.wikia.nocookie.net/super-adventure-rpg/images/b/bf/Slap.png/revision/latest/window-crop/width/200/x-offset/0/y-offset/0/window-width/421/window-height/420?cb=20190115092926"/>
+        </Link>
+          <Link to="/discover">Home</Link>
+          <Link to="/discover">Stream</Link> 
+          <Link to="/discover">Library</Link>
         <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Search" />
         </form>

@@ -1,11 +1,13 @@
 import { connect } from "react-redux";
-import { openUserModal } from "../../actions/ui_actions"
-
+import { withRouter } from "react-router-dom";
+import { openUserModal } from "../../actions/ui_actions";
+import { logout } from "../../actions/session_actions";
 
 import NavBar from "./navbar";
 
 const mapStateToProps = ({ entities, session }) => ({
-  username: entities.users[session.id].email
+  currentUser: entities.users[session.id],
+  sessionId: session.id,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -13,4 +15,4 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))

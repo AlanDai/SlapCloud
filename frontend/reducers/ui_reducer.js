@@ -1,6 +1,7 @@
 import {
   OPEN_USER_MODAL,
-  CLOSE_USER_MODAL
+  CLOSE_USER_MODAL,
+  CLOSE_ALL_MODALS
 } from '../actions/ui_actions'
 import {
   FETCH_CURRENT_USER
@@ -18,6 +19,8 @@ const uiReducer = (state = initialState, action) => {
     case FETCH_CURRENT_USER:
     case CLOSE_USER_MODAL:
       return Object.assign({}, state, { userModal: false });
+    case CLOSE_ALL_MODALS:
+      return initialState;
     default:
       return state;
   }
