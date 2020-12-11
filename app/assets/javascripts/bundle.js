@@ -495,6 +495,9 @@ var ConnectForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ConnectForm);
 
     _this = _super.call(this, props);
+    _this.state = {
+      error: null
+    };
     _this.handleDemoClick = _this.handleDemoClick.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -515,18 +518,26 @@ var ConnectForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var email = e.target[0].value;
-      this.props.emailCheck(email);
+
+      if (email.length > 0) {
+        this.props.emailCheck(email);
+      } else {
+        this.setState({
+          error: "Enter a valid email address."
+        });
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      var error = this.state.error;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "connect-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "demo-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleDemoClick
-      }, "Demo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "or"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }, "Demo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "connect-input-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -535,7 +546,9 @@ var ConnectForm = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", _defineProperty({
         type: "submit",
         className: "connect-submit"
-      }, "type", "submit"), "Continue")));
+      }, "type", "submit"), "Continue")), error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "errors"
+      }, error));
     }
   }]);
 
@@ -620,7 +633,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           email = _this$props.email,
-          submitText = _this$props.submitText;
+          submitText = _this$props.submitText,
+          error = _this$props.error;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "session-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -633,7 +647,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         placeholder: "Your Password"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", _defineProperty({
         type: "submit"
-      }, "type", "submit"), submitText)));
+      }, "type", "submit"), submitText)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "errors"
+      }, error));
     }
   }]);
 
@@ -671,6 +687,7 @@ __webpack_require__.r(__webpack_exports__);
 var UserModal = function UserModal(_ref) {
   var emailExists = _ref.emailExists,
       email = _ref.email,
+      error = _ref.error,
       emailCheck = _ref.emailCheck,
       emailUncheck = _ref.emailUncheck,
       signup = _ref.signup,
@@ -695,6 +712,7 @@ var UserModal = function UserModal(_ref) {
       action: login,
       email: email,
       emailUncheck: emailUncheck,
+      error: error,
       submitText: "Sign in",
       closeUserModal: closeUserModal
     });
@@ -707,7 +725,7 @@ var mapStateToProps = function mapStateToProps(_ref2) {
   return {
     emailExists: session.emailExists,
     email: session.email,
-    errors: errors.session
+    error: errors.session
   };
 };
 

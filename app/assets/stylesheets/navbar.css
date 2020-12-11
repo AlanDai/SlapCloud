@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  overflow: scroll;
 }
 
 .navbar {
@@ -67,6 +68,11 @@ body {
 
 .user-btns button:focus {
   outline: none;
+}
+
+.session-btns, .user-btns {
+  width: 200px;
+  display: flex;
 }
 
 .session-btns button {

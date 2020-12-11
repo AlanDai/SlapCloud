@@ -6,7 +6,7 @@ import { closeUserModal } from '../../../actions/ui_actions';
 import ConnectForm from "./connect_form";
 import SessionForm from "./session_form";
 
-const UserModal = ({ emailExists, email, emailCheck, emailUncheck, signup, login, closeUserModal }) => {
+const UserModal = ({ emailExists, email, error, emailCheck, emailUncheck, signup, login, closeUserModal }) => {
   if (emailExists === null) {
     return <ConnectForm
       emailCheck={emailCheck}
@@ -25,6 +25,7 @@ const UserModal = ({ emailExists, email, emailCheck, emailUncheck, signup, login
       action={login}
       email={email}
       emailUncheck={emailUncheck}
+      error={error}
       submitText="Sign in"
       closeUserModal={closeUserModal}
     />
@@ -34,7 +35,7 @@ const UserModal = ({ emailExists, email, emailCheck, emailUncheck, signup, login
 const mapStateToProps = ({ session, errors }) => ({
   emailExists: session.emailExists,
   email: session.email,
-  errors: errors.session,
+  error: errors.session,
 });
 
 const mapDispatchToProps = (dispatch) => ({

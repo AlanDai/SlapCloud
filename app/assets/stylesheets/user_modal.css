@@ -30,6 +30,10 @@
   outline: none;
 }
 
+.demo-input button:focus, .connect-submit:focus, .session-input-form button:focus {
+  outline: none;
+}
+
 /* connect form */
 
 .media-btn-container {
@@ -47,14 +51,6 @@
 
 .connect-submit {
   background-color: #FF4500;
-}
-
-.connect-form p {
-  position: absolute;
-  top: 106px;
-  padding: 0 10px 0 10px;
-  background-color: white;
-  font-family: 'Overpass', sans-serif;
 }
 
 .connect-input-form {
@@ -95,9 +91,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 0;
 }
 
-.session-input-form input {
+.session-input-form input[type="password"] {
   width: 394px;
   height: 41px;
   margin-top: 10px;

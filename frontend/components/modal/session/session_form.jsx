@@ -22,7 +22,7 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    const { email, submitText } = this.props;
+    const { email, submitText, error } = this.props;
 
     return(
       <div className="session-form">
@@ -33,6 +33,7 @@ class SessionForm extends React.Component {
             {submitText}
           </button>
         </form>
+        <div className="errors">{error}</div>
       </div>
     )
   }
