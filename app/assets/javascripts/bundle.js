@@ -963,72 +963,9 @@ var Root = function Root(_ref) {
 /*!****************************************************!*
   !*** ./frontend/components/upload/upload_page.jsx ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
- // import UploadLandingPage from './uplading_landing_page';
-// import SlapFormContainer from './slap_form_container';
-
-var UploadPage = /*#__PURE__*/function (_React$Component) {
-  _inherits(UploadPage, _React$Component);
-
-  var _super = _createSuper(UploadPage);
-
-  function UploadPage(props) {
-    var _this;
-
-    _classCallCheck(this, UploadPage);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      slaps: []
-    };
-    return _this;
-  }
-
-  _createClass(UploadPage, [{
-    key: "render",
-    value: function render() {
-      var slaps = this.state.slaps;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Upload page"); // if(this.slaps.length === 0) {
-      //   return <UploadLandingPage />
-      // } else {
-      //   return <SlapFormContainer />
-      // }
-    }
-  }]);
-
-  return UploadPage;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UploadPage);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/alan/Desktop/slapCloud/frontend/components/upload/upload_page.jsx: Support for the experimental syntax 'classProperties' isn't currently enabled (16:14):\n\n\u001b[0m \u001b[90m 14 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 15 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 | \u001b[39m  handleDrop \u001b[33m=\u001b[39m files \u001b[33m=>\u001b[39m {}\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 18 | \u001b[39m  render () {\u001b[0m\n\u001b[0m \u001b[90m 19 | \u001b[39m    \u001b[36mconst\u001b[39m { slaps } \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate\u001b[33m;\u001b[39m\u001b[0m\n\nAdd @babel/plugin-proposal-class-properties (https://git.io/vb4SL) to the 'plugins' section of your Babel config to enable transformation.\nIf you want to leave it as-is, add @babel/plugin-syntax-class-properties (https://git.io/vb4yQ) to the 'plugins' section to enable parsing.\n    at Object._raise (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.expectPlugin (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:9102:18)\n    at Object.parseClassProperty (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12699:12)\n    at Object.pushClassProperty (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12667:30)\n    at Object.parseClassMemberWithIsStatic (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12572:14)\n    at Object.parseClassMember (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12509:10)\n    at withTopicForbiddingContext (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12454:14)\n    at Object.withTopicForbiddingContext (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:11490:14)\n    at Object.parseClassBody (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12431:10)");
 
 /***/ }),
 

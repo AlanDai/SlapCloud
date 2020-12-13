@@ -1,29 +1,48 @@
 import React from "react";
 
-// import UploadLandingPage from './uplading_landing_page';
-// import SlapFormContainer from './slap_form_container';
-
+import DragDrop from "../../util/drag_drop";
 
 class UploadPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      slaps: []
+      files: [],
+    }
+  }
+
+  handleDrop = files => {
+    let fileList = this.state.files;
+    files.length.forEach(file => {
+      fileList.push(file);
+    })
+    this.setState({files: fileList});
+  }
+
+  uploadItems() {
+    if(this.state.slaps.length === 0) {
+      return(
+        <div>
+          <h1>Upload something!</h1>
+        </div>
+      )
+    } else {
+      return(
+        <div>
+          {this.state.files.forEach(file => (
+            <h1>file</h1>
+          ))}
+        </div>
+      )
     }
   }
 
   render () {
-    const { slaps } = this.state;
-
-    return <div>Upload page</div>
-
-
-    // if(this.slaps.length === 0) {
-    //   return <UploadLandingPage />
-    // } else {
-    //   return <SlapFormContainer />
-    // }
+    return (
+      <DragDrop handleDrop={this.handleDrop}>
+        {this.uploadItems}
+      </DragDrop>
+    )
   }
 }
 
