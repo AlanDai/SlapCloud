@@ -27,8 +27,8 @@ class NavBar extends React.Component {
     if(this.props.currentUser){
       return (
         <div className="user-btns">
-          <button>{this.props.currentUser.email}</button>
-          <button onClick={this.handleLogout}>Logout</button>
+          <Link to="/upload">Upload</Link>
+          <button onClick={this.handleLogout}>{this.props.currentUser.email}</button>
         </div>
       )
     } else {
