@@ -39,4 +39,14 @@ class User < ApplicationRecord
         self.session_token
     end
 
+    has_many :slaps,
+        primary_key: :id,
+        foreign_key: :uploader_id,
+        class_name: :Slap
+
+    has_many :albums,
+        primary_key: :id,
+        foreign_key: :uploader_id,
+        class_name: :Album
+
 end
