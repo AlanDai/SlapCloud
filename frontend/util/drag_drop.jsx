@@ -1,17 +1,15 @@
 // component created with help from a tutorial by Egor Egorov
 // url: https://medium.com/@650egor/simple-drag-and-drop-file-upload-in-react-2cb409d88929
 
-import Reaect, { Component } from 'react';
+import React, { Component } from 'react';
 
 class DragDrop extends Component {
-  state = {
-    drag: false
-  }
-
-  dropRef = React.createRef();
-
-  componentDidMount() {
-    this.dragCounter = 0;
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      drag: false
+    };
   }
 
   handleDrag = (e) => {
@@ -48,36 +46,21 @@ class DragDrop extends Component {
   }
 
   componentDidMount() {
-    let div = this.dropRef.current;
-    div.addEventListener('dragenter', this.handleDragIn);
-    div.addEventListener('dragLeave', this.handleDragOut);
-    div.addEventListener('dragOver', this.handleDrag);
-    div.addEventListener('drop', this.handleDrop)
+    this.dragCounter = 0;
   }
 
 render() {
     return (
       <div
         className="upload-drag-modal"
-        ref={this.dropRef}
+        onDragOver={this.handleDrag}
+        onDragEnter={this.handleDragIn}
+        onDragLeave={this.handleDragOut}
+        onDrop={this.handleDrop}
       >
-        {this.state.dragging &&
-          <div 
-            // style={{
-            //   border: 'dashed grey 4px',
-            //   backgroundColor: 'rgba(255,255,255,.8)',
-            //   position: 'absolute',
-            //   top: 0,
-            //   bottom: 0,
-            //   left: 0, 
-            //   right: 0,
-            //   zIndex: 9999
-            // }}
-            className="upload-drag-screen"
-          >
-            <div 
-              className="upload-drag-text"
-            >
+        {this.state.drag &&
+          <div className="upload-drag-screen">
+            <div className="upload-drag-text">
               <div>Drop your files here.</div>
             </div>
           </div>

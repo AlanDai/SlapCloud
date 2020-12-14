@@ -1,6 +1,7 @@
 import React from "react";
 
 import DragDrop from "../../util/drag_drop";
+import UploadFormContainer from "./upload_form_container";
 
 class UploadPage extends React.Component {
   constructor(props) {
@@ -11,16 +12,21 @@ class UploadPage extends React.Component {
     }
   }
 
+  cancelUpload = uploadedFile => {
+    const files = this.state.files.filter(file => file !== uploadedFile)
+    this.setState({ files })
+  }
+
   handleDrop = files => {
     let fileList = this.state.files;
-    files.length.forEach(file => {
-      fileList.push(file);
-    })
+    for(let i = 0; i < files.length; i++) {
+      fileList.push(files[i]);
+    }
     this.setState({files: fileList});
   }
 
   uploadItems() {
-    if(this.state.slaps.length === 0) {
+    if(this.state.files.length === 0) {
       return(
         <div>
           <h1>Upload something!</h1>
@@ -29,8 +35,8 @@ class UploadPage extends React.Component {
     } else {
       return(
         <div>
-          {this.state.files.forEach(file => (
-            <h1>file</h1>
+          {this.state.files.map((file, idx) => (
+            <UploadFormContainer key={idx} file={file} cancelUpload={this.cancelUpload}/>
           ))}
         </div>
       )
@@ -40,7 +46,7 @@ class UploadPage extends React.Component {
   render () {
     return (
       <DragDrop handleDrop={this.handleDrop}>
-        {this.uploadItems}
+        {this.uploadItems()}
       </DragDrop>
     )
   }

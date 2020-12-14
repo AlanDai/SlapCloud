@@ -959,13 +959,244 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/upload/upload_form.jsx":
+/*!****************************************************!*
+  !*** ./frontend/components/upload/upload_form.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var UploadForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(UploadForm, _React$Component);
+
+  var _super = _createSuper(UploadForm);
+
+  function UploadForm(props) {
+    var _this;
+
+    _classCallCheck(this, UploadForm);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "handleCancel", function () {
+      _this.props.cancelUpload(_this.props.file);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
+      console.log(e);
+    });
+
+    _this.state = {
+      name: '',
+      description: ''
+    };
+    return _this;
+  }
+
+  _createClass(UploadForm, [{
+    key: "render",
+    value: function render() {
+      var file = this.props.file;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "upload-form-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        placeholder: "Name your slap"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        placeholder: "Describe your slap"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleCancel
+      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleSave
+      }, "Save")));
+    }
+  }]);
+
+  return UploadForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UploadForm);
+
+/***/ }),
+
+/***/ "./frontend/components/upload/upload_form_container.js":
+/*!*************************************************************!*
+  !*** ./frontend/components/upload/upload_form_container.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _upload_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./upload_form */ "./frontend/components/upload/upload_form.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    file: ownProps.file,
+    cancelUpload: function cancelUpload(file) {
+      return ownProps.cancelUpload(file);
+    }
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_upload_form__WEBPACK_IMPORTED_MODULE_1__.default));
+
+/***/ }),
+
 /***/ "./frontend/components/upload/upload_page.jsx":
 /*!****************************************************!*
   !*** ./frontend/components/upload/upload_page.jsx ***!
   \****************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/alan/Desktop/slapCloud/frontend/components/upload/upload_page.jsx: Support for the experimental syntax 'classProperties' isn't currently enabled (16:14):\n\n\u001b[0m \u001b[90m 14 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 15 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 | \u001b[39m  handleDrop \u001b[33m=\u001b[39m files \u001b[33m=>\u001b[39m {}\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 18 | \u001b[39m  render () {\u001b[0m\n\u001b[0m \u001b[90m 19 | \u001b[39m    \u001b[36mconst\u001b[39m { slaps } \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate\u001b[33m;\u001b[39m\u001b[0m\n\nAdd @babel/plugin-proposal-class-properties (https://git.io/vb4SL) to the 'plugins' section of your Babel config to enable transformation.\nIf you want to leave it as-is, add @babel/plugin-syntax-class-properties (https://git.io/vb4yQ) to the 'plugins' section to enable parsing.\n    at Object._raise (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.expectPlugin (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:9102:18)\n    at Object.parseClassProperty (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12699:12)\n    at Object.pushClassProperty (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12667:30)\n    at Object.parseClassMemberWithIsStatic (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12572:14)\n    at Object.parseClassMember (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12509:10)\n    at withTopicForbiddingContext (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12454:14)\n    at Object.withTopicForbiddingContext (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:11490:14)\n    at Object.parseClassBody (/Users/alan/Desktop/slapCloud/node_modules/@babel/parser/lib/index.js:12431:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _util_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/drag_drop */ "./frontend/util/drag_drop.jsx");
+/* harmony import */ var _upload_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./upload_form_container */ "./frontend/components/upload/upload_form_container.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var UploadPage = /*#__PURE__*/function (_React$Component) {
+  _inherits(UploadPage, _React$Component);
+
+  var _super = _createSuper(UploadPage);
+
+  function UploadPage(props) {
+    var _this;
+
+    _classCallCheck(this, UploadPage);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "cancelUpload", function (uploadedFile) {
+      var files = _this.state.files.filter(function (file) {
+        return file !== uploadedFile;
+      });
+
+      _this.setState({
+        files: files
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDrop", function (files) {
+      var fileList = _this.state.files;
+
+      for (var i = 0; i < files.length; i++) {
+        fileList.push(files[i]);
+      }
+
+      _this.setState({
+        files: fileList
+      });
+    });
+
+    _this.state = {
+      files: []
+    };
+    return _this;
+  }
+
+  _createClass(UploadPage, [{
+    key: "uploadItems",
+    value: function uploadItems() {
+      var _this2 = this;
+
+      if (this.state.files.length === 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Upload something!"));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.files.map(function (file, idx) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+            key: idx,
+            file: file,
+            cancelUpload: _this2.cancelUpload
+          });
+        }));
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_drag_drop__WEBPACK_IMPORTED_MODULE_1__.default, {
+        handleDrop: this.handleDrop
+      }, this.uploadItems());
+    }
+  }]);
+
+  return UploadPage;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UploadPage);
 
 /***/ }),
 
@@ -1303,6 +1534,137 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/drag_drop.jsx":
+/*!*************************************!*
+  !*** ./frontend/util/drag_drop.jsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// component created with help from a tutorial by Egor Egorov
+// url: https://medium.com/@650egor/simple-drag-and-drop-file-upload-in-react-2cb409d88929
+
+
+var DragDrop = /*#__PURE__*/function (_Component) {
+  _inherits(DragDrop, _Component);
+
+  var _super = _createSuper(DragDrop);
+
+  function DragDrop(props) {
+    var _this;
+
+    _classCallCheck(this, DragDrop);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "handleDrag", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDragIn", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      _this.dragCounter++;
+
+      if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+        _this.setState({
+          drag: true
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDragOut", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      _this.dragCounter--;
+      if (_this.dragCounter > 0) return;
+
+      _this.setState({
+        drag: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDrop", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      _this.setState({
+        drag: false
+      });
+
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        _this.props.handleDrop(e.dataTransfer.files);
+
+        e.dataTransfer.clearData();
+        _this.dragCounter = 0;
+      }
+    });
+
+    _this.state = {
+      drag: false
+    };
+    return _this;
+  }
+
+  _createClass(DragDrop, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.dragCounter = 0;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "upload-drag-modal",
+        onDragOver: this.handleDrag,
+        onDragEnter: this.handleDragIn,
+        onDragLeave: this.handleDragOut,
+        onDrop: this.handleDrop
+      }, this.state.drag && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "upload-drag-screen"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "upload-drag-text"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Drop your files here."))), this.props.children);
+    }
+  }]);
+
+  return DragDrop;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DragDrop);
 
 /***/ }),
 
