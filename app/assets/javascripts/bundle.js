@@ -989,6 +989,33 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/upload/saved_upload_item.jsx":
+/*!**********************************************************!*
+  !*** ./frontend/components/upload/saved_upload_item.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var SavedUploadItem = function SavedUploadItem(_ref) {
+  var item = _ref.item;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "saved-upload-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "slap-info"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Title: ".concat(item.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Description: ".concat(item.description))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SavedUploadItem);
+
+/***/ }),
+
 /***/ "./frontend/components/upload/upload_form.jsx":
 /*!****************************************************!*
   !*** ./frontend/components/upload/upload_form.jsx ***!
@@ -1032,25 +1059,32 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(UploadForm);
 
-  function UploadForm(props) {
+  function UploadForm() {
     var _this;
 
     _classCallCheck(this, UploadForm);
 
-    _this = _super.call(this, props);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "handleCancel", function () {
       _this.props.cancelUpload(_this.props.file);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
-      console.log(e);
+      e.preventDefault();
+      var slap = {
+        title: e.target[0].value,
+        description: e.target[1].value,
+        file: _this.props.file
+      };
+
+      _this.props.saveSlap(_this.props.file, slap);
     });
 
-    _this.state = {
-      name: '',
-      description: ''
-    };
     return _this;
   }
 
@@ -1061,16 +1095,17 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-form-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        onSubmit: this.handSubmit
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        placeholder: "Name your slap"
+        placeholder: "Name your slap",
+        minLength: "1"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         placeholder: "Describe your slap"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleCancel
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: this.handleSave
+        type: "submit"
       }, "Save")));
     }
   }]);
@@ -1079,39 +1114,6 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UploadForm);
-
-/***/ }),
-
-/***/ "./frontend/components/upload/upload_form_container.js":
-/*!*************************************************************!*
-  !*** ./frontend/components/upload/upload_form_container.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _upload_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./upload_form */ "./frontend/components/upload/upload_form.jsx");
-
-
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return {
-    file: ownProps.file,
-    cancelUpload: function cancelUpload(file) {
-      return ownProps.cancelUpload(file);
-    }
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_upload_form__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -1128,8 +1130,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/drag_drop */ "./frontend/util/drag_drop.jsx");
-/* harmony import */ var _upload_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./upload_form_container */ "./frontend/components/upload/upload_form_container.js");
-/* harmony import */ var _errors_error_notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../errors/error_notification */ "./frontend/components/errors/error_notification.jsx");
+/* harmony import */ var _upload_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./upload_form */ "./frontend/components/upload/upload_form.jsx");
+/* harmony import */ var _saved_upload_item_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./saved_upload_item.jsx */ "./frontend/components/upload/saved_upload_item.jsx");
+/* harmony import */ var _errors_error_notification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../errors/error_notification */ "./frontend/components/errors/error_notification.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1159,6 +1162,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var UploadPage = /*#__PURE__*/function (_React$Component) {
   _inherits(UploadPage, _React$Component);
 
@@ -1170,16 +1174,6 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, UploadPage);
 
     _this = _super.call(this, props);
-
-    _defineProperty(_assertThisInitialized(_this), "cancelUpload", function (uploadedFile) {
-      var files = _this.state.files.filter(function (file) {
-        return file !== uploadedFile;
-      });
-
-      _this.setState({
-        files: files
-      });
-    });
 
     _defineProperty(_assertThisInitialized(_this), "handleDrop", function (files) {
       var fileList = _this.state.files;
@@ -1194,18 +1188,45 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
       }
 
       var errorList = _this.state.errors;
+      var errorNotification = false;
 
       if (numFiltered === 1) {
         errorList.push("1 of your files is not an audio file and was not uploaded.");
       } else if (numFiltered !== 0) {
         errorList.push("".concat(numFiltered, " of your files are not audio files and were not uploaded."));
+        errorNotification = true;
       }
 
       _this.setState({
         files: fileList,
         errors: errorList,
-        notifications: true
+        notifications: errorNotification
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "cancelUpload", function (uploadedFile) {
+      var files = _this.state.files.filter(function (file) {
+        return file !== uploadedFile;
+      });
+
+      _this.setState({
+        files: files
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleClick", function (e) {
+      if (_this.state.saved.length >= 0 || _this.state.files.length >= 0) {
+        if (_this.state.files.length >= 0) {
+          _this.setState({
+            errors: _this.state.errors.push("Fill out all slap information before submitting.")
+          });
+        } else {// upload to s3!
+        }
+      } else {
+        _this.setState({
+          errors: _this.state.errors.push("Nothing to upload.")
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "closeNotifications", function () {
@@ -1216,27 +1237,66 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
 
     _this.state = {
       files: [],
+      saved: [],
       errors: [],
       notifications: false
     };
+    _this.saveSlap = _this.saveSlap.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(UploadPage, [{
     key: "uploadItems",
+    // for rendering upload form 
     value: function uploadItems() {
       var _this2 = this;
 
-      if (this.state.files.length === 0) {
+      if (this.state.files.length === 0 && this.state.saved.length === 0) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Upload something!"));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.files.map(function (file, idx) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form__WEBPACK_IMPORTED_MODULE_2__.default, {
             key: idx,
             file: file,
+            saveSlap: _this2.saveSlap,
             cancelUpload: _this2.cancelUpload
           });
         }));
+      }
+    }
+  }, {
+    key: "saveSlap",
+    // for rendering saved items
+    value: function saveSlap(file, slap) {
+      var fileList = this.state.files;
+      fileList = fileList.filter(function (currentFile) {
+        return currentFile !== file;
+      });
+      var savedList = this.state.saved;
+      savedList.push(slap);
+      this.setState({
+        files: fileList,
+        saved: savedList
+      });
+    }
+  }, {
+    key: "savedUploadItems",
+    value: function savedUploadItems() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.saved.map(function (item, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_saved_upload_item_jsx__WEBPACK_IMPORTED_MODULE_3__.default, {
+          key: idx,
+          item: item
+        });
+      }));
+    } // submit button
+
+  }, {
+    key: "submitButton",
+    value: function submitButton() {
+      if (this.state.files.length > 0 || this.state.saved.length > 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: this.handleClick
+        }, "Submit");
       }
     }
   }, {
@@ -1244,11 +1304,12 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$state = this.state,
           files = _this$state.files,
+          saved = _this$state.saved,
           errors = _this$state.errors,
           notifications = _this$state.notifications;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_drag_drop__WEBPACK_IMPORTED_MODULE_1__.default, {
         handleDrop: this.handleDrop
-      }, this.uploadItems()), notifications && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_errors_error_notification__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, this.uploadItems(), this.savedUploadItems()), this.submitButton(), notifications && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_errors_error_notification__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: errors,
         closeNotifications: this.closeNotifications
       }));
