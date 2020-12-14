@@ -265,7 +265,7 @@ var App = function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/discover",
     component: _discover_discover_page__WEBPACK_IMPORTED_MODULE_5__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
     path: "/upload",
     component: _upload_upload_page__WEBPACK_IMPORTED_MODULE_6__.default
   }));
@@ -294,6 +294,36 @@ var DiscoverPage = function DiscoverPage(props) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DiscoverPage);
+
+/***/ }),
+
+/***/ "./frontend/components/errors/error_notification.jsx":
+/*!***********************************************************!*
+  !*** ./frontend/components/errors/error_notification.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var ErrorNotification = function ErrorNotification(_ref) {
+  var errors = _ref.errors,
+      closeNotifications = _ref.closeNotifications;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, errors.map(function (error, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: idx
+    }, error);
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: closeNotifications
+  }, "x"));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ErrorNotification);
 
 /***/ }),
 
@@ -1099,6 +1129,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/drag_drop */ "./frontend/util/drag_drop.jsx");
 /* harmony import */ var _upload_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./upload_form_container */ "./frontend/components/upload/upload_form_container.js");
+/* harmony import */ var _errors_error_notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../errors/error_notification */ "./frontend/components/errors/error_notification.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1122,6 +1153,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1151,18 +1183,41 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleDrop", function (files) {
       var fileList = _this.state.files;
+      var numFiltered = 0;
 
       for (var i = 0; i < files.length; i++) {
-        fileList.push(files[i]);
+        if (files[i].type === "audio/mpeg") {
+          fileList.push(files[i]);
+        } else {
+          numFiltered++;
+        }
+      }
+
+      var errorList = _this.state.errors;
+
+      if (numFiltered === 1) {
+        errorList.push("1 of your files is not an audio file and was not uploaded.");
+      } else if (numFiltered !== 0) {
+        errorList.push("".concat(numFiltered, " of your files are not audio files and were not uploaded."));
       }
 
       _this.setState({
-        files: fileList
+        files: fileList,
+        errors: errorList,
+        notifications: true
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "closeNotifications", function () {
+      _this.setState({
+        notifications: false
       });
     });
 
     _this.state = {
-      files: []
+      files: [],
+      errors: [],
+      notifications: false
     };
     return _this;
   }
@@ -1187,9 +1242,16 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_drag_drop__WEBPACK_IMPORTED_MODULE_1__.default, {
+      var _this$state = this.state,
+          files = _this$state.files,
+          errors = _this$state.errors,
+          notifications = _this$state.notifications;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_drag_drop__WEBPACK_IMPORTED_MODULE_1__.default, {
         handleDrop: this.handleDrop
-      }, this.uploadItems());
+      }, this.uploadItems()), notifications && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_errors_error_notification__WEBPACK_IMPORTED_MODULE_3__.default, {
+        errors: errors,
+        closeNotifications: this.closeNotifications
+      }));
     }
   }]);
 
@@ -1677,7 +1739,8 @@ var DragDrop = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AuthRoute": () => /* binding */ AuthRoute
+/* harmony export */   "AuthRoute": () => /* binding */ AuthRoute,
+/* harmony export */   "ProtectedRoute": () => /* binding */ ProtectedRoute
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -1702,6 +1765,22 @@ var Auth = function Auth(_ref) {
   });
 };
 
+var Protected = function Protected(_ref2) {
+  var Component = _ref2.component,
+      path = _ref2.path,
+      loggedIn = _ref2.loggedIn,
+      exact = _ref2.exact;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+    path: path,
+    exact: exact,
+    render: function render(props) {
+      return loggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Component, props) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Redirect, {
+        to: "/discover"
+      });
+    }
+  });
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     loggedIn: Boolean(state.session.id)
@@ -1709,6 +1788,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var AuthRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps)(Auth));
+var ProtectedRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps)(Protected));
 
 /***/ }),
 
