@@ -42,5 +42,6 @@
   "bugs": {
     "url": "https://github.com/AlanDai/SlapCloud/issues"
   },
-  "homepage": "https://github.com/AlanDai/SlapCloud#readme"
+  "homepage": "https://github.com/AlanDai/SlapCloud#readme",
+  "devDependencies": {}
 }

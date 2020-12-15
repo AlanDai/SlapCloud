@@ -1,0 +1,25 @@
+.upload-form-container {
+  border: 1px solid #E8E8E8;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form-input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.upload-form-slap-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form-submit-btns {
+  display: flex;
+  justify-content: flex-end;
+
+  border-top: 1px solid #E8E8E8;
+}

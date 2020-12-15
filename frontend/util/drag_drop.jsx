@@ -52,15 +52,15 @@ class DragDrop extends Component {
 render() {
     return (
       <div
-        className="upload-drag-modal"
+        className="drag-modal"
         onDragOver={this.handleDrag}
         onDragEnter={this.handleDragIn}
         onDragLeave={this.handleDragOut}
         onDrop={this.handleDrop}
       >
         {this.state.drag &&
-          <div className="upload-drag-screen">
-            <div className="upload-drag-text">
+          <div className="drag-screen">
+            <div className="drag-text">
               <div>Drop your files here.</div>
             </div>
           </div>

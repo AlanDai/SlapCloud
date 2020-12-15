@@ -39,7 +39,7 @@ class User < ApplicationRecord
         self.session_token
     end
 
-    has_one_attached :picture
+    has_one_attached :audio
 
     has_many :slaps,
         primary_key: :id,

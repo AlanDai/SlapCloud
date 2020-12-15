@@ -1,5 +1,6 @@
 class Album < ApplicationRecord
   validates :name, :uploader_id, presence: true
+  validates :name, uniqueness: { scope: :uploader_id }
 
   belongs_to :uploader,
     primary_key: :id,
