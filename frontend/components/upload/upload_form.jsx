@@ -21,26 +21,35 @@ class UploadForm extends React.Component {
       title: e.target[1].value,
       description: e.target[2].value,
       audio: this.props.file,
-      image: e.target[0].files[0]
+      image: e.target[0].files[0],
+      imageUrl: this.state.imageUrl
     }
     this.props.saveSlap(this.props.file, slap)
   }
 
-  loadImage() {
+  handleChange = e => {
     var reader = new FileReader();
-    reader.onload = () => {
-      this.setState({ imageUrl: reader.result, imageFile: this.state.image});
+    const file = e.currentTarget.files[0];
+    reader.onloadend = () => {
+      this.setState({ imageUrl: reader.result, imageFile: file });
     }
 
-    if (this.state.imageFile) {
-      reader.readAsURL(this.state.imageFile);
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ imageUrl: "", imageFile: null })
+    }
+    
+  }
+
+  loadImage() {
+    if(this.state.imageUrl) {
       return (
         <img className="upload-slap-image" src={this.state.imageUrl}/>
       )
-
     } else {
       return (
-        <div className="white-square"/>
+        <div className="default-upload-image"/>
       )
     }
   }
@@ -52,16 +61,16 @@ class UploadForm extends React.Component {
       <div className="upload-form-container">
         <form className="upload-form" onSubmit={this.handleSubmit}>
           <div className="upload-form-input-container">
-            
             <div className="image-container">
               {this.loadImage()}
-              <label htmlFor="image-upload" className="upload-input">
-                <div><i className="fas fa-camera" /> Upload image</div>
+              <label htmlFor="image-upload" className="input-upload-label">
+                <div>Upload Image</div>
               </label>
               <input
                 id="image-upload"
                 type="file"
                 accept="image/*"
+                onChange={this.handleChange}
               />
             </div>
 
@@ -78,17 +87,16 @@ class UploadForm extends React.Component {
               <label>Description
                 <br />
                 <textarea
-                  placeholder="Describe your slap"
+                  placeholder="Describe your slap (optional)"
                 />
               </label>
-            </div>
-          </div> 
 
-          <div className="upload-form-submit-btns">
-            <button onClick={this.handleCancel}>Cancel</button>
-            <button type="submit">Save</button>
+              <div className="upload-form-submit-btns">
+                <button className="cancel-btn" onClick={this.handleCancel}>Cancel</button>
+                <button className="save-btn" type="submit">Save</button>
+              </div>
+            </div>
           </div>
-            
         </form>
 
       </div>

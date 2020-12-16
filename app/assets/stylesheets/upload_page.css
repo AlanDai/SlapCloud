@@ -50,7 +50,7 @@
 
 /* upload form list */
 
-.upload-form-list {
+.upload-form-list, .saved-item-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,4 +65,29 @@
   justify-content: center;
 
   font: inherit;
+}
+
+/* saved item list */
+
+/* submit buttons */
+
+.upload-form-list-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form-list-btns, .upload-form-list-btns * {
+  font-family: 'Overpass', sans-serif;
+}
+
+.upload-form-list-btns input[type="checkbox"], .album-title-input {
+  margin: 0px 20px 10px 0;
+}
+
+.upload-form-list-btns button {
+  background-color: #FF4500;
+  color: white;
+
+  border: none;
+  border-radius: 3px;
 }

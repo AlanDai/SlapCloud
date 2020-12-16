@@ -1,0 +1,39 @@
+.saved-upload-item {
+  border: 1px solid #E8E8E8;
+
+  width: 800px;
+}
+
+.saved-upload-item {
+  font-family: 'Overpass', sans-serif;
+
+}
+
+/* image */
+
+.saved-image-container {
+  position: relative;
+
+  width: 30%
+}
+
+.saved-item-image {
+  position: absolute;
+
+  height: 100px;
+  width: 1009px;
+
+
+}
+
+/* slap info */
+
+.saved-slap-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  width: 70%
+}
+

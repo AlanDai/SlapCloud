@@ -76,7 +76,6 @@ class UploadPage extends React.Component {
           {this.state.files.map((file, idx) => (
             <UploadForm key={idx} file={file} saveSlap={this.saveSlap} cancelUpload={this.cancelUpload}/>
           ))}
-          {this.submitButtons()}
         </div>
       )
     }
@@ -105,7 +104,7 @@ class UploadPage extends React.Component {
 
   savedUploadItems() {
     return(
-      <div>
+      <div class="saved-item-list">
         {this.state.saved.map((item, idx) => (
           <SavedUploadItem key={idx} item={item} />
         ))}
@@ -116,18 +115,27 @@ class UploadPage extends React.Component {
   // submit button
 
   submitButtons() {
-    return(
-      <form className="upload-form-list-buttons" onSubmit={this.handleSubmit}>
-        <label> Make a playlist
-          <input
-            type="checkbox"
-            onChange={e => this.setState({album: e.target.checked})}
-          />
-        </label>
-        {this.state.album && <input placeholder="Album title" />}
-        <button type="submit">Submit</button>
-      </form>
-    )
+    if(this.state.saved.length > 0) {
+      return(
+        <form className="upload-form-list-btns" onSubmit={this.handleSubmit}>
+          <label>
+            <input
+              type="checkbox"
+              onChange={e => this.setState({album: e.target.checked})}
+            />
+            Make a playlist
+          </label>
+          {this.state.album &&
+            <input
+              className="album-title-input"
+              placeholder="Album title"
+          />}
+          <button type="submit">Submit</button>
+        </form>
+      )
+    } else {
+      return null;
+    }
   }
 
   handleSubmit = e => {
@@ -198,6 +206,7 @@ class UploadPage extends React.Component {
         <DragDrop handleDrop={this.handleDrop}>
           {this.uploadItems()}
           {this.savedUploadItems()}
+          {this.submitButtons()}
         </DragDrop>
         {notifications &&
           <ErrorNotification errors={errors} closeNotifications={this.closeNotifications}/>
