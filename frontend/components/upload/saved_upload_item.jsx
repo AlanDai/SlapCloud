@@ -5,7 +5,7 @@ class SavedUploadItem extends React.Component {
     if(item.imageUrl){
       return (<img className="saved-item-image" src={item.imageUrl} />)
     } else {
-      return (<div className="default-upload-image" />)
+      return (<div className="default-saved-image" />)
     }
   }
 

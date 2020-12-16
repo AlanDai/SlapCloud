@@ -1056,7 +1056,7 @@ var SavedUploadItem = /*#__PURE__*/function (_React$Component) {
         });
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "default-upload-image"
+          className: "default-saved-image"
         });
       }
     }
@@ -1484,7 +1484,7 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
     key: "savedUploadItems",
     value: function savedUploadItems() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        "class": "saved-item-list"
+        className: "saved-item-list"
       }, this.state.saved.map(function (item, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_saved_upload_item_jsx__WEBPACK_IMPORTED_MODULE_5__.default, {
           key: idx,
@@ -1502,6 +1502,8 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
           className: "upload-form-list-btns",
           onSubmit: this.handleSubmit
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "upload-form-album"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "checkbox",
           onChange: function onChange(e) {
@@ -1509,10 +1511,10 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
               album: e.target.checked
             });
           }
-        }), "Make a playlist"), this.state.album && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        }), "Upload slaps as an album (in this order)"), this.state.album && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           className: "album-title-input",
           placeholder: "Album title"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           type: "submit"
         }, "Submit"));
       } else {

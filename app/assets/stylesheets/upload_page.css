@@ -67,13 +67,25 @@
   font: inherit;
 }
 
-/* saved item list */
-
 /* submit buttons */
 
 .upload-form-list-btns {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 20px;
+}
+
+.upload-form-album {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.upload-form-album * {
+  margin-right: 15px;
 }
 
 .upload-form-list-btns, .upload-form-list-btns * {
@@ -88,6 +100,7 @@
   background-color: #FF4500;
   color: white;
 
+  width: 400px;
   border: none;
   border-radius: 3px;
 }

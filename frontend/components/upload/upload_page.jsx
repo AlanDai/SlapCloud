@@ -104,7 +104,7 @@ class UploadPage extends React.Component {
 
   savedUploadItems() {
     return(
-      <div class="saved-item-list">
+      <div className="saved-item-list">
         {this.state.saved.map((item, idx) => (
           <SavedUploadItem key={idx} item={item} />
         ))}
@@ -118,18 +118,20 @@ class UploadPage extends React.Component {
     if(this.state.saved.length > 0) {
       return(
         <form className="upload-form-list-btns" onSubmit={this.handleSubmit}>
-          <label>
-            <input
-              type="checkbox"
-              onChange={e => this.setState({album: e.target.checked})}
-            />
-            Make a playlist
-          </label>
-          {this.state.album &&
-            <input
-              className="album-title-input"
-              placeholder="Album title"
-          />}
+          <div className="upload-form-album">
+            <label>
+              <input
+                type="checkbox"
+                onChange={e => this.setState({album: e.target.checked})}
+              />
+              Upload slaps as an album (in this order)
+            </label>
+            {this.state.album &&
+              <input
+                className="album-title-input"
+                placeholder="Album title"
+            />}
+          </div>
           <button type="submit">Submit</button>
         </form>
       )
