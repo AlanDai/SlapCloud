@@ -8,7 +8,7 @@ class SlapsIndex extends React.Component {
 
     return(
       <div>
-        {slaps.map(slap => (
+        {slaps && slaps.map(slap => (
           // <SlapItem slap={slap} />
           <h1>{slap.name}</h1>
         ))}

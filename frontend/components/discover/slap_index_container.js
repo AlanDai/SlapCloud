@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
-import SlapsIndex from './slaps_index'
+import SlapIndex from './slap_index'
 
 const mapStateToProps = ({ entities }) => ({
-  slaps: entities.slaps
+  slaps: entities.slaps,
 })
 
 const mapDispatchToProps = dispatch => ({
-  
+
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SlapsIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(SlapIndex);

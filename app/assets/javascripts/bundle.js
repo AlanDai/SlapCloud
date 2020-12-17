@@ -190,9 +190,52 @@ var logout = function logout() {
 /*!******************************************!*
   !*** ./frontend/actions/slap_actions.js ***!
   \******************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_SLAPS": () => /* binding */ RECEIVE_SLAPS,
+/* harmony export */   "RECEIVE_SLAP": () => /* binding */ RECEIVE_SLAP,
+/* harmony export */   "receiveSlaps": () => /* binding */ receiveSlaps,
+/* harmony export */   "receiveSlap": () => /* binding */ receiveSlap,
+/* harmony export */   "fetchAllSlaps": () => /* binding */ fetchAllSlaps,
+/* harmony export */   "fetchSlap": () => /* binding */ fetchSlap
+/* harmony export */ });
+/* harmony import */ var _util_slap_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/slap_api_util */ "./frontend/util/slap_api_util.js");
 
+var RECEIVE_SLAPS = "RECEIVE_SLAPS";
+var RECEIVE_SLAP = "RECEIVE_SLAP";
+var receiveSlaps = function receiveSlaps(slaps) {
+  return {
+    type: RECEIVE_SLAPS,
+    paylod: {
+      slaps: slaps
+    }
+  };
+};
+var receiveSlap = function receiveSlap(slap) {
+  return {
+    type: RECEIVE_SLAP,
+    paylod: {
+      slap: slap
+    }
+  };
+};
+var fetchAllSlaps = function fetchAllSlaps() {
+  return function (dispatch) {
+    return _util_slap_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchSlaps().then(function (slaps) {
+      return dispatch(receiveSlaps(slaps));
+    });
+  };
+};
+var fetchSlap = function fetchSlap(slap) {
+  return function (dispatch) {
+    return _util_slap_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchSlap(slap.id).then(function (slap) {
+      return dispatch(receiveSlap(slap));
+    });
+  };
+};
 
 /***/ }),
 
@@ -297,13 +340,114 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _slap_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slap_index_container */ "./frontend/components/discover/slap_index_container.js");
+
 
 
 var DiscoverPage = function DiscoverPage(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Discover Page");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Discover Page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DiscoverPage);
+
+/***/ }),
+
+/***/ "./frontend/components/discover/slap_index.jsx":
+/*!*****************************************************!*
+  !*** ./frontend/components/discover/slap_index.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+ // import SlapItem from "./slap_item";
+
+var SlapsIndex = /*#__PURE__*/function (_React$Component) {
+  _inherits(SlapsIndex, _React$Component);
+
+  var _super = _createSuper(SlapsIndex);
+
+  function SlapsIndex() {
+    _classCallCheck(this, SlapsIndex);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(SlapsIndex, [{
+    key: "render",
+    value: function render() {
+      var slaps = this.props.slaps;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, slaps && slaps.map(function (slap) {
+        return (
+          /*#__PURE__*/
+          // <SlapItem slap={slap} />
+          react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, slap.name)
+        );
+      }));
+    }
+  }]);
+
+  return SlapsIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SlapsIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/discover/slap_index_container.js":
+/*!**************************************************************!*
+  !*** ./frontend/components/discover/slap_index_container.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _slap_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slap_index */ "./frontend/components/discover/slap_index.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    slaps: entities.slaps
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_slap_index__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -903,10 +1047,10 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/discover"
       }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/discover"
-      }, "Stream"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/discover"
-      }, "Library"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        to: "/profile"
+      }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/slaps"
+      }, "Slaps"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
@@ -1253,13 +1397,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _actions_slap_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/slap_actions */ "./frontend/actions/slap_actions.js");
-/* harmony import */ var _actions_slap_actions__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_actions_slap_actions__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _util_drag_drop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/drag_drop */ "./frontend/util/drag_drop.jsx");
-/* harmony import */ var _upload_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./upload_form */ "./frontend/components/upload/upload_form.jsx");
-/* harmony import */ var _saved_upload_item_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./saved_upload_item.jsx */ "./frontend/components/upload/saved_upload_item.jsx");
-/* harmony import */ var _errors_error_notification__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../errors/error_notification */ "./frontend/components/errors/error_notification.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _util_drag_drop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/drag_drop */ "./frontend/util/drag_drop.jsx");
+/* harmony import */ var _upload_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./upload_form */ "./frontend/components/upload/upload_form.jsx");
+/* harmony import */ var _saved_upload_item_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./saved_upload_item.jsx */ "./frontend/components/upload/saved_upload_item.jsx");
+/* harmony import */ var _errors_error_notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../errors/error_notification */ "./frontend/components/errors/error_notification.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1283,7 +1425,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -1456,7 +1597,7 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "upload-form-list"
         }, this.state.files.map(function (file, idx) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form__WEBPACK_IMPORTED_MODULE_4__.default, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form__WEBPACK_IMPORTED_MODULE_3__.default, {
             key: idx,
             file: file,
             saveSlap: _this2.saveSlap,
@@ -1486,7 +1627,7 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "saved-item-list"
       }, this.state.saved.map(function (item, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_saved_upload_item_jsx__WEBPACK_IMPORTED_MODULE_5__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_saved_upload_item_jsx__WEBPACK_IMPORTED_MODULE_4__.default, {
           key: idx,
           item: item
         });
@@ -1529,9 +1670,9 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
           notifications = _this$state.notifications;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "upload-page"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_drag_drop__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_drag_drop__WEBPACK_IMPORTED_MODULE_2__.default, {
         handleDrop: this.handleDrop
-      }, this.uploadItems(), this.savedUploadItems(), this.submitButtons()), notifications && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_errors_error_notification__WEBPACK_IMPORTED_MODULE_6__.default, {
+      }, this.uploadItems(), this.savedUploadItems(), this.submitButtons()), notifications && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_errors_error_notification__WEBPACK_IMPORTED_MODULE_5__.default, {
         errors: errors,
         closeNotifications: this.closeNotifications
       }));
@@ -1541,14 +1682,6 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
   return UploadPage;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    createSlap: function createSlap(slap) {
-      return dispatch((0,_actions_slap_actions__WEBPACK_IMPORTED_MODULE_2__.createSlap)(slap));
-    }
-  };
-};
-
 var mapStateToProps = function mapStateToProps(_ref) {
   var session = _ref.session;
   return {
@@ -1556,7 +1689,7 @@ var mapStateToProps = function mapStateToProps(_ref) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(UploadPage)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps)(UploadPage)));
 
 /***/ }),
 
@@ -1571,12 +1704,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _slaps_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slaps_reducer */ "./frontend/reducers/slaps_reducer.js");
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  slaps: _slaps_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1727,6 +1863,48 @@ var sessionReducer = function sessionReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sessionReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/slaps_reducer.js":
+/*!********************************************!*
+  !*** ./frontend/reducers/slaps_reducer.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _actions_slap_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/slap_actions */ "./frontend/actions/slap_actions.js");
+
+var initialState = {
+  slaps: []
+};
+
+var slapsReducer = function slapsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_slap_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SLAPS:
+      return Object.assign({}, state, {
+        slaps: action.payload
+      });
+
+    case _actions_slap_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SLAP:
+      var newState = state;
+      newState.slaps[action.payload.id] = action.payload;
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (slapsReducer);
 
 /***/ }),
 
@@ -2135,6 +2313,33 @@ var checkEmail = function checkEmail(email) {
     data: {
       email: email
     }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/slap_api_util.js":
+/*!****************************************!*
+  !*** ./frontend/util/slap_api_util.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchSlaps": () => /* binding */ fetchSlaps,
+/* harmony export */   "fetchSlap": () => /* binding */ fetchSlap
+/* harmony export */ });
+var fetchSlaps = function fetchSlaps() {
+  return $.ajax({
+    url: "/api/slaps",
+    method: "GET"
+  });
+};
+var fetchSlap = function fetchSlap(slapId) {
+  return $.ajax({
+    url: "/api/slaps/".concat(slapId),
+    method: "GET"
   });
 };
 

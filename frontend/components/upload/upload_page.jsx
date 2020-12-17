@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { createSlap } from "../../actions/slap_actions";
 
 import DragDrop from "../../util/drag_drop";
 import UploadForm from "./upload_form";
@@ -218,12 +217,8 @@ class UploadPage extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  createSlap: slap => dispatch(createSlap(slap))
-})
-
 const mapStateToProps = ({ session }) => ({
   userId: session.id
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UploadPage));
+export default withRouter(connect(mapStateToProps)(UploadPage));
