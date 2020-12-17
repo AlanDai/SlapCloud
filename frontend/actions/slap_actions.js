@@ -15,10 +15,7 @@ export const receiveSlap = slap => ({
 
 export const fetchSlaps = () => dispatch => (
   APIUtil.fetchSlaps()
-  .then(slaps => {
-    console.log(slaps)
-    return dispatch(receiveSlaps(slaps))
-  })
+  .then(slaps => dispatch(receiveSlaps(slaps)))
 )
 
 export const fetchSlap = slap => dispatch => (

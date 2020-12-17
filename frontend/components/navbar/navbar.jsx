@@ -20,7 +20,6 @@ class NavBar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e.currentTarget.value);
   }
 
   userButtons() {

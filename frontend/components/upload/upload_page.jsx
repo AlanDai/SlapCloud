@@ -73,7 +73,7 @@ class UploadPage extends React.Component {
       return(
         <div className="upload-form-list">
           {this.state.files.map((file, idx) => (
-            <UploadForm key={idx} file={file} saveSlap={this.saveSlap} cancelUpload={this.cancelUpload}/>
+            <UploadForm key={file.name} file={file} saveSlap={this.saveSlap} cancelUpload={this.cancelUpload}/>
           ))}
         </div>
       )
@@ -91,7 +91,7 @@ class UploadPage extends React.Component {
 
   // for rendering saved items
 
-  saveSlap(file, slap) {
+  saveSlap = (file, slap) => {
     let fileList = this.state.files;
     fileList = fileList.filter(currentFile => currentFile !== file);
 

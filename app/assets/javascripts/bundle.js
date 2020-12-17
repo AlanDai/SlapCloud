@@ -225,7 +225,6 @@ var receiveSlap = function receiveSlap(slap) {
 var fetchSlaps = function fetchSlaps() {
   return function (dispatch) {
     return _util_slap_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchSlaps().then(function (slaps) {
-      console.log(slaps);
       return dispatch(receiveSlaps(slaps));
     });
   };
@@ -1138,7 +1137,6 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      console.log(e.currentTarget.value);
     }
   }, {
     key: "userButtons",
@@ -1410,7 +1408,7 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
       e.preventDefault();
       var slap = {
-        title: e.target[1].value,
+        title: _this.state.name,
         description: e.target[2].value,
         audio: _this.props.file,
         image: e.target[0].files[0],
@@ -1441,7 +1439,14 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "updateName", function (e) {
+      _this.setState({
+        name: e.currentTarget.value
+      });
+    });
+
     _this.state = {
+      name: props.file.name,
       imageUrl: '',
       imageFile: null
     };
@@ -1465,7 +1470,7 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var file = this.props.file;
+      var name = this.state.name;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-form-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -1476,20 +1481,20 @@ var UploadForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-container"
       }, this.loadImage(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        htmlFor: "image-upload",
         className: "input-upload-label"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Upload Image")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        id: "image-upload",
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Upload Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "image-upload",
         type: "file",
         accept: "image/*",
         onChange: this.handleChange
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "upload-form-slap-inputs"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         placeholder: "Name your slap",
         minLength: "1",
-        defaultValue: file.name
+        value: name,
+        onChange: this.updateName
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         placeholder: "Describe your slap (optional)"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1623,6 +1628,20 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "saveSlap", function (file, slap) {
+      var fileList = _this.state.files;
+      fileList = fileList.filter(function (currentFile) {
+        return currentFile !== file;
+      });
+      var savedList = _this.state.saved;
+      savedList.push(slap);
+
+      _this.setState({
+        files: fileList,
+        saved: savedList
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
       if (!_this.state.files) {
         var errorList = _this.state.errors;
@@ -1725,28 +1744,13 @@ var UploadPage = /*#__PURE__*/function (_React$Component) {
           className: "upload-form-list"
         }, this.state.files.map(function (file, idx) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_upload_form__WEBPACK_IMPORTED_MODULE_3__.default, {
-            key: idx,
+            key: file.name,
             file: file,
             saveSlap: _this2.saveSlap,
             cancelUpload: _this2.cancelUpload
           });
         }));
       }
-    }
-  }, {
-    key: "saveSlap",
-    // for rendering saved items
-    value: function saveSlap(file, slap) {
-      var fileList = this.state.files;
-      fileList = fileList.filter(function (currentFile) {
-        return currentFile !== file;
-      });
-      var savedList = this.state.saved;
-      savedList.push(slap);
-      this.setState({
-        files: fileList,
-        saved: savedList
-      });
     }
   }, {
     key: "savedUploadItems",
@@ -1911,6 +1915,40 @@ var modalsReducer = function modalsReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modalsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/music_player_reducer.js":
+/*!***************************************************!*
+  !*** ./frontend/reducers/music_player_reducer.js ***!
+  \***************************************************/
+/***/ (() => {
+
+// import {
+//   PLAY_SONG,
+//   PAUSE_SONG,
+//   RECEIVE_QUEUE
+// } from '/../actions/music_player_actions'
+// const initialState = {
+//   playing: false,
+//   queue: [],
+// }
+// const musicPlayerReducer = (state = initialState, action) => {
+//   Object.freeze(state);
+//   switch(action.type) {
+//     case PLAY_SONG:
+//       return Object.assign({}, state, {playing: true});
+//     case PAUSE_SONG:
+//       return Object.assign({}, state, {playing: false});
+//     case RECEIVE_QUEUE:
+//       const songs = Object.values(actions.songs);
+//       const queue = songs.map(song => song.id)
+//       return Object.assign({}, state, {queue: queue})
+//     default:
+//       return state
+//   }
+// }
+// export default musicPlayerReducer
 
 /***/ }),
 
@@ -2092,12 +2130,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _modals_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals_reducer */ "./frontend/reducers/modals_reducer.js");
+/* harmony import */ var _music_player_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./music_player_reducer */ "./frontend/reducers/music_player_reducer.js");
+/* harmony import */ var _music_player_reducer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_music_player_reducer__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  modals: _modals_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  modals: _modals_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  musicPlayer: (_music_player_reducer__WEBPACK_IMPORTED_MODULE_1___default())
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
 
