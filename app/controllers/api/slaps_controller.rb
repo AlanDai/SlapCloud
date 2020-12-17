@@ -1,9 +1,13 @@
 class Api::SlapsController < ApplicationController
   
   def index
+    @slaps = Slap.all
+    render :index
   end
 
   def show
+    @slaps = Slap.find_by(id: params[:id])
+    render :show
   end
 
   def create
