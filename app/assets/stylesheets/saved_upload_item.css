@@ -1,0 +1,57 @@
+.saved-upload-item {
+  border: 1px solid #E8E8E8;
+
+  width: 600px;
+}
+
+.saved-upload-item {
+  display: flex;
+  justify-content: space-evenly;
+
+  height: 100px;
+  padding: 20px;
+  margin-top: 20px;
+
+  font-family: 'Overpass', sans-serif;
+}
+
+
+
+/* image */
+
+.saved-image-container {
+  position: relative;
+}
+
+.saved-item-image, .default-saved-image {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100px;
+  width: 100px;
+
+  border: none;
+}
+
+.default-saved-image {
+  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8);
+}
+
+/* slap info */
+
+.saved-slap-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 50%;
+}
+
+.saved-slap-info p {
+  margin: 5px 0 5px 25px;
+}
+

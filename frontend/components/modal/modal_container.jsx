@@ -14,7 +14,7 @@ const Modal = (props) => {
 }
 
 const mapStateToProps = ({ ui }) => ({
-  userModal: ui.userModal
+  userModal: ui.modals.userModal
 });
 
 const mapDispatchToProps = (dispatch) => ({});

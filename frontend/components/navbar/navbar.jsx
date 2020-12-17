@@ -20,15 +20,14 @@ class NavBar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e.currentTarget.value);
   }
 
   userButtons() {
     if(this.props.currentUser){
       return (
         <div className="user-btns">
-          <button>{this.props.currentUser.email}</button>
-          <button onClick={this.handleLogout}>Logout</button>
+          <Link to="/upload">Upload</Link>
+          <button onClick={this.handleLogout}>{this.props.currentUser.email}</button>
         </div>
       )
     } else {
@@ -48,8 +47,8 @@ class NavBar extends React.Component {
           <img className="logo" src="https://vignette.wikia.nocookie.net/super-adventure-rpg/images/b/bf/Slap.png/revision/latest/window-crop/width/200/x-offset/0/y-offset/0/window-width/421/window-height/420?cb=20190115092926"/>
         </Link>
           <Link to="/discover">Home</Link>
-          <Link to="/discover">Stream</Link> 
-          <Link to="/discover">Library</Link>
+          <Link to="/profile">Profile</Link> 
+          <Link to="/discover">Slaps</Link>
         <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Search" />
         </form>

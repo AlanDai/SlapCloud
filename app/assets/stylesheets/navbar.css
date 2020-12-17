@@ -22,14 +22,16 @@ body {
 }
 
 .user-btns {
+  display: flex;
+  align-items: center;
   width: 300px;
 }
 
-.user-btns button {
+.user-btns * {
   padding: 10px;
 }
 
-.navbar a:not(:first-child), .user-btns button {
+.navbar a:not(:first-child), .user-btns * {
   text-decoration: none;
   text-align: center;
 } 
@@ -52,7 +54,7 @@ body {
 }
 
 
-.user-btns button {
+.user-btns * {
   vertical-align: middle;
   text-align: center;
   width: 110px;
@@ -62,11 +64,11 @@ body {
   border: none;
 }
 
-.user-btns button:hover {
+.user-btns *:hover {
   color: whitesmoke;
 }
 
-.user-btns button:focus {
+.user-btns *:focus {
   outline: none;
 }
 

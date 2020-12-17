@@ -1,0 +1,18 @@
+/* slap index item */
+
+.slap-item {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 800px;
+}
+
+.slap-item-image, .default-slap-image {
+  height: 160px;
+  width: 160px;
+}
+
+.default-slap-image {
+  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8)
+}

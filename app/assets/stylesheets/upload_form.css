@@ -1,0 +1,112 @@
+.upload-form-container {
+  border: 1px solid #E8E8E8;
+
+  width: 800px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form-input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* image */
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30%;
+
+  position: relative;
+  width: 400px;
+  padding: 15px 0 15px 0;
+
+  border: none;
+}
+
+.upload-slap-image, .default-upload-image, .input-upload-label {
+  position: absolute;
+}
+
+.upload-slap-image, .default-upload-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 250px;
+}
+
+.default-upload-image {
+  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8)
+}
+
+.input-upload-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: black;
+  background-color: white;
+  opacity: 0.8;
+
+  top: 65%;
+  padding: 0 10px 0 10px;
+
+  border-radius: 3px;
+
+  cursor: pointer;
+}
+
+/* inputs */
+
+.upload-form-slap-inputs {
+  display: flex;
+  flex-direction: column;
+
+  width: 70%;
+  padding: 40px 30px 40px 0;
+}
+
+.upload-form-slap-inputs input[type="text"], .upload-form-slap-inputs textarea {
+  width: 450px;
+  margin-bottom: 10px;
+
+  font-family: 'Overpass', sans-serif;
+
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+
+.upload-form-slap-inputs textarea {
+  height: 120px;
+}
+
+.upload-form-submit-btns {
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 10px;
+  border-top: 1px solid #E8E8E8;
+}
+
+.upload-form-submit-btns button {
+  font-family: 'Overpass', sans-serif;
+
+  border: none;
+  border-radius: 3px;
+}
+
+.cancel-btn {
+  background-color: white;
+}
+
+.save-btn {
+  background-color: #FF4500;
+  color: white;
+}
