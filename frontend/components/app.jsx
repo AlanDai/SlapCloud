@@ -7,6 +7,7 @@ import ModalContainer from "./modal/modal_container";
 import LandingPage from "./landing_page";
 import DiscoverPage from "./discover/discover_page";
 import UploadPage from "./upload/upload_page";
+import MusicPlayerContainer from "./music_player/music_player_container"
 
 const App = () => (
   <div>
@@ -15,6 +16,7 @@ const App = () => (
     <AuthRoute exact path="/" component={LandingPage} />
     <Route path="/discover" component={DiscoverPage} />
     <ProtectedRoute path="/upload" component={UploadPage} />
+    <Route path="/" component={MusicPlayerContainer} />
   </div>
 );
 

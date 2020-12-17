@@ -11,11 +11,9 @@ const slapsReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_SLAPS:
-      return Object.assign({}, state, {slaps: action.payload})
+      return Object.assign({}, action.payload);
     case RECEIVE_SLAP:
-      let newState = state;
-      newState.slaps[action.payload.id] = action.payload;
-      return newState;
+      return Object.assign({}, state, { [action.payload.id]: action.payload });
     default:
       return state;
   }

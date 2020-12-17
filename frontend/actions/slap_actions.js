@@ -5,17 +5,20 @@ export const RECEIVE_SLAP = "RECEIVE_SLAP";
 
 export const receiveSlaps = slaps => ({
   type: RECEIVE_SLAPS,
-  paylod: { slaps },
+  payload: { slaps },
 })
 
 export const receiveSlap = slap => ({
   type: RECEIVE_SLAP,
-  paylod: { slap },
+  payload: { slap },
 })
 
-export const fetchAllSlaps = () => dispatch => (
+export const fetchSlaps = () => dispatch => (
   APIUtil.fetchSlaps()
-  .then(slaps => dispatch(receiveSlaps(slaps)))
+  .then(slaps => {
+    console.log(slaps)
+    return dispatch(receiveSlaps(slaps))
+  })
 )
 
 export const fetchSlap = slap => dispatch => (
