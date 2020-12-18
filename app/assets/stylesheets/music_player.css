@@ -1,0 +1,10 @@
+html, body, #app {
+  height: 100%;
+}
+
+.music-player-footer {
+  position: fixed;
+  left: 0; bottom: 0;
+  width: 100%;
+  background-color: lightgray;
+}

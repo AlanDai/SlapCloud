@@ -1,34 +1,33 @@
-
-export const PLAY_SONG = 'PLAY_SONG';
+export const PLAY_SLAP = 'PLAY_SONG';
 export const playSlap = () => ({
-  type: PLAY_SONG
+  type: PLAY_SLAP
 })
 
-export const PAUSE_SONG = 'PAUSE_SONG';
+export const PAUSE_SLAP = 'PAUSE_SLAP';
 export const pauseSlap = () => ({
-  type: PAUSE_SONG
+  type: PAUSE_SLAP
 })
 
-export const RECEIVE_CURR_SONG = 'RECEIVE_CURR_SONG';
-export const fetchCurrentSlap = songId => ({
-  type: RECEIVE_CURR_SONG,
-  payload: songId
+export const RECEIVE_CURR_SLAP = 'RECEIVE_CURR_SLAP';
+export const fetchCurrentSlap = slapId => ({
+  type: RECEIVE_CURR_SLAP,
+  payload: slapId
 })
 
-export const RECEIVE_PREV_SONG = 'RECEIVE_PREV_SONG';
-export const fetchPreviousSlap = songId => ({
-  type: RECEIVE_PREV_SONG,
-  payload: songId
+export const RECEIVE_PREV_SLAP = 'RECEIVE_PREV_SLAP';
+export const fetchPreviousSlap = slapId => ({
+  type: RECEIVE_PREV_SLAP,
+  payload: slapId
 })
 
-export const RECEIVE_NEXT_SONG = 'RECEIVE_NEXT_SONG';
-export const fetchNextSlap = songId => ({
-  type: RECEIVE_NEXT_SONG,
-  payload: songId
+export const RECEIVE_NEXT_SLAP = 'RECEIVE_NEXT_SLAP';
+export const fetchNextSlap = slapId => ({
+  type: RECEIVE_NEXT_SLAP,
+  payload: slapId
 })
 
 export const RECEIVE_QUEUE = 'RECEIVE_QUEUE';
-export const fetchQueue = songs => ({
+export const fetchQueue = slaps => ({
   type: RECEIVE_QUEUE,
-  payload: songs
+  payload: slaps
 })
