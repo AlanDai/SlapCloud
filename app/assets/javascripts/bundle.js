@@ -79,6 +79,71 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 /***/ }),
 
+/***/ "./frontend/actions/music_player_actions.js":
+/*!**************************************************!*
+  !*** ./frontend/actions/music_player_actions.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PLAY_SLAP": () => /* binding */ PLAY_SLAP,
+/* harmony export */   "playSlap": () => /* binding */ playSlap,
+/* harmony export */   "PAUSE_SLAP": () => /* binding */ PAUSE_SLAP,
+/* harmony export */   "pauseSlap": () => /* binding */ pauseSlap,
+/* harmony export */   "RECEIVE_CURR_SLAP": () => /* binding */ RECEIVE_CURR_SLAP,
+/* harmony export */   "fetchCurrentSlap": () => /* binding */ fetchCurrentSlap,
+/* harmony export */   "RECEIVE_PREV_SLAP": () => /* binding */ RECEIVE_PREV_SLAP,
+/* harmony export */   "fetchPreviousSlap": () => /* binding */ fetchPreviousSlap,
+/* harmony export */   "RECEIVE_NEXT_SLAP": () => /* binding */ RECEIVE_NEXT_SLAP,
+/* harmony export */   "fetchNextSlap": () => /* binding */ fetchNextSlap,
+/* harmony export */   "RECEIVE_QUEUE": () => /* binding */ RECEIVE_QUEUE,
+/* harmony export */   "fetchQueue": () => /* binding */ fetchQueue
+/* harmony export */ });
+var PLAY_SLAP = 'PLAY_SONG';
+var playSlap = function playSlap() {
+  return {
+    type: PLAY_SLAP
+  };
+};
+var PAUSE_SLAP = 'PAUSE_SLAP';
+var pauseSlap = function pauseSlap() {
+  return {
+    type: PAUSE_SLAP
+  };
+};
+var RECEIVE_CURR_SLAP = 'RECEIVE_CURR_SLAP';
+var fetchCurrentSlap = function fetchCurrentSlap(slapId) {
+  return {
+    type: RECEIVE_CURR_SLAP,
+    payload: slapId
+  };
+};
+var RECEIVE_PREV_SLAP = 'RECEIVE_PREV_SLAP';
+var fetchPreviousSlap = function fetchPreviousSlap(slapId) {
+  return {
+    type: RECEIVE_PREV_SLAP,
+    payload: slapId
+  };
+};
+var RECEIVE_NEXT_SLAP = 'RECEIVE_NEXT_SLAP';
+var fetchNextSlap = function fetchNextSlap(slapId) {
+  return {
+    type: RECEIVE_NEXT_SLAP,
+    payload: slapId
+  };
+};
+var RECEIVE_QUEUE = 'RECEIVE_QUEUE';
+var fetchQueue = function fetchQueue(slaps) {
+  return {
+    type: RECEIVE_QUEUE,
+    payload: slaps
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*
   !*** ./frontend/actions/session_actions.js ***!
@@ -288,14 +353,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navbar/navbar_container */ "./frontend/components/navbar/navbar_container.js");
 /* harmony import */ var _modal_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modal/modal_container */ "./frontend/components/modal/modal_container.jsx");
 /* harmony import */ var _landing_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./landing_page */ "./frontend/components/landing_page.jsx");
 /* harmony import */ var _discover_discover_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./discover/discover_page */ "./frontend/components/discover/discover_page.jsx");
 /* harmony import */ var _upload_upload_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload/upload_page */ "./frontend/components/upload/upload_page.jsx");
-/* harmony import */ var _music_player_music_player_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./music_player/music_player_container */ "./frontend/components/music_player/music_player_container.js");
 
 
 
@@ -303,29 +367,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
+ // import MusicPlayerContainer from "./music_player/music_player_container"
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "app"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/",
     component: _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/",
     component: _modal_modal_container__WEBPACK_IMPORTED_MODULE_3__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.AuthRoute, {
     exact: true,
     path: "/",
     component: _landing_page__WEBPACK_IMPORTED_MODULE_4__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/discover",
     component: _discover_discover_page__WEBPACK_IMPORTED_MODULE_5__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
     path: "/upload",
     component: _upload_upload_page__WEBPACK_IMPORTED_MODULE_6__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
-    path: "/",
-    component: _music_player_music_player_container__WEBPACK_IMPORTED_MODULE_7__.default
   }));
 };
 
@@ -350,7 +412,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DiscoverPage = function DiscoverPage(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Discover Page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "discover-page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Welcome to SlapCloud"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DiscoverPage);
@@ -482,8 +546,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _slaps_play_button_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../slaps/play_button_container */ "./frontend/components/slaps/play_button_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -507,6 +572,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -549,18 +615,22 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
       var slap = this.props.slap;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.NavLink, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
         to: "".concat(slap.uploader.id, "/").concat(slap.name)
       }, this.loadSlapImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-item-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, slap.name)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, slap.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
+        src: slap.audio,
+        controls: true,
+        controlsList: "nodownload"
+      })));
     }
   }]);
 
   return SlapItem;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)(SlapItem));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)(SlapItem));
 
 /***/ }),
 
@@ -1055,19 +1125,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/music_player/music_player_container.js":
-/*!********************************************************************!*
-  !*** ./frontend/components/music_player/music_player_container.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
- // import MusicPlayer from './music_player';
-
-/***/ }),
-
 /***/ "./frontend/components/navbar/navbar.jsx":
 /*!***********************************************!*
   !*** ./frontend/components/navbar/navbar.jsx ***!
@@ -1265,6 +1322,27 @@ var Root = function Root(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Root);
+
+/***/ }),
+
+/***/ "./frontend/components/slaps/play_button_container.js":
+/*!************************************************************!*
+  !*** ./frontend/components/slaps/play_button_container.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
 
 /***/ }),
 
@@ -1922,33 +2000,70 @@ var modalsReducer = function modalsReducer() {
 /*!***************************************************!*
   !*** ./frontend/reducers/music_player_reducer.js ***!
   \***************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-// import {
-//   PLAY_SONG,
-//   PAUSE_SONG,
-//   RECEIVE_QUEUE
-// } from '/../actions/music_player_actions'
-// const initialState = {
-//   playing: false,
-//   queue: [],
-// }
-// const musicPlayerReducer = (state = initialState, action) => {
-//   Object.freeze(state);
-//   switch(action.type) {
-//     case PLAY_SONG:
-//       return Object.assign({}, state, {playing: true});
-//     case PAUSE_SONG:
-//       return Object.assign({}, state, {playing: false});
-//     case RECEIVE_QUEUE:
-//       const songs = Object.values(actions.songs);
-//       const queue = songs.map(song => song.id)
-//       return Object.assign({}, state, {queue: queue})
-//     default:
-//       return state
-//   }
-// }
-// export default musicPlayerReducer
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/music_player_actions */ "./frontend/actions/music_player_actions.js");
+
+var initialState = {
+  playing: false,
+  next: [],
+  prev: [],
+  curr: null
+};
+
+var musicPlayerReducer = function musicPlayerReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.PLAY_SLAP:
+      return Object.assign({}, state, {
+        playing: true
+      });
+
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.PAUSE_SLAP:
+      return Object.assign({}, state, {
+        playing: false
+      });
+
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_QUEUE:
+      var slaps = Object.values(actions.payload);
+      var receivedQueue = slaps.map(function (slap) {
+        return slap.id;
+      });
+      return Object.assign({}, state, {
+        queue: receivedQueue
+      });
+
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PREV_SLAP:
+      var played = state.played.push(action.payload);
+      return Object.assign({}, state, {
+        played: played
+      });
+
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURR_SLAP:
+      return Object.assign({}, state, {
+        currId: action.payload
+      });
+
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NEXT_SLAP:
+      var updatedQueue = state.queue.unshift(action.payload);
+      return Object.assign({}, state, {
+        queue: updatedQueue
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (musicPlayerReducer);
 
 /***/ }),
 
@@ -2133,13 +2248,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _modals_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals_reducer */ "./frontend/reducers/modals_reducer.js");
 /* harmony import */ var _music_player_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./music_player_reducer */ "./frontend/reducers/music_player_reducer.js");
-/* harmony import */ var _music_player_reducer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_music_player_reducer__WEBPACK_IMPORTED_MODULE_1__);
 
 
 
 var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
   modals: _modals_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  musicPlayer: (_music_player_reducer__WEBPACK_IMPORTED_MODULE_1___default())
+  musicPlayer: _music_player_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
 
