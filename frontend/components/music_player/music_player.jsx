@@ -11,20 +11,24 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  // componentDidMount = () => {
-  //   const mp = document.getElementById('audio');
-  //   mp.addEventListener("timeupdate", e => {
-  //     this.setState({
-  //       currentTime: e.target.currentTime,
-  //       duration: e.target.duration,
-  //     })
-  //   });
-  // }
+  componentDidMount = () => {
+    const mp = document.getElementById('audio');
+    if(!mp) return;
 
-  // componentWillUnmount() {
-  //   const mp = document.getElementById('audio');
-  //   mp.removeEventListener("timeupdate", () => {})
-  // }
+    mp.addEventListener("timeupdate", e => {
+      this.setState({
+        currentTime: e.target.currentTime,
+        duration: e.target.duration,
+      })
+    });
+  }
+
+  componentWillUnmount() {
+    const mp = document.getElementById('audio');
+    if(!mp) return;
+    
+    mp.removeEventListener("timeupdate", () => {})
+  }
 
   loadMPComponents = () => {
 

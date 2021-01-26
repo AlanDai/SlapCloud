@@ -8,3 +8,7 @@ html, body, #app {
   width: 100%;
   background-color: lightgray;
 }
+
+#audio {
+  display: none;
+}
