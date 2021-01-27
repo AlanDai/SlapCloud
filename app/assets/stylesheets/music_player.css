@@ -78,24 +78,37 @@
 
 #volume-dropdown {
   display: none;
-  transform: rotate(270deg);
-  right: 10%;
 }
 
 #volume-bar:hover #volume-dropdown {
+  display: block;
+  position: absolute;
+  top: -147px;
+  width: 35px;
+  height: 150px;
+  background-color: #F2F2F2;
+  border: 1px solid #CECECE;
+  box-shadow: 0 5px 2px -2px lightgray;
+}
+
+#volume-bar-input {
+  display: none;
+  transform: rotate(270deg);
+}
+
+#volume-bar-input {
   -webkit-appearance: none;
   -moz-appearance: none;
   display: block;
   position: absolute;
-  top: -80px;
-  right: -54px;
+  top: 73px;
+  right: -50px;
   width: 130px;
-  height: 35px;
-  background-color: #F2F2F2;
-  border: 1px solid #CECECE;
+  height: 1px;
+  background-color: #CCCCCC;
 }
 
-#volume-dropdown::-webkit-slider-thumb {
+#volume-bar-input::-webkit-slider-thumb {
   -webkit-appearance: none;
   -moz-appearance: none;
   width: 10px;

@@ -14325,12 +14325,19 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         });
       }); // to properly color slider bar
 
-      document.getElementById("slider-bar-input").oninput = function () {
+      var sbi = document.getElementById("slider-bar-input");
+      sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.currentTime + '%, #CCCCCC ' + _this.state.currentTime + '%, #CCCCCC 100%)';
+
+      sbi.oninput = function () {
         var value = (this.value - this.min) / (this.max - this.min) * 100;
         this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
-      };
+      }; // to properly color volume bar
 
-      document.getElementById("volume-dropdown").oninput = function () {
+
+      var vbi = document.getElementById("volume-bar-input");
+      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume + '%, #CCCCCC ' + _this.state.volume + '%, #CCCCCC 100%)';
+
+      vbi.oninput = function () {
         var value = (this.value - this.min) / (this.max - this.min) * 100;
         this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
       };
@@ -14339,8 +14346,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "loadMPComponents", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "mp-controls"
-      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl()); // scroll bar
-      // volume
+      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl(), _this.songInfo(_this.props.curr));
     });
 
     _defineProperty(_assertThisInitialized(_this), "rewindButton", function () {
@@ -14396,23 +14402,36 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         icon: "volume-mute"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "volume-up"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        id: "volume-dropdown",
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "volume-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        id: "volume-bar-input",
         type: "range",
         min: "0",
-        max: "100",
-        value: "50" // will be variable later
+        max: "100" // value="50" // will be variable later
         // onChange={this.handleChange} - handles user scrubbing
         ,
         step: "1"
-      }));
+      })));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "songInfo", function (slap) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "song-info-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        id: "song-img"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "song-info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, slap.uploader), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, slap.name)));
     });
 
     _this.state = {
       currentTime: 0,
       duration: 0,
+      volume: 50,
       muted: false
     };
+    _this.loadMPComponents = _this.loadMPComponents.bind(_assertThisInitialized(_this));
     return _this;
   }
 

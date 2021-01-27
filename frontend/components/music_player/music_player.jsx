@@ -7,8 +7,11 @@ class MusicPlayer extends React.Component {
     this.state = {
       currentTime: 0,
       duration: 0,
+      volume: 50,
       muted: false,
     }
+
+    this.loadMPComponents = this.loadMPComponents.bind(this);
   }
 
   componentDidMount = () => {
@@ -23,16 +26,20 @@ class MusicPlayer extends React.Component {
     });
 
     // to properly color slider bar
-    document.getElementById("slider-bar-input").oninput = function() {
+    const sbi = document.getElementById("slider-bar-input")
+    sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + this.state.currentTime + '%, #CCCCCC ' + this.state.currentTime + '%, #CCCCCC 100%)'
+    sbi.oninput = function() {
       var value = (this.value-this.min)/(this.max-this.min)*100
       this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
     };
 
-    document.getElementById("volume-dropdown").oninput = function() {
+    // to properly color volume bar
+    const vbi = document.getElementById("volume-bar-input")
+    vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + this.state.volume + '%, #CCCCCC ' + this.state.volume + '%, #CCCCCC 100%)'
+    vbi.oninput = function() {
       var value = (this.value-this.min)/(this.max-this.min)*100
       this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
     };
-
   }
 
   componentWillUnmount() {
@@ -51,13 +58,10 @@ class MusicPlayer extends React.Component {
         {this.fastForwardButton()}
         {this.sliderBar()}
         {this.volumeControl()}
+        {this.songInfo(this.props.curr)}
       </div>
     )
-    // scroll bar
-    // volume
-  }
-
-  // /* rewind button */
+    }
 
   rewindButton = () => (
     // <button onClick={this.handleRewind}>
@@ -138,14 +142,26 @@ class MusicPlayer extends React.Component {
           <FontAwesomeIcon icon="volume-mute" /> : 
           <FontAwesomeIcon icon="volume-up" />}
       </button>
-      <input 
-        id="volume-dropdown"
-        type="range" 
-        min="0" max="100" 
-        value="50" // will be variable later
-        // onChange={this.handleChange} - handles user scrubbing
-        step="1"
-      />
+      <div id="volume-dropdown">
+        <input 
+          id="volume-bar-input"
+          type="range" 
+          min="0" max="100" 
+          // value="50" // will be variable later
+          // onChange={this.handleChange} - handles user scrubbing
+          step="1"
+        />
+      </div>
+    </div>
+  )
+
+  songInfo = (slap) => (
+    <div id="song-info-container">
+      <img id="song-img"></img>
+      <div id="song-info">
+        <div>{slap.uploader}</div>
+        <div>{slap.name}</div>
+      </div>
     </div>
   )
 
