@@ -14329,12 +14329,17 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         var value = (this.value - this.min) / (this.max - this.min) * 100;
         this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
       };
+
+      document.getElementById("volume-dropdown").oninput = function () {
+        var value = (this.value - this.min) / (this.max - this.min) * 100;
+        this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
+      };
     });
 
     _defineProperty(_assertThisInitialized(_this), "loadMPComponents", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "mp-controls"
-      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar()); // scroll bar
+      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl()); // scroll bar
       // volume
     });
 
@@ -14377,7 +14382,26 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         id: "slider-bar-input",
         type: "range",
         min: "0",
-        max: "100" // value={this.state.value} - correspond to the currentTime on the track
+        max: "100",
+        value: _this.state.currentTime // onChange={this.handleChange} - handles user scrubbing
+        ,
+        step: "1"
+      }));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "volumeControl", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "volume-bar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, _this.state.muted ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "volume-mute"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "volume-up"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        id: "volume-dropdown",
+        type: "range",
+        min: "0",
+        max: "100",
+        value: "50" // will be variable later
         // onChange={this.handleChange} - handles user scrubbing
         ,
         step: "1"
@@ -14386,7 +14410,8 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _this.state = {
       currentTime: 0,
-      duration: 0
+      duration: 0,
+      muted: false
     };
     return _this;
   }
@@ -14726,7 +14751,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute);
 
 var Root = function Root(_ref) {
   var store = _ref.store;

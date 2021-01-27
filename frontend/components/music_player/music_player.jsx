@@ -7,6 +7,7 @@ class MusicPlayer extends React.Component {
     this.state = {
       currentTime: 0,
       duration: 0,
+      muted: false,
     }
   }
 
@@ -26,6 +27,12 @@ class MusicPlayer extends React.Component {
       var value = (this.value-this.min)/(this.max-this.min)*100
       this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
     };
+
+    document.getElementById("volume-dropdown").oninput = function() {
+      var value = (this.value-this.min)/(this.max-this.min)*100
+      this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
+    };
+
   }
 
   componentWillUnmount() {
@@ -43,6 +50,7 @@ class MusicPlayer extends React.Component {
         {this.playButton()}
         {this.fastForwardButton()}
         {this.sliderBar()}
+        {this.volumeControl()}
       </div>
     )
     // scroll bar
@@ -110,20 +118,36 @@ class MusicPlayer extends React.Component {
   //   this.props.playSlap();
   // }
 
-  sliderBar = () => { 
-    return (
-      <div id="slider-bar">
-        <input 
-          id="slider-bar-input"
-          type="range" 
-          min="0" max="100" 
-          // value={this.state.value} - correspond to the currentTime on the track
-          // onChange={this.handleChange} - handles user scrubbing
-          step="1"
-        />
-      </div>
-    )
-  }
+  sliderBar = () => (
+    <div id="slider-bar">
+      <input 
+        id="slider-bar-input"
+        type="range" 
+        min="0" max="100" 
+        value={this.state.currentTime}
+        // onChange={this.handleChange} - handles user scrubbing
+        step="1"
+      />
+    </div>
+  )
+
+  volumeControl = () => (
+    <div id="volume-bar">
+      <button>
+        {this.state.muted ? 
+          <FontAwesomeIcon icon="volume-mute" /> : 
+          <FontAwesomeIcon icon="volume-up" />}
+      </button>
+      <input 
+        id="volume-dropdown"
+        type="range" 
+        min="0" max="100" 
+        value="50" // will be variable later
+        // onChange={this.handleChange} - handles user scrubbing
+        step="1"
+      />
+    </div>
+  )
 
   // // handleAudioControls = e => {
 
