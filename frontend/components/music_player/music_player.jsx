@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class MusicPlayer extends React.Component {
@@ -7,10 +8,10 @@ class MusicPlayer extends React.Component {
     this.state = {
       currentTime: 0,
       duration: 0,
-      volume: 50,
+      volume: 0.5,
       muted: false,
     }
-
+    
     this.loadMPComponents = this.loadMPComponents.bind(this);
   }
 
@@ -58,10 +59,10 @@ class MusicPlayer extends React.Component {
         {this.fastForwardButton()}
         {this.sliderBar()}
         {this.volumeControl()}
-        {this.songInfo(this.props.curr)}
+        {/* {this.songInfo(this.props.curr)} */}
       </div>
     )
-    }
+  }
 
   rewindButton = () => (
     // <button onClick={this.handleRewind}>
@@ -180,13 +181,10 @@ class MusicPlayer extends React.Component {
   // }
 
   render() {
-    const { curr, playing, next, prev} = this.props
-    let audioUrl = '';
+    const { curr } = this.props
+    if (!curr) return null;
 
-    if(curr) {
-      audioUrl = curr;
-    }
-
+    let audioUrl = curr;
     return (
       <div id="music-player" className="footer">
         <audio id="audio"

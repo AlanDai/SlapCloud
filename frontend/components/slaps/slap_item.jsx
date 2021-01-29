@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-
-import PlayButtonContainer from '../slaps/play_button_container';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class SlapItem extends React.Component {
   loadSlapImage = () => {
@@ -12,21 +11,35 @@ class SlapItem extends React.Component {
     }
   }
 
+  playButton = () => {
+
+    <button class="play-button" onClick={this.handleClick}>
+      {this.props.playing ?
+        <FontAwesomeIcon icon="pause" /> :
+        <FontAwesomeIcon icon="play" />
+      }
+    </button>
+  }
+
+  handleClick = () => {
+    if (this.props.slap.id != this.props.curr) {
+      this.props.setQueue([this.props.slap])
+      this.props.playSlap();
+    } else {
+      this.props.playing ? this.props.pauseSlap() : this.props.playSlap();
+    }
+  }
+
   render () {
-    const { slap } = this.props;
+    const { slap, setQueue, playSlap, pauseSlap } = this.props;
 
     return (
       <div className="slap-item">
         <NavLink to={`${slap.uploader.id}/${slap.name}`}>{this.loadSlapImage()}</NavLink>
         <div className="slap-item-info">
-          {/* <PlayButtonContainer slap={slap}/> */}
           <p>{slap.uploader.email}</p>
           <h3>{slap.name}</h3>
-          <audio 
-            src={slap.audio}
-            controls
-            controlsList="nodownload"
-          />
+          {this.playButton()}
         </div>
       </div>
     )

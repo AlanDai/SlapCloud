@@ -5,11 +5,12 @@ import {
   fetchPreviousSlap,
   fetchCurrentSlap,
   fetchNextSlap,
+  setQueue,
 } from '../../actions/music_player_actions';
 
 const mapStateToProps = ({entities, ui}) => {
   const { slaps } = entities.slaps;
-  const { playing, next, prev, curr } = ui
+  const { playing, next, prev, curr } = ui.musicPlayer;
 
   return {
     playing,
@@ -25,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
   fetchPreviousSlap: slapId => dispatch(fetchPreviousSlap(slapId)), 
   fetchCurrentSlap: slapId => dispatch(fetchCurrentSlap(slapId)),
   fetchNextSlap: slapId => dispatch(fetchNextSlap(slapId)),
-  fetchQueue: slaps => dispatch(fetchQueue(slaps)),
+  setQueue: slaps => dispatch(setQueue(slaps)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer)

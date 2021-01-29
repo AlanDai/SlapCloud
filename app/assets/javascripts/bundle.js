@@ -13571,7 +13571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _slap_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slap_item */ "./frontend/components/discover/slap_item.jsx");
+/* harmony import */ var _slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../slaps/slap_item_container */ "./frontend/components/slaps/slap_item_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13620,7 +13620,7 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index"
       }, slaps && slaps.map(function (slap, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           key: idx,
           slap: slap
         });
@@ -13669,106 +13669,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_slap_index__WEBPACK_IMPORTED_MODULE_2__.default));
-
-/***/ }),
-
-/***/ "./frontend/components/discover/slap_item.jsx":
-/*!****************************************************!*
-  !*** ./frontend/components/discover/slap_item.jsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _slaps_play_button_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../slaps/play_button_container */ "./frontend/components/slaps/play_button_container.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var SlapItem = /*#__PURE__*/function (_React$Component) {
-  _inherits(SlapItem, _React$Component);
-
-  var _super = _createSuper(SlapItem);
-
-  function SlapItem() {
-    var _this;
-
-    _classCallCheck(this, SlapItem);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _super.call.apply(_super, [this].concat(args));
-
-    _defineProperty(_assertThisInitialized(_this), "loadSlapImage", function () {
-      if (!_this.props.slap.image) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "default-slap-image"
-        });
-      } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          className: "slap-item-image",
-          src: _this.props.slap.image
-        });
-      }
-    });
-
-    return _this;
-  }
-
-  _createClass(SlapItem, [{
-    key: "render",
-    value: function render() {
-      var slap = this.props.slap;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "slap-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-        to: "".concat(slap.uploader.id, "/").concat(slap.name)
-      }, this.loadSlapImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "slap-item-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, slap.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
-        src: slap.audio,
-        controls: true,
-        controlsList: "nodownload"
-      })));
-    }
-  }]);
-
-  return SlapItem;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)(SlapItem));
 
 /***/ }),
 
@@ -14346,7 +14246,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "loadMPComponents", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "mp-controls"
-      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl(), _this.songInfo(_this.props.curr));
+      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl());
     });
 
     _defineProperty(_assertThisInitialized(_this), "rewindButton", function () {
@@ -14428,7 +14328,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       currentTime: 0,
       duration: 0,
-      volume: 50,
+      volume: 0.5,
       muted: false
     };
     _this.loadMPComponents = _this.loadMPComponents.bind(_assertThisInitialized(_this));
@@ -14452,17 +14352,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     // handleEnded = e => {
     // }
     value: function render() {
-      var _this$props = this.props,
-          curr = _this$props.curr,
-          playing = _this$props.playing,
-          next = _this$props.next,
-          prev = _this$props.prev;
-      var audioUrl = '';
-
-      if (curr) {
-        audioUrl = curr;
-      }
-
+      var curr = this.props.curr;
+      if (!curr) return null;
+      var audioUrl = curr;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "music-player",
         className: "footer"
@@ -14506,10 +14398,11 @@ var mapStateToProps = function mapStateToProps(_ref) {
   var entities = _ref.entities,
       ui = _ref.ui;
   var slaps = entities.slaps.slaps;
-  var playing = ui.playing,
-      next = ui.next,
-      prev = ui.prev,
-      curr = ui.curr;
+  var _ui$musicPlayer = ui.musicPlayer,
+      playing = _ui$musicPlayer.playing,
+      next = _ui$musicPlayer.next,
+      prev = _ui$musicPlayer.prev,
+      curr = _ui$musicPlayer.curr;
   return {
     playing: playing,
     next: next,
@@ -14783,24 +14676,62 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
-/***/ "./frontend/components/slaps/play_button_container.js":
-/*!************************************************************!*
-  !*** ./frontend/components/slaps/play_button_container.js ***!
-  \************************************************************/
+/***/ "./frontend/components/slaps/slap_item.jsx":
+/*!*************************************************!*
+  !*** ./frontend/components/slaps/slap_item.jsx ***!
+  \*************************************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/alan/Desktop/App Academy/slapCloud/frontend/components/slaps/slap_item.jsx: Unexpected token (18:13)\n\n\u001b[0m \u001b[90m 16 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 | \u001b[39m    \u001b[90m// play or pause\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 18 | \u001b[39m    \u001b[36mif\u001b[39m (\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 19 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 20 | \u001b[39m    \u001b[36mreturn\u001b[39m (\u001b[0m\n\u001b[0m \u001b[90m 21 | \u001b[39m      \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"slap-item\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at Object._raise (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.raise (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:735:17)\n    at Object.unexpected (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:9097:16)\n    at Object.parseIdentifierName (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:11317:18)\n    at Object.parseIdentifier (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:11290:23)\n    at Object.parseMaybePrivateName (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:10618:19)\n    at Object.parseMember (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:10181:63)\n    at Object.parseSubscript (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:10169:19)\n    at Object.parseSubscripts (/Users/alan/Desktop/App Academy/slapCloud/node_modules/@babel/parser/lib/index.js:10139:19)");
+
+/***/ }),
+
+/***/ "./frontend/components/slaps/slap_item_container.js":
+/*!**********************************************************!*
+  !*** ./frontend/components/slaps/slap_item_container.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/music_player_actions */ "./frontend/actions/music_player_actions.js");
+/* harmony import */ var _slap_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./slap_item */ "./frontend/components/slaps/slap_item.jsx");
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+
+
+var mapStateToProps = function mapStateToProps(_ref, _ref2) {
+  var ui = _ref.ui;
+  var slap = _ref2.slap;
+  var _ui$musicPlayer = ui.musicPlayer,
+      playing = _ui$musicPlayer.playing,
+      next = _ui$musicPlayer.next,
+      prev = _ui$musicPlayer.prev,
+      curr = _ui$musicPlayer.curr;
+  return {
+    slap: slap
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchQueue: function fetchQueue(slaps) {
+      return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_1__.fetchQueue)(slaps));
+    },
+    playSlap: function playSlap() {
+      return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_1__.playSlap)());
+    },
+    pauseSlap: function pauseSlap() {
+      return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_1__.pauseSlap)());
+    }
+  };
 };
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_slap_item__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -15497,6 +15428,8 @@ var musicPlayerReducer = function musicPlayerReducer() {
       });
       return Object.assign({}, state, {
         queue: receivedQueue
+      }, {
+        playing: true
       });
 
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PREV_SLAP:

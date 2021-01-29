@@ -1,6 +1,6 @@
 import React from "react";
 
-import SlapItem from "./slap_item";
+import SlapItem from "../slaps/slap_item_container";
 
 class SlapsIndex extends React.Component {
   componentDidMount() {
