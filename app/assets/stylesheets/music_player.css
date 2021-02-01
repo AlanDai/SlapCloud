@@ -117,13 +117,42 @@
   background: #FF4500;
 }
 
-/* #slider-bar-input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border-radius: 26px;
-  height: 1px;
-  width: 400px;
-  margin-left: 50px; margin-right: 50px;
-  outline: none;
-  background-color: #CCCCCC;
+#song-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: 'Overpass', sans-serif;
+  font-size: 12px;
+  margin-left: 30px;
+}
+
+#song-img {
+  height: 30px;
+  width: 30px;
+}
+
+#song-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 15px;
+}
+
+#song-info p {
+  margin: 0px;
+}
+
+#song-info p:first-child {
+  color: #999999
+}
+
+#song-info p:nth-child(2) {
+  color: #666666
+}
+
+#song-info p:hover {
+  color: black;
+  cursor: pointer;
 }

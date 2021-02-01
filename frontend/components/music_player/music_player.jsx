@@ -17,22 +17,15 @@ class MusicPlayer extends React.Component {
 
   componentDidMount = () => {
     const mp = document.getElementById('audio');
-    if(!mp) return;
-
+    if (!mp) return;
+    mp.volume = 0.5
     mp.addEventListener("timeupdate", e => {
-      this.setState({
-        currentTime: e.target.currentTime,
-        duration: e.target.duration,
-      })
+      console.log("here");
+      // this.setState({
+      //   currentTime: e.target.currentTime,
+      //   duration: e.target.duration,
+      // })
     });
-
-    // to properly color slider bar
-    const sbi = document.getElementById("slider-bar-input")
-    sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + this.state.currentTime + '%, #CCCCCC ' + this.state.currentTime + '%, #CCCCCC 100%)'
-    sbi.oninput = function() {
-      var value = (this.value-this.min)/(this.max-this.min)*100
-      this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
-    };
 
     // to properly color volume bar
     const vbi = document.getElementById("volume-bar-input")
@@ -59,7 +52,7 @@ class MusicPlayer extends React.Component {
         {this.fastForwardButton()}
         {this.sliderBar()}
         {this.volumeControl()}
-        {/* {this.songInfo(this.props.curr)} */}
+        {this.songInfo(this.props.curr)}
       </div>
     )
   }
@@ -97,11 +90,30 @@ class MusicPlayer extends React.Component {
     const mp = document.getElementById('audio');
 
     if(this.props.playing) {
+      clearInterval(this.playingInterval);
       this.props.pauseSlap();
       mp.pause();
     } else {
-      this.props.playSong();
+      this.props.playSlap();
       mp.play();
+    }
+  }
+  
+  handlePlaying = e => {
+    const mp = document.getElementById('audio');
+    if (!mp.paused) {
+      this.playerInterval = setInterval(() => {
+
+        // to color slider bar
+        const sbi = document.getElementById("slider-bar-input")
+        sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + this.state.currentTime + '%, #CCCCCC ' + this.state.currentTime + '%, #CCCCCC 100%)'
+        sbi.oninput = function() {
+          var value = (this.value-this.min)/(this.max-this.min)*100
+          this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
+        };
+
+        this.setState({ currentTime: mp.currentTime });
+      }, this.state.duration/100000)
     }
   }
 
@@ -157,10 +169,10 @@ class MusicPlayer extends React.Component {
 
   songInfo = (slap) => (
     <div id="song-info-container">
-      <img id="song-img"></img>
+      <img id="song-img" src={slap.image} />
       <div id="song-info">
-        <div>{slap.uploader}</div>
-        <div>{slap.name}</div>
+        <p>{slap.uploader.email}</p>
+        <p>{slap.name}</p>
       </div>
     </div>
   )
@@ -171,9 +183,9 @@ class MusicPlayer extends React.Component {
 
   // /* audio player event handler */
 
-  // handlePlaying = e => {
-
-  // }
+  handleMetaData = (e) => {
+    this.setState({ duration: e.target.duration });
+  }
 
   // handleEnded = e => {
 
@@ -183,7 +195,8 @@ class MusicPlayer extends React.Component {
     const { curr } = this.props
     if (!curr) return null;
 
-    let audioUrl = curr.audio_file;
+    let audioUrl = curr.audio;
+
     return (
       <div id="music-player" className="footer">
         <audio id="audio"
@@ -191,6 +204,7 @@ class MusicPlayer extends React.Component {
           controls
           controlsList="nodownload"
           onPlaying={this.handlePlaying}
+          onLoadedMetadata={this.handleMetaData}
           onEnded={this.handleEnded}
         />
         {this.loadMPComponents()}

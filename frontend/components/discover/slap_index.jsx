@@ -9,7 +9,6 @@ class SlapsIndex extends React.Component {
 
   render() {
     const { slaps } = this.props;
-    console.log(Object.keys(slaps));
 
     return(
       <div className="slap-index" >

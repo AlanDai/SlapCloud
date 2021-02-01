@@ -13617,7 +13617,6 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var slaps = this.props.slaps;
-      console.log(Object.keys(slaps));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index"
       }, slaps && Object.keys(slaps).map(function (id) {
@@ -14219,21 +14218,13 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       var mp = document.getElementById('audio');
       if (!mp) return;
+      mp.volume = 0.5;
       mp.addEventListener("timeupdate", function (e) {
-        _this.setState({
-          currentTime: e.target.currentTime,
-          duration: e.target.duration
-        });
-      }); // to properly color slider bar
-
-      var sbi = document.getElementById("slider-bar-input");
-      sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.currentTime + '%, #CCCCCC ' + _this.state.currentTime + '%, #CCCCCC 100%)';
-
-      sbi.oninput = function () {
-        var value = (this.value - this.min) / (this.max - this.min) * 100;
-        this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
-      }; // to properly color volume bar
-
+        console.log("here"); // this.setState({
+        //   currentTime: e.target.currentTime,
+        //   duration: e.target.duration,
+        // })
+      }); // to properly color volume bar
 
       var vbi = document.getElementById("volume-bar-input");
       vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume + '%, #CCCCCC ' + _this.state.volume + '%, #CCCCCC 100%)';
@@ -14247,7 +14238,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "loadMPComponents", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "mp-controls"
-      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl());
+      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl(), _this.songInfo(_this.props.curr));
     });
 
     _defineProperty(_assertThisInitialized(_this), "rewindButton", function () {
@@ -14274,13 +14265,36 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       var mp = document.getElementById('audio');
 
       if (_this.props.playing) {
+        clearInterval(_this.playingInterval);
+
         _this.props.pauseSlap();
 
         mp.pause();
       } else {
-        _this.props.playSong();
+        _this.props.playSlap();
 
         mp.play();
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handlePlaying", function (e) {
+      var mp = document.getElementById('audio');
+
+      if (!mp.paused) {
+        _this.playerInterval = setInterval(function () {
+          // to color slider bar
+          var sbi = document.getElementById("slider-bar-input");
+          sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.currentTime + '%, #CCCCCC ' + _this.state.currentTime + '%, #CCCCCC 100%)';
+
+          sbi.oninput = function () {
+            var value = (this.value - this.min) / (this.max - this.min) * 100;
+            this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
+          };
+
+          _this.setState({
+            currentTime: mp.currentTime
+          });
+        }, _this.state.duration / 100000);
       }
     });
 
@@ -14332,10 +14346,17 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "song-info-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        id: "song-img"
+        id: "song-img",
+        src: slap.image
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "song-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, slap.uploader), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, slap.name)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.name)));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMetaData", function (e) {
+      _this.setState({
+        duration: e.target.duration
+      });
     });
 
     _this.state = {
@@ -14357,17 +14378,12 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "render",
-    // // handleAudioControls = e => {
-    // // }
-    // /* audio player event handler */
-    // handlePlaying = e => {
-    // }
     // handleEnded = e => {
     // }
     value: function render() {
       var curr = this.props.curr;
       if (!curr) return null;
-      var audioUrl = curr.audio_file;
+      var audioUrl = curr.audio;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "music-player",
         className: "footer"
@@ -14377,6 +14393,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         controls: true,
         controlsList: "nodownload",
         onPlaying: this.handlePlaying,
+        onLoadedMetadata: this.handleMetaData,
         onEnded: this.handleEnded
       }), this.loadMPComponents());
     }
@@ -14752,6 +14769,9 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
       } else {
         _this.props.playing ? _this.props.pauseSlap() : _this.props.playSlap();
       }
+
+      var mp = document.getElementById('audio');
+      if (mp) _this.props.playing ? mp.pause() : mp.play();
     });
 
     return _this;
