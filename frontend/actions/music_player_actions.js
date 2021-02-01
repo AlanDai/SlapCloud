@@ -9,7 +9,7 @@ export const pauseSlap = () => ({
 })
 
 export const RECEIVE_CURR_SLAP = 'RECEIVE_CURR_SLAP';
-export const fetchCurrentSlap = slapId => ({
+export const setCurrentSlap = slapId => ({
   type: RECEIVE_CURR_SLAP,
   payload: slapId
 })

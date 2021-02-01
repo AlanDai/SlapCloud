@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import {
+  setCurrentSlap,
   setQueue,
   playSlap,
   pauseSlap
@@ -9,7 +10,7 @@ import {
 import SlapItem from './slap_item';
 
 const mapStateToProps = ({ ui }, { slap }) => {
-  const { playing, next, prev, curr } = ui.musicPlayer;
+  const { playing, curr } = ui.musicPlayer;
 
   return {
     slap,
@@ -19,6 +20,7 @@ const mapStateToProps = ({ ui }, { slap }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  setCurrentSlap: (slapId) => dispatch(setCurrentSlap(slapId)),
   setQueue: (slaps) => dispatch(setQueue(slaps)),
   playSlap: () => dispatch(playSlap()),
   pauseSlap: () => dispatch(pauseSlap()),

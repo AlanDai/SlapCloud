@@ -86,25 +86,24 @@ class MusicPlayer extends React.Component {
   // }
 
   playButton = () => (
-    // <button onClick={this.handlePlay}>
-    <button>
+    <button onClick={this.handlePlay}>
       {this.props.playing ? 
         <FontAwesomeIcon icon="pause" /> : 
         <FontAwesomeIcon icon="play" />}
     </button>
   )
 
-  // handlePlay = e => {
-  //   const mp = document.getElementById('audio');
+  handlePlay = e => {
+    const mp = document.getElementById('audio');
 
-  //   if(this.props.playing) {
-  //     this.props.pauseSlap();
-  //     mp.pause();
-  //   } else {
-  //     this.props.playSong();
-  //     mp.play();
-  //   }
-  // }
+    if(this.props.playing) {
+      this.props.pauseSlap();
+      mp.pause();
+    } else {
+      this.props.playSong();
+      mp.play();
+    }
+  }
 
   fastForwardButton = () => (
     // <button onClick={this.handleFF}>
@@ -184,7 +183,7 @@ class MusicPlayer extends React.Component {
     const { curr } = this.props
     if (!curr) return null;
 
-    let audioUrl = curr;
+    let audioUrl = curr.audio_file;
     return (
       <div id="music-player" className="footer">
         <audio id="audio"
