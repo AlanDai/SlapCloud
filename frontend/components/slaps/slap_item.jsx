@@ -29,8 +29,9 @@ class SlapItem extends React.Component {
       this.props.playing ? this.props.pauseSlap() : this.props.playSlap();
     }
 
-    const mp = document.getElementById('audio');
-    if (mp) this.props.playing ? mp.pause() : mp.play();
+    // temporary stop gap measure
+    // const mp = document.getElementById('audio');
+    // if (mp) this.props.playing ? mp.pause() : mp.play();
   }
 
   render () {

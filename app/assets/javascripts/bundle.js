@@ -14217,14 +14217,13 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       var mp = document.getElementById('audio');
-      if (!mp) return;
-      mp.volume = 0.5;
-      mp.addEventListener("timeupdate", function (e) {
-        console.log("here"); // this.setState({
-        //   currentTime: e.target.currentTime,
-        //   duration: e.target.duration,
-        // })
-      }); // to properly color volume bar
+      if (!mp) return; // mp.addEventListener("timeupdate", e => {
+      // this.setState({
+      //   currentTime: e.target.currentTime,
+      //   duration: e.target.duration,
+      // })
+      // });
+      // to properly color volume bar
 
       var vbi = document.getElementById("volume-bar-input");
       vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume + '%, #CCCCCC ' + _this.state.volume + '%, #CCCCCC 100%)';
@@ -14263,6 +14262,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handlePlay", function (e) {
       var mp = document.getElementById('audio');
+      mp.volume = _this.state.volume;
 
       if (_this.props.playing) {
         clearInterval(_this.playingInterval);
@@ -14335,11 +14335,21 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         id: "volume-bar-input",
         type: "range",
         min: "0",
-        max: "100" // value="50" // will be variable later
-        // onChange={this.handleChange} - handles user scrubbing
-        ,
+        max: "100",
+        value: _this.state.volume * 100,
+        onChange: _this.handleVolumeChange,
         step: "1"
       })));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleVolumeChange", function (e) {
+      var volume = e.target.value / 100;
+      var mp = document.getElementById('audio');
+      mp.volume = parseFloat(volume);
+
+      _this.setState({
+        volume: volume
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "songInfo", function (slap) {
@@ -14768,10 +14778,10 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
         _this.props.playSlap();
       } else {
         _this.props.playing ? _this.props.pauseSlap() : _this.props.playSlap();
-      }
+      } // temporary stop gap measure
+      // const mp = document.getElementById('audio');
+      // if (mp) this.props.playing ? mp.pause() : mp.play();
 
-      var mp = document.getElementById('audio');
-      if (mp) _this.props.playing ? mp.pause() : mp.play();
     });
 
     return _this;

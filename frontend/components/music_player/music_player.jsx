@@ -18,14 +18,12 @@ class MusicPlayer extends React.Component {
   componentDidMount = () => {
     const mp = document.getElementById('audio');
     if (!mp) return;
-    mp.volume = 0.5
-    mp.addEventListener("timeupdate", e => {
-      console.log("here");
+    // mp.addEventListener("timeupdate", e => {
       // this.setState({
       //   currentTime: e.target.currentTime,
       //   duration: e.target.duration,
       // })
-    });
+    // });
 
     // to properly color volume bar
     const vbi = document.getElementById("volume-bar-input")
@@ -88,6 +86,7 @@ class MusicPlayer extends React.Component {
 
   handlePlay = e => {
     const mp = document.getElementById('audio');
+    mp.volume = this.state.volume;
 
     if(this.props.playing) {
       clearInterval(this.playingInterval);
@@ -159,13 +158,20 @@ class MusicPlayer extends React.Component {
           id="volume-bar-input"
           type="range" 
           min="0" max="100" 
-          // value="50" // will be variable later
-          // onChange={this.handleChange} - handles user scrubbing
+          value={this.state.volume * 100}
+          onChange={this.handleVolumeChange}
           step="1"
         />
       </div>
     </div>
   )
+
+  handleVolumeChange = (e) => {
+    var volume = e.target.value / 100;
+    const mp = document.getElementById('audio');
+    mp.volume = parseFloat(volume);
+    this.setState({ volume });
+  }
 
   songInfo = (slap) => (
     <div id="song-info-container">
