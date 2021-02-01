@@ -14217,16 +14217,21 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       var mp = document.getElementById('audio');
-      if (!mp) return; // mp.addEventListener("timeupdate", e => {
+      if (!mp) return;
+
+      _this.setState({
+        duration: mp.target.duration
+      }); // mp.addEventListener("timeupdate", e => {
       // this.setState({
       //   currentTime: e.target.currentTime,
       //   duration: e.target.duration,
       // })
       // });
-      // to properly color volume bar
+      // to properly color volume bar - not working
+
 
       var vbi = document.getElementById("volume-bar-input");
-      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume + '%, #CCCCCC ' + _this.state.volume + '%, #CCCCCC 100%)';
+      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume * 100 + '%, #CCCCCC ' + _this.state.volume * 100 + '%, #CCCCCC 100%)';
 
       vbi.oninput = function () {
         var value = (this.value - this.min) / (this.max - this.min) * 100;
@@ -14284,7 +14289,13 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         _this.playerInterval = setInterval(function () {
           // to color slider bar
           var sbi = document.getElementById("slider-bar-input");
-          sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.currentTime + '%, #CCCCCC ' + _this.state.currentTime + '%, #CCCCCC 100%)';
+          var currPlayedPercent = _this.state.currentTime / _this.state.duration * 100;
+
+          _this.setState({
+            currentPercent: currPlayedPercent
+          });
+
+          sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + currPlayedPercent + '%, #CCCCCC ' + currPlayedPercent + '%, #CCCCCC 100%)';
 
           sbi.oninput = function () {
             var value = (this.value - this.min) / (this.max - this.min) * 100;
@@ -14294,7 +14305,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           _this.setState({
             currentTime: mp.currentTime
           });
-        }, _this.state.duration / 100000);
+        }, 30);
       }
     });
 
@@ -14316,11 +14327,14 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         type: "range",
         min: "0",
         max: "100",
-        value: _this.state.currentTime // onChange={this.handleChange} - handles user scrubbing
+        value: _this.state.currentPercent // value={(this.state.currentTime / this.state.duration) * 100}
+        // onChange={this.handleChange} - handles user scrubbing
         ,
         step: "1"
       }));
     });
+
+    _defineProperty(_assertThisInitialized(_this), "handleScrub", function (e) {});
 
     _defineProperty(_assertThisInitialized(_this), "volumeControl", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14371,6 +14385,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _this.state = {
       currentTime: 0,
+      currentPercent: 0,
       duration: 0,
       volume: 0.5,
       muted: false

@@ -7,6 +7,7 @@ class MusicPlayer extends React.Component {
     super(props);
     this.state = {
       currentTime: 0,
+      currentPercent: 0,
       duration: 0,
       volume: 0.5,
       muted: false,
@@ -18,6 +19,9 @@ class MusicPlayer extends React.Component {
   componentDidMount = () => {
     const mp = document.getElementById('audio');
     if (!mp) return;
+
+    this.setState({ duration: mp.target.duration })
+
     // mp.addEventListener("timeupdate", e => {
       // this.setState({
       //   currentTime: e.target.currentTime,
@@ -25,9 +29,9 @@ class MusicPlayer extends React.Component {
       // })
     // });
 
-    // to properly color volume bar
+    // to properly color volume bar - not working
     const vbi = document.getElementById("volume-bar-input")
-    vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + this.state.volume + '%, #CCCCCC ' + this.state.volume + '%, #CCCCCC 100%)'
+    vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.volume * 100) + '%, #CCCCCC ' + (this.state.volume * 100) + '%, #CCCCCC 100%)'
     vbi.oninput = function() {
       var value = (this.value-this.min)/(this.max-this.min)*100
       this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
@@ -98,21 +102,23 @@ class MusicPlayer extends React.Component {
     }
   }
   
-  handlePlaying = e => {
+  handlePlaying = (e) => {
     const mp = document.getElementById('audio');
     if (!mp.paused) {
       this.playerInterval = setInterval(() => {
 
         // to color slider bar
         const sbi = document.getElementById("slider-bar-input")
-        sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + this.state.currentTime + '%, #CCCCCC ' + this.state.currentTime + '%, #CCCCCC 100%)'
+        let currPlayedPercent = (this.state.currentTime / this.state.duration) * 100
+        this.setState({ currentPercent: currPlayedPercent })
+        sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + currPlayedPercent + '%, #CCCCCC ' + currPlayedPercent + '%, #CCCCCC 100%)'
         sbi.oninput = function() {
           var value = (this.value-this.min)/(this.max-this.min)*100
           this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
         };
 
         this.setState({ currentTime: mp.currentTime });
-      }, this.state.duration/100000)
+      }, 30)
     }
   }
 
@@ -139,12 +145,18 @@ class MusicPlayer extends React.Component {
         id="slider-bar-input"
         type="range" 
         min="0" max="100" 
-        value={this.state.currentTime}
+        value={this.state.currentPercent}
+        // value={(this.state.currentTime / this.state.duration) * 100}
         // onChange={this.handleChange} - handles user scrubbing
         step="1"
       />
     </div>
   )
+
+  handleScrub = (e) => {
+
+  }
+
 
   volumeControl = () => (
     <div id="volume-bar">
