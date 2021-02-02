@@ -15,7 +15,7 @@ class SlapItem extends React.Component {
     <button className="play-button" onClick={this.handleClick}>
       {this.props.playing && this.props.slap.id === this.props.curr ?
         <FontAwesomeIcon icon="pause" /> :
-        <FontAwesomeIcon icon="play" />
+        <FontAwesomeIcon icon="play-circle" />
       }
     </button>
   )
