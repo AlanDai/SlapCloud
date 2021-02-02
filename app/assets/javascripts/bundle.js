@@ -14197,15 +14197,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       if (!mp) return;
       document.addEventListener("keydown", function (e) {
         if (e.key === "Space") _this.handlePlay(e);
-      }); // to properly color volume bar - not working
-
+      });
       var vbi = document.getElementById("volume-bar-input");
       vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume * 100 + '%, #CCCCCC ' + _this.state.volume * 100 + '%, #CCCCCC 100%)';
-
-      vbi.oninput = function () {
-        var value = (this.value - this.min) / (this.max - this.min) * 100;
-        this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
-      };
     });
 
     _defineProperty(_assertThisInitialized(_this), "loadMPComponents", function () {
@@ -14271,20 +14265,14 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
       if (!mp.paused) {
         _this.playerInterval = setInterval(function () {
-          // to color slider bar
-          var sbi = document.getElementById("slider-bar-input");
           var currPlayedPercent = _this.state.currentTime / _this.state.duration * 100;
 
           _this.setState({
             currentPercent: currPlayedPercent
           });
 
+          var sbi = document.getElementById("slider-bar-input");
           sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + currPlayedPercent + '%, #CCCCCC ' + currPlayedPercent + '%, #CCCCCC 100%)';
-
-          sbi.oninput = function () {
-            var value = (this.value - this.min) / (this.max - this.min) * 100;
-            this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)';
-          };
 
           _this.setState({
             currentTime: mp.currentTime
@@ -14362,6 +14350,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "sliderBar", function () {
+      var barColor = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.currentPercent * 100 + '%, #CCCCCC ' + _this.state.currentPercent * 100 + '%, #CCCCCC 100%)';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "slider-bar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
@@ -14373,7 +14362,10 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         max: "100",
         value: _this.state.currentPercent,
         onChange: _this.handleScrub,
-        step: "1"
+        step: "1",
+        style: {
+          background: barColor
+        }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "total-duration"
       }, _this.formatTime(_this.state.duration)));
@@ -14390,13 +14382,12 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "volumeControl", function () {
+      var barColor = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume * 100 + '%, #CCCCCC ' + _this.state.volume * 100 + '%, #CCCCCC 100%)';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "volume-bar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, _this.state.muted ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
-        icon: "volume-mute"
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
-        icon: "volume-up"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: _this.handleMute
+      }, _this.volumeIcon(_this.props.muted, _this.props.volume)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "volume-dropdown"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         id: "volume-bar-input",
@@ -14405,8 +14396,35 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         max: "100",
         value: _this.state.volume * 100,
         onChange: _this.handleVolumeChange,
-        step: "1"
+        step: "1",
+        style: {
+          background: barColor
+        }
       })));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "volumeIcon", function (muted, volume) {
+      if (muted || volume == 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+          icon: "volume-mute"
+        });
+      } else if (volume <= 0.5) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+          icon: "volume-up"
+        });
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+          icon: "volume-down"
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMute", function (e) {
+      _this.state.muted ? _this.setState({
+        muted: false
+      }) : _this.setState({
+        muted: true
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleVolumeChange", function (e) {
@@ -14417,6 +14435,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       _this.setState({
         volume: volume
       });
+
+      var vbi = document.getElementById("volume-bar-input");
+      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + e.target.value + '%, #CCCCCC ' + e.target.value + '%, #CCCCCC 100%)';
     });
 
     _defineProperty(_assertThisInitialized(_this), "songInfo", function (slap) {
@@ -14444,7 +14465,6 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       muted: false,
       looping: false
     };
-    _this.loadMPComponents = _this.loadMPComponents.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -14854,7 +14874,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faRedo, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlayCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPauseCircle);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faRedo, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeDown, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlayCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPauseCircle);
 
 var Root = function Root(_ref) {
   var store = _ref.store;

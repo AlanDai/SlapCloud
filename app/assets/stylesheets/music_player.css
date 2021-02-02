@@ -85,6 +85,8 @@
 
 #volume-bar button {
   margin: 0px;
+  width: 30px;
+  height: 20px;
 }
 
 #volume-dropdown {
