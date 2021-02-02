@@ -14302,7 +14302,12 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleNextSong", function (e) {
-      if (!_this.props.next.length) return;
+      if (!_this.props.next.length) {
+        _this.props.pauseSlap();
+
+        return;
+      }
+
       var mp = document.getElementById('audio');
 
       if (!_this.state.looping) {
