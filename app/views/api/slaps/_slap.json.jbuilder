@@ -1,7 +1,14 @@
 # json.set! :id do
 json.extract! slap, :id, :name, :description
-json.audio url_for(slap.audio_file)
-json.image url_for(slap.image_file)
+
+json.audio url_for(slap.audio_file) 
+
+if slap.image_file
+  json.image url_for(slap.image_file)
+end
+
 json.uploader slap.uploader
-json.album slap.album
-# end
+
+if slap.album
+  json.album slap.album
+end

@@ -1,3 +1,7 @@
+.session-form button, .connect-form button {
+  cursor: pointer;
+}
+
 /* both forms */
 
 .connect-form, .session-form {
