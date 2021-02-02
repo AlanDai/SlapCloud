@@ -124,6 +124,8 @@ class MusicPlayer extends React.Component {
   )
 
   handleNextSong = (e) => {
+    if (!this.props.next.length) return;
+
     const mp = document.getElementById('audio');
 
     if (!this.state.looping) {
@@ -153,8 +155,19 @@ class MusicPlayer extends React.Component {
     }
   }
 
+  formatTime = (time) => {
+    const minutes = Math.floor(time/60);
+    const seconds = Math.floor(time%60);
+    if (seconds < 10) {
+      return minutes + ':0' + seconds
+    } else {
+      return minutes + ':' + seconds
+    }
+  }
+
   sliderBar = () => (
     <div id="slider-bar">
+      <p id="current-time">{this.formatTime(this.state.currentTime)}</p>
       <input 
         id="slider-bar-input"
         type="range" 
@@ -163,6 +176,7 @@ class MusicPlayer extends React.Component {
         onChange={this.handleScrub}
         step="1"
       />
+      <p id="total-duration">{this.formatTime(this.state.duration)}</p>
     </div>
   )
 
@@ -213,10 +227,6 @@ class MusicPlayer extends React.Component {
 
   handleMetaData = (e) => {
     this.setState({ duration: e.target.duration });
-
-    const pb = document.getElementById('playButton');
-    console.log(pb);
-    pb.click();
   }
 
   render() {

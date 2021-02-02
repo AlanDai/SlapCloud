@@ -4,3 +4,11 @@
   font-size: 45px;
   border: none;
 }
+
+.play-button:hover {
+  cursor: pointer;
+}
+
+.play-button:focus {
+  outline: none;
+}

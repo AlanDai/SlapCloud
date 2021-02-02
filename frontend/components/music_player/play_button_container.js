@@ -7,7 +7,7 @@ import {
 } from '../../actions/music_player_actions';
 
 
-import SlapItem from './slap_item';
+import PlayButton from './play_button';
 
 const mapStateToProps = ({ ui }, { slap }) => {
   const { playing, curr } = ui.musicPlayer;
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => ({
   pauseSlap: () => dispatch(pauseSlap()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SlapItem);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayButton);
