@@ -33,15 +33,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  height: 160px;
+  width: 250px;
   padding: 0;
   margin: 0;
 }
 
-.slap-item-info audio {
+/* .slap-item-info audio {
   margin-bottom: 10px;
 }
 
 .slap-item-info audio:focus {
   outline: none;
-}
+} */

@@ -1,3 +1,6 @@
-json.array! @slaps do |slap|
-  json.partial! "api/slaps/slap", slap: slap
+# json.array! @slaps do |slap|
+@slaps.each do |slap|
+  json.set! slap.id do
+    json.partial! "api/slaps/slap", slap: slap
+  end
 end

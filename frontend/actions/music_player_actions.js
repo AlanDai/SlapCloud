@@ -9,13 +9,13 @@ export const pauseSlap = () => ({
 })
 
 export const RECEIVE_CURR_SLAP = 'RECEIVE_CURR_SLAP';
-export const fetchCurrentSlap = slapId => ({
+export const setCurrentSlap = slapId => ({
   type: RECEIVE_CURR_SLAP,
   payload: slapId
 })
 
 export const RECEIVE_PREV_SLAP = 'RECEIVE_PREV_SLAP';
-export const fetchPreviousSlap = slapId => ({
+export const addPreviousSlap = slapId => ({
   type: RECEIVE_PREV_SLAP,
   payload: slapId
 })
@@ -27,7 +27,7 @@ export const fetchNextSlap = slapId => ({
 })
 
 export const RECEIVE_QUEUE = 'RECEIVE_QUEUE';
-export const fetchQueue = slaps => ({
+export const setQueue = slaps => ({
   type: RECEIVE_QUEUE,
   payload: slaps
 })

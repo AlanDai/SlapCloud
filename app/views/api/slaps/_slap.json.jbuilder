@@ -1,3 +1,4 @@
+# json.set! :id do
 json.extract! slap, :id, :name, :description
 
 json.audio url_for(slap.audio_file) 

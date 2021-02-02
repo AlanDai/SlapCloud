@@ -2,14 +2,17 @@ import { connect } from 'react-redux';
 import MusicPlayer from './music_player';
 
 import {
-  fetchPreviousSlap,
-  fetchCurrentSlap,
+  playSlap,
+  pauseSlap,
+  addPreviousSlap,
+  setCurrentSlap,
   fetchNextSlap,
+  setQueue
 } from '../../actions/music_player_actions';
 
 const mapStateToProps = ({entities, ui}) => {
   const { slaps } = entities.slaps;
-  const { playing, next, prev, curr } = ui
+  const { playing, next, prev, curr } = ui.musicPlayer;
 
   return {
     playing,
@@ -22,10 +25,10 @@ const mapStateToProps = ({entities, ui}) => {
 const mapDispatchToProps = dispatch => ({
   playSlap: () => dispatch(playSlap()),
   pauseSlap: () => dispatch(pauseSlap()),
-  fetchPreviousSlap: slapId => dispatch(fetchPreviousSlap(slapId)), 
-  fetchCurrentSlap: slapId => dispatch(fetchCurrentSlap(slapId)),
+  addPreviousSlap: slapId => dispatch(addPreviousSlap(slapId)), 
+  setCurrentSlap: slapId => dispatch(setCurrentSlap(slapId)),
   fetchNextSlap: slapId => dispatch(fetchNextSlap(slapId)),
-  fetchQueue: slaps => dispatch(fetchQueue(slaps)),
+  setQueue: slaps => dispatch(setQueue(slaps)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer)
