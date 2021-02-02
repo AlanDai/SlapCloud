@@ -146,15 +146,17 @@ class MusicPlayer extends React.Component {
         type="range" 
         min="0" max="100" 
         value={this.state.currentPercent}
-        // value={(this.state.currentTime / this.state.duration) * 100}
-        // onChange={this.handleChange} - handles user scrubbing
+        onChange={this.handleScrub}
         step="1"
       />
     </div>
   )
 
   handleScrub = (e) => {
+    const mp = document.getElementById('audio');
+    mp.currentTime = (e.target.value * this.state.duration / 100);
 
+    this.setState({ currentTime: e.target.value, currentPercent: e.target.value })
   }
 
 

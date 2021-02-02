@@ -14327,14 +14327,21 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         type: "range",
         min: "0",
         max: "100",
-        value: _this.state.currentPercent // value={(this.state.currentTime / this.state.duration) * 100}
-        // onChange={this.handleChange} - handles user scrubbing
-        ,
+        value: _this.state.currentPercent,
+        onChange: _this.handleScrub,
         step: "1"
       }));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleScrub", function (e) {});
+    _defineProperty(_assertThisInitialized(_this), "handleScrub", function (e) {
+      var mp = document.getElementById('audio');
+      mp.currentTime = e.target.value * _this.state.duration / 100;
+
+      _this.setState({
+        currentTime: e.target.value,
+        currentPercent: e.target.value
+      });
+    });
 
     _defineProperty(_assertThisInitialized(_this), "volumeControl", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
