@@ -15640,7 +15640,7 @@ var musicPlayerReducer = function musicPlayerReducer() {
       });
 
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PREV_SLAP:
-      var played = state.played.push(action.payload);
+      var played = state.prev.push(action.payload);
       return Object.assign({}, state, {
         played: played
       });
