@@ -4,7 +4,7 @@ import MusicPlayer from './music_player';
 import {
   playSlap,
   pauseSlap,
-  fetchPreviousSlap,
+  addPreviousSlap,
   setCurrentSlap,
   fetchNextSlap,
   setQueue
@@ -25,7 +25,7 @@ const mapStateToProps = ({entities, ui}) => {
 const mapDispatchToProps = dispatch => ({
   playSlap: () => dispatch(playSlap()),
   pauseSlap: () => dispatch(pauseSlap()),
-  fetchPreviousSlap: slapId => dispatch(fetchPreviousSlap(slapId)), 
+  addPreviousSlap: slapId => dispatch(addPreviousSlap(slapId)), 
   setCurrentSlap: slapId => dispatch(setCurrentSlap(slapId)),
   fetchNextSlap: slapId => dispatch(fetchNextSlap(slapId)),
   setQueue: slaps => dispatch(setQueue(slaps)),

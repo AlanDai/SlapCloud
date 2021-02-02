@@ -11,6 +11,7 @@ class MusicPlayer extends React.Component {
       duration: 0,
       volume: 0.5,
       muted: false,
+      looping: false,
     }
     
     this.loadMPComponents = this.loadMPComponents.bind(this);
@@ -19,15 +20,9 @@ class MusicPlayer extends React.Component {
   componentDidMount = () => {
     const mp = document.getElementById('audio');
     if (!mp) return;
-
-    this.setState({ duration: mp.target.duration })
-
-    // mp.addEventListener("timeupdate", e => {
-      // this.setState({
-      //   currentTime: e.target.currentTime,
-      //   duration: e.target.duration,
-      // })
-    // });
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Space") this.handlePlay(e);
+    });
 
     // to properly color volume bar - not working
     const vbi = document.getElementById("volume-bar-input")
@@ -42,7 +37,7 @@ class MusicPlayer extends React.Component {
     const mp = document.getElementById('audio');
     if(!mp) return;
     
-    mp.removeEventListener("timeupdate", () => {})
+    document.removeEventListener("keydown", () => {})
   }
 
   loadMPComponents = () => {
@@ -52,6 +47,7 @@ class MusicPlayer extends React.Component {
         {this.rewindButton()}
         {this.playButton()}
         {this.fastForwardButton()}
+        {this.loopButton()}
         {this.sliderBar()}
         {this.volumeControl()}
         {this.songInfo(this.props.curr)}
@@ -60,25 +56,24 @@ class MusicPlayer extends React.Component {
   }
 
   rewindButton = () => (
-    // <button onClick={this.handleRewind}>
-    <button>
+    <button onClick={this.handleRewind}>
       <FontAwesomeIcon icon="step-backward" />
     </button>
   )
 
-  // handleRewind = e => {
-  //   const mp = document.getElementById('audio');
+  handleRewind = e => {
+    const mp = document.getElementById('audio');
 
-  //   if(mp.currentTime > 10 && this.props.prev.length > 0) {
-  //     this.props.fetchPreviousSlap(this.props.curr.id);
-  //     this.props.fetchCurrentSlap(this.props.prev.pop());
-  //   } else {
-  //     mp.currentTime = 0;
-  //     this.props.playSlap();
-  //     mp.play();
-  //   }
+    if(mp.currentTime > 10 && this.props.prev.length > 0) {
+      this.props.addPreviousSlap(this.props.curr.id);
+      this.props.setCurrentSlap(this.props.prev.pop());
+    } else {
+      mp.currentTime = 0;
+      this.props.playSlap();
+      mp.play();
+    }
 
-  // }
+  }
 
   playButton = () => (
     <button onClick={this.handlePlay}>
@@ -118,26 +113,45 @@ class MusicPlayer extends React.Component {
         };
 
         this.setState({ currentTime: mp.currentTime });
-      }, 30)
+      }, 50)
     }
   }
 
   fastForwardButton = () => (
-    // <button onClick={this.handleFF}>
-    <button>
+    <button onClick={this.handleNextSong}>
       <FontAwesomeIcon icon="step-forward" />
     </button>
   )
 
-  // handleFF = e => {
-  //   const mp = document.getElementById('audio');
+  handleNextSong = (e) => {
+    const mp = document.getElementById('audio');
 
-  //   this.props.fetchPreviousSlap(this.props.curr.id);
-  //   this.props.fetchCurrentSlap(this.props.next.shift());
+    if (!this.state.looping) {
+      this.props.addPreviousSlap(this.props.curr.id);
+      this.props.setCurrentSlap(this.props.next.shift());
+    }
 
-  //   mp.currentTime = 0;
-  //   this.props.playSlap();
-  // }
+    mp.currentTime = 0;
+    this.props.playSlap();
+    mp.play();
+  }
+
+  loopButton = () => (
+    <button id="loop-button" onClick={this.handleLoop}>
+      <FontAwesomeIcon icon="redo" />
+    </button>
+  )
+
+  handleLoop = (e) => {
+    const lb = document.getElementById("loop-button");
+    if (this.state.looping) {
+      this.setState({ looping: false });
+      lb.style.color = "black";
+    } else {
+      this.setState({ looping: true });
+      lb.style.color = "#FF4500";
+    }
+  }
 
   sliderBar = () => (
     <div id="slider-bar">
@@ -197,19 +211,9 @@ class MusicPlayer extends React.Component {
     </div>
   )
 
-  // // handleAudioControls = e => {
-
-  // // }
-
-  // /* audio player event handler */
-
   handleMetaData = (e) => {
     this.setState({ duration: e.target.duration });
   }
-
-  // handleEnded = e => {
-
-  // }
 
   render() {
     const { curr } = this.props
@@ -225,7 +229,7 @@ class MusicPlayer extends React.Component {
           controlsList="nodownload"
           onPlaying={this.handlePlaying}
           onLoadedMetadata={this.handleMetaData}
-          onEnded={this.handleEnded}
+          onEnded={this.handleNextSong}
         />
         {this.loadMPComponents()}
       </div>

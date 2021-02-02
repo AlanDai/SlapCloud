@@ -13228,7 +13228,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_CURR_SLAP": () => /* binding */ RECEIVE_CURR_SLAP,
 /* harmony export */   "setCurrentSlap": () => /* binding */ setCurrentSlap,
 /* harmony export */   "RECEIVE_PREV_SLAP": () => /* binding */ RECEIVE_PREV_SLAP,
-/* harmony export */   "fetchPreviousSlap": () => /* binding */ fetchPreviousSlap,
+/* harmony export */   "addPreviousSlap": () => /* binding */ addPreviousSlap,
 /* harmony export */   "RECEIVE_NEXT_SLAP": () => /* binding */ RECEIVE_NEXT_SLAP,
 /* harmony export */   "fetchNextSlap": () => /* binding */ fetchNextSlap,
 /* harmony export */   "RECEIVE_QUEUE": () => /* binding */ RECEIVE_QUEUE,
@@ -13254,7 +13254,7 @@ var setCurrentSlap = function setCurrentSlap(slapId) {
   };
 };
 var RECEIVE_PREV_SLAP = 'RECEIVE_PREV_SLAP';
-var fetchPreviousSlap = function fetchPreviousSlap(slapId) {
+var addPreviousSlap = function addPreviousSlap(slapId) {
   return {
     type: RECEIVE_PREV_SLAP,
     payload: slapId
@@ -14218,17 +14218,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       var mp = document.getElementById('audio');
       if (!mp) return;
-
-      _this.setState({
-        duration: mp.target.duration
-      }); // mp.addEventListener("timeupdate", e => {
-      // this.setState({
-      //   currentTime: e.target.currentTime,
-      //   duration: e.target.duration,
-      // })
-      // });
-      // to properly color volume bar - not working
-
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Space") _this.handlePlay(e);
+      }); // to properly color volume bar - not working
 
       var vbi = document.getElementById("volume-bar-input");
       vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume * 100 + '%, #CCCCCC ' + _this.state.volume * 100 + '%, #CCCCCC 100%)';
@@ -14242,17 +14234,31 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "loadMPComponents", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "mp-controls"
-      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.sliderBar(), _this.volumeControl(), _this.songInfo(_this.props.curr));
+      }, _this.rewindButton(), _this.playButton(), _this.fastForwardButton(), _this.loopButton(), _this.sliderBar(), _this.volumeControl(), _this.songInfo(_this.props.curr));
     });
 
     _defineProperty(_assertThisInitialized(_this), "rewindButton", function () {
-      return (
-        /*#__PURE__*/
-        // <button onClick={this.handleRewind}>
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
-          icon: "step-backward"
-        }))
-      );
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: _this.handleRewind
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "step-backward"
+      }));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleRewind", function (e) {
+      var mp = document.getElementById('audio');
+
+      if (mp.currentTime > 10 && _this.props.prev.length > 0) {
+        _this.props.addPreviousSlap(_this.props.curr.id);
+
+        _this.props.setCurrentSlap(_this.props.prev.pop());
+      } else {
+        mp.currentTime = 0;
+
+        _this.props.playSlap();
+
+        mp.play();
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "playButton", function () {
@@ -14305,18 +14311,59 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           _this.setState({
             currentTime: mp.currentTime
           });
-        }, 30);
+        }, 50);
       }
     });
 
     _defineProperty(_assertThisInitialized(_this), "fastForwardButton", function () {
-      return (
-        /*#__PURE__*/
-        // <button onClick={this.handleFF}>
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
-          icon: "step-forward"
-        }))
-      );
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: _this.handleNextSong
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "step-forward"
+      }));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleNextSong", function (e) {
+      var mp = document.getElementById('audio');
+
+      if (!_this.state.looping) {
+        _this.props.addPreviousSlap(_this.props.curr.id);
+
+        _this.props.setCurrentSlap(_this.props.next.shift());
+      }
+
+      mp.currentTime = 0;
+
+      _this.props.playSlap();
+
+      mp.play();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "loopButton", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "loop-button",
+        onClick: _this.handleLoop
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "redo"
+      }));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleLoop", function (e) {
+      var lb = document.getElementById("loop-button");
+
+      if (_this.state.looping) {
+        _this.setState({
+          looping: false
+        });
+
+        lb.style.color = "black";
+      } else {
+        _this.setState({
+          looping: true
+        });
+
+        lb.style.color = "#FF4500";
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "sliderBar", function () {
@@ -14395,7 +14442,8 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       currentPercent: 0,
       duration: 0,
       volume: 0.5,
-      muted: false
+      muted: false,
+      looping: false
     };
     _this.loadMPComponents = _this.loadMPComponents.bind(_assertThisInitialized(_this));
     return _this;
@@ -14406,12 +14454,10 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     value: function componentWillUnmount() {
       var mp = document.getElementById('audio');
       if (!mp) return;
-      mp.removeEventListener("timeupdate", function () {});
+      document.removeEventListener("keydown", function () {});
     }
   }, {
     key: "render",
-    // handleEnded = e => {
-    // }
     value: function render() {
       var curr = this.props.curr;
       if (!curr) return null;
@@ -14426,7 +14472,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         controlsList: "nodownload",
         onPlaying: this.handlePlaying,
         onLoadedMetadata: this.handleMetaData,
-        onEnded: this.handleEnded
+        onEnded: this.handleNextSong
       }), this.loadMPComponents());
     }
   }]);
@@ -14481,8 +14527,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     pauseSlap: function pauseSlap() {
       return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_2__.pauseSlap)());
     },
-    fetchPreviousSlap: function fetchPreviousSlap(slapId) {
-      return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPreviousSlap)(slapId));
+    addPreviousSlap: function addPreviousSlap(slapId) {
+      return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_2__.addPreviousSlap)(slapId));
     },
     setCurrentSlap: function setCurrentSlap(slapId) {
       return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_2__.setCurrentSlap)(slapId));
@@ -14695,7 +14741,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faRedo, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute);
 
 var Root = function Root(_ref) {
   var store = _ref.store;

@@ -12,6 +12,7 @@ import {
   faPlay,
   faPause,
   faStepForward,
+  faRedo,
   faVolumeUp,
   faVolumeMute
 } from "@fortawesome/free-solid-svg-icons";
@@ -21,6 +22,7 @@ library.add(
   faPlay,
   faPause,
   faStepForward,
+  faRedo,
   faVolumeUp,
   faVolumeMute
 )

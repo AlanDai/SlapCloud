@@ -15,7 +15,7 @@ export const setCurrentSlap = slapId => ({
 })
 
 export const RECEIVE_PREV_SLAP = 'RECEIVE_PREV_SLAP';
-export const fetchPreviousSlap = slapId => ({
+export const addPreviousSlap = slapId => ({
   type: RECEIVE_PREV_SLAP,
   payload: slapId
 })
