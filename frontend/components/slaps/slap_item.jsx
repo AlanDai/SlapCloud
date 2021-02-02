@@ -20,18 +20,26 @@ class SlapItem extends React.Component {
     </button>
   )
 
-  handleClick = () => {
-    if (this.props.slap.id != this.props.curr) {
+  handleClick = (e) => {
+    if (this.props.slap.id != this.props.curr && !this.props.playing) {
       this.props.setCurrentSlap(this.props.slap.id);
       this.props.setQueue([]);
-      this.props.playSlap();
+      setTimeout(()=>{this.handlePlay(e)}, 10);
     } else {
-      this.props.playing ? this.props.pauseSlap() : this.props.playSlap();
+      this.handlePlay(e);
     }
+  }
 
-    // temporary stop gap measure
-    // const mp = document.getElementById('audio');
-    // if (mp) this.props.playing ? mp.pause() : mp.play();
+  handlePlay = (e) => {
+    if(this.props.playing) {
+      this.props.pauseSlap();
+      const mp = document.getElementById('audio');
+      mp.pause();
+    } else {
+      this.props.playSlap();
+      const mp = document.getElementById('audio');
+      mp.play();
+    }
   }
 
   render () {

@@ -14263,6 +14263,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "playButton", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "playButton",
         onClick: _this.handlePlay
       }, _this.props.playing ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "pause"
@@ -14273,7 +14274,6 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handlePlay", function (e) {
       var mp = document.getElementById('audio');
-      mp.volume = _this.state.volume;
 
       if (_this.props.playing) {
         clearInterval(_this.playingInterval);
@@ -14290,6 +14290,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handlePlaying", function (e) {
       var mp = document.getElementById('audio');
+      mp.volume = _this.state.volume;
 
       if (!mp.paused) {
         _this.playerInterval = setInterval(function () {
@@ -14435,6 +14436,10 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       _this.setState({
         duration: e.target.duration
       });
+
+      var pb = document.getElementById('playButton');
+      console.log(pb);
+      pb.click();
     });
 
     _this.state = {
@@ -14461,13 +14466,12 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var curr = this.props.curr;
       if (!curr) return null;
-      var audioUrl = curr.audio;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "music-player",
         className: "footer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
         id: "audio",
-        src: audioUrl,
+        src: curr.audio,
         controls: true,
         controlsList: "nodownload",
         onPlaying: this.handlePlaying,
@@ -14837,19 +14841,33 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
       }));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
-      if (_this.props.slap.id != _this.props.curr) {
+    _defineProperty(_assertThisInitialized(_this), "handleClick", function (e) {
+      if (_this.props.slap.id != _this.props.curr && !_this.props.playing) {
         _this.props.setCurrentSlap(_this.props.slap.id);
 
         _this.props.setQueue([]);
 
-        _this.props.playSlap();
+        setTimeout(function () {
+          _this.handlePlay(e);
+        }, 10);
       } else {
-        _this.props.playing ? _this.props.pauseSlap() : _this.props.playSlap();
-      } // temporary stop gap measure
-      // const mp = document.getElementById('audio');
-      // if (mp) this.props.playing ? mp.pause() : mp.play();
+        _this.handlePlay(e);
+      }
+    });
 
+    _defineProperty(_assertThisInitialized(_this), "handlePlay", function (e) {
+      if (_this.props.playing) {
+        _this.props.pauseSlap();
+
+        var mp = document.getElementById('audio');
+        mp.pause();
+      } else {
+        _this.props.playSlap();
+
+        var _mp = document.getElementById('audio');
+
+        _mp.play();
+      }
     });
 
     return _this;

@@ -76,7 +76,7 @@ class MusicPlayer extends React.Component {
   }
 
   playButton = () => (
-    <button onClick={this.handlePlay}>
+    <button id="playButton" onClick={this.handlePlay}>
       {this.props.playing ? 
         <FontAwesomeIcon icon="pause" /> : 
         <FontAwesomeIcon icon="play" />}
@@ -85,7 +85,6 @@ class MusicPlayer extends React.Component {
 
   handlePlay = e => {
     const mp = document.getElementById('audio');
-    mp.volume = this.state.volume;
 
     if(this.props.playing) {
       clearInterval(this.playingInterval);
@@ -99,6 +98,7 @@ class MusicPlayer extends React.Component {
   
   handlePlaying = (e) => {
     const mp = document.getElementById('audio');
+    mp.volume = this.state.volume;
     if (!mp.paused) {
       this.playerInterval = setInterval(() => {
 
@@ -213,18 +213,20 @@ class MusicPlayer extends React.Component {
 
   handleMetaData = (e) => {
     this.setState({ duration: e.target.duration });
+
+    const pb = document.getElementById('playButton');
+    console.log(pb);
+    pb.click();
   }
 
   render() {
     const { curr } = this.props
     if (!curr) return null;
 
-    let audioUrl = curr.audio;
-
     return (
       <div id="music-player" className="footer">
         <audio id="audio"
-          src={audioUrl}
+          src={curr.audio}
           controls
           controlsList="nodownload"
           onPlaying={this.handlePlaying}

@@ -33,7 +33,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  height: 160px;
+  width: 250px;
   padding: 0;
   margin: 0;
 }
