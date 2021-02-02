@@ -124,7 +124,10 @@ class MusicPlayer extends React.Component {
   )
 
   handleNextSong = (e) => {
-    if (!this.props.next.length) return;
+    if (!this.props.next.length) {
+      this.props.pauseSlap();
+      return;
+    }
 
     const mp = document.getElementById('audio');
 
@@ -185,6 +188,7 @@ class MusicPlayer extends React.Component {
     mp.currentTime = (e.target.value * this.state.duration / 100);
 
     this.setState({ currentTime: e.target.value, currentPercent: e.target.value })
+
   }
 
 
