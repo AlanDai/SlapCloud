@@ -124,6 +124,8 @@ class MusicPlayer extends React.Component {
   )
 
   handleNextSong = (e) => {
+    if (!this.props.next.length) return;
+
     const mp = document.getElementById('audio');
 
     if (!this.state.looping) {
@@ -225,10 +227,6 @@ class MusicPlayer extends React.Component {
 
   handleMetaData = (e) => {
     this.setState({ duration: e.target.duration });
-
-    const pb = document.getElementById('playButton');
-    console.log(pb);
-    pb.click();
   }
 
   render() {

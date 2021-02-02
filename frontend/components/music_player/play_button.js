@@ -1,35 +1,37 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default PlayButton = () => {
-  handleClick = (e) => {
-    if (this.props.slap.id != this.props.curr && !this.props.playing) {
-      this.props.setCurrentSlap(this.props.slap.id);
-      this.props.setQueue([]);
-      setTimeout(()=>{this.handlePlay(e)}, 10);
+const PlayButton = ({ playing, curr, slap, setCurrentSlap, setQueue, playSlap, pauseSlap }) => {
+  
+    function handleClick(e) {
+    if (slap.id != curr) {
+      setCurrentSlap(slap.id);
+      setQueue([]);
+      setTimeout(()=>{handlePlay(e)}, 1);
     } else {
-      this.handlePlay(e);
+      handlePlay(e);
     }
   }
 
-  handlePlay = (e) => {
-    if(this.props.playing) {
-      this.props.pauseSlap();
-      const mp = document.getElementById('audio');
+  function handlePlay (e) {
+    const mp = document.getElementById('audio');
+    if(playing && slap.id === curr) {
+      pauseSlap();
       mp.pause();
     } else {
-      this.props.playSlap();
-      const mp = document.getElementById('audio');
+      playSlap();
       mp.play();
     }
   }
 
   return (
-    <button className="play-button" onClick={this.handleClick}>
-      {this.props.playing && this.props.slap.id === this.props.curr ?
+    <button className="play-button" onClick={handleClick}>
+      {playing && slap.id === curr ?
         <FontAwesomeIcon icon="pause-circle" /> :
         <FontAwesomeIcon icon="play-circle" />
       }
     </button>
   )
 }
+
+export default PlayButton;
