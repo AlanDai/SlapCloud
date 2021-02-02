@@ -14344,10 +14344,23 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "formatTime", function (time) {
+      var minutes = Math.floor(time / 60);
+      var seconds = Math.floor(time % 60);
+
+      if (seconds < 10) {
+        return minutes + ':0' + seconds;
+      } else {
+        return minutes + ':' + seconds;
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_this), "sliderBar", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "slider-bar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "current-time"
+      }, _this.formatTime(_this.state.currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         id: "slider-bar-input",
         type: "range",
         min: "0",
@@ -14355,7 +14368,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         value: _this.state.currentPercent,
         onChange: _this.handleScrub,
         step: "1"
-      }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "total-duration"
+      }, _this.formatTime(_this.state.duration)));
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleScrub", function (e) {

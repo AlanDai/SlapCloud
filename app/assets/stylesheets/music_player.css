@@ -37,6 +37,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 510px;
+  margin-left: 30px; margin-right: 30px;
+}
+
+#current-time, #total-duration {
+  font-family: 'Overpass', sans-serif;
+  font-size: 12px;
+}
+
+#current-time {
+  color: #FF4500;
 }
 
 #slider-bar-input {
@@ -45,9 +56,9 @@
   border-radius: 26px;
   height: 1px;
   width: 400px;
-  margin-left: 50px; margin-right: 50px;
   outline: none;
   background-color: #CCCCCC;
+  margin-left: 20px; margin-right: 20px;
 }
 
 #slider-bar-input::-webkit-slider-thumb {
