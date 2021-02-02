@@ -14834,14 +14834,14 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function (e) {
-      if (_this.props.slap.id != _this.props.curr && !_this.props.playing) {
+      if (_this.props.slap.id != _this.props.curr) {
         _this.props.setCurrentSlap(_this.props.slap.id);
 
         _this.props.setQueue([]);
 
         setTimeout(function () {
           _this.handlePlay(e);
-        }, 10);
+        }, 1);
       } else {
         _this.handlePlay(e);
       }

@@ -21,10 +21,10 @@ class SlapItem extends React.Component {
   )
 
   handleClick = (e) => {
-    if (this.props.slap.id != this.props.curr && !this.props.playing) {
+    if (this.props.slap.id != this.props.curr) {
       this.props.setCurrentSlap(this.props.slap.id);
       this.props.setQueue([]);
-      setTimeout(()=>{this.handlePlay(e)}, 10);
+      setTimeout(()=>{this.handlePlay(e)}, 1);
     } else {
       this.handlePlay(e);
     }

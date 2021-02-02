@@ -8,3 +8,7 @@
 .play-button:hover {
   cursor: pointer;
 }
+
+.play-button:focus {
+  outline: none;
+}
