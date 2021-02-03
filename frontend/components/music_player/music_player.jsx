@@ -13,35 +13,19 @@ class MusicPlayer extends React.Component {
       muted: false,
       looping: false,
     }
-    
-    this.loadMPComponents = this.loadMPComponents.bind(this);
   }
 
   componentDidMount = () => {
-    const mp = document.getElementById('audio');
-    if (!mp) return;
     document.addEventListener("keydown", (e) => {
       if(e.key === "Space") this.handlePlay(e);
     });
-
-    // to properly color volume bar - not working
-    const vbi = document.getElementById("volume-bar-input")
-    vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.volume * 100) + '%, #CCCCCC ' + (this.state.volume * 100) + '%, #CCCCCC 100%)'
-    vbi.oninput = function() {
-      var value = (this.value-this.min)/(this.max-this.min)*100
-      this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
-    };
   }
 
   componentWillUnmount() {
-    const mp = document.getElementById('audio');
-    if(!mp) return;
-    
     document.removeEventListener("keydown", () => {})
   }
 
   loadMPComponents = () => {
-
     return (
       <div id="mp-controls">
         {this.rewindButton()}
@@ -102,15 +86,10 @@ class MusicPlayer extends React.Component {
     if (!mp.paused) {
       this.playerInterval = setInterval(() => {
 
-        // to color slider bar
-        const sbi = document.getElementById("slider-bar-input")
         let currPlayedPercent = (this.state.currentTime / this.state.duration) * 100
         this.setState({ currentPercent: currPlayedPercent })
+        const sbi = document.getElementById("slider-bar-input")
         sbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + currPlayedPercent + '%, #CCCCCC ' + currPlayedPercent + '%, #CCCCCC 100%)'
-        sbi.oninput = function() {
-          var value = (this.value-this.min)/(this.max-this.min)*100
-          this.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + value + '%, #CCCCCC ' + value + '%, #CCCCCC 100%)'
-        };
 
         this.setState({ currentTime: mp.currentTime });
       }, 50)
@@ -168,20 +147,25 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  sliderBar = () => (
-    <div id="slider-bar">
-      <p id="current-time">{this.formatTime(this.state.currentTime)}</p>
-      <input 
-        id="slider-bar-input"
-        type="range" 
-        min="0" max="100" 
-        value={this.state.currentPercent}
-        onChange={this.handleScrub}
-        step="1"
-      />
-      <p id="total-duration">{this.formatTime(this.state.duration)}</p>
-    </div>
-  )
+  sliderBar = () => {
+    var barColor = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.currentPercent * 100) + '%, #CCCCCC ' + (this.state.currentPercent * 100) + '%, #CCCCCC 100%)'
+
+    return (
+      <div id="slider-bar">
+        <p id="current-time">{this.formatTime(this.state.currentTime)}</p>
+        <input 
+          id="slider-bar-input"
+          type="range" 
+          min="0" max="100" 
+          value={this.state.currentPercent}
+          onChange={this.handleScrub}
+          step="1"
+          style={{background: barColor}}
+        />
+        <p id="total-duration">{this.formatTime(this.state.duration)}</p>
+      </div>
+    )
+  }
 
   handleScrub = (e) => {
     const mp = document.getElementById('audio');
@@ -191,32 +175,65 @@ class MusicPlayer extends React.Component {
 
   }
 
-
-  volumeControl = () => (
-    <div id="volume-bar">
-      <button>
-        {this.state.muted ? 
-          <FontAwesomeIcon icon="volume-mute" /> : 
-          <FontAwesomeIcon icon="volume-up" />}
-      </button>
-      <div id="volume-dropdown">
-        <input 
-          id="volume-bar-input"
-          type="range" 
-          min="0" max="100" 
-          value={this.state.volume * 100}
-          onChange={this.handleVolumeChange}
-          step="1"
-        />
+  volumeControl = () => {
+    var barColor = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.volume * 100) + '%, #CCCCCC ' + (this.state.volume * 100) + '%, #CCCCCC 100%)'
+    
+    return (
+      <div id="volume-bar">
+        <button onClick={this.handleMute}>
+          {this.volumeIcon()}
+        </button>
+        <div id="volume-dropdown">
+          <input 
+            id="volume-bar-input"
+            type="range"
+            min="0" max="100" 
+            value={this.state.volume * 100}
+            onChange={this.handleVolumeChange}
+            step="1"
+            style={{background: barColor}}
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+
+  volumeIcon = () => {
+    if (this.state.muted || this.state.volume == 0) {
+      return <FontAwesomeIcon icon={"volume-mute"} />
+    } else if (this.state.volume >= 0.5) {
+      return <FontAwesomeIcon icon="volume-up" />
+    } else {
+      return <FontAwesomeIcon icon="volume-down" />
+    }
+  }
+
+  handleMute = (e) => {
+    const mp = document.getElementById('audio');
+    const vbi = document.getElementById("volume-bar-input");
+    if (this.state.muted) {
+      this.setState({ muted: false })
+      mp.volume = this.state.volume;
+      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.volume * 100) + '%, #CCCCCC ' + (this.state.volume * 100) + '%, #CCCCCC 100%)'
+      console.log(vbi.value)
+      vbi.value = this.state.volume;
+      console.log(vbi.value)
+    } else {
+      this.setState({ muted: true });
+      mp.volume = 0;
+      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 0%, #CCCCCC 0%, #CCCCCC 100%)'
+      vbi.value = 0;
+    }
+  }
 
   handleVolumeChange = (e) => {
     var volume = e.target.value / 100;
     const mp = document.getElementById('audio');
     mp.volume = parseFloat(volume);
     this.setState({ volume });
+
+    const vbi = document.getElementById("volume-bar-input");
+    vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + e.target.value + '%, #CCCCCC ' + e.target.value + '%, #CCCCCC 100%)'
   }
 
   songInfo = (slap) => (

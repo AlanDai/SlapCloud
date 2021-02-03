@@ -85,6 +85,8 @@
 
 #volume-bar button {
   margin: 0px;
+  width: 30px;
+  height: 20px;
 }
 
 #volume-dropdown {
@@ -122,6 +124,11 @@
 #volume-bar-input::-webkit-slider-thumb {
   -webkit-appearance: none;
   -moz-appearance: none;
+  width: 0px;
+  height: 0px;
+}
+
+#volume-bar:hover input::-webkit-slider-thumb{
   width: 10px;
   height: 10px;
   border-radius: 50%;
