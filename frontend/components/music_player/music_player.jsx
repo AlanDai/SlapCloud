@@ -16,25 +16,16 @@ class MusicPlayer extends React.Component {
   }
 
   componentDidMount = () => {
-    const mp = document.getElementById('audio');
-    if (!mp) return;
     document.addEventListener("keydown", (e) => {
       if(e.key === "Space") this.handlePlay(e);
     });
-
-    const vbi = document.getElementById("volume-bar-input");
-    vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.volume * 100) + '%, #CCCCCC ' + (this.state.volume * 100) + '%, #CCCCCC 100%)';
   }
 
   componentWillUnmount() {
-    const mp = document.getElementById('audio');
-    if(!mp) return;
-    
     document.removeEventListener("keydown", () => {})
   }
 
   loadMPComponents = () => {
-
     return (
       <div id="mp-controls">
         {this.rewindButton()}
@@ -190,12 +181,12 @@ class MusicPlayer extends React.Component {
     return (
       <div id="volume-bar">
         <button onClick={this.handleMute}>
-          {this.volumeIcon(this.props.muted, this.props.volume)}
+          {this.volumeIcon()}
         </button>
         <div id="volume-dropdown">
           <input 
             id="volume-bar-input"
-            type="range" 
+            type="range"
             min="0" max="100" 
             value={this.state.volume * 100}
             onChange={this.handleVolumeChange}
@@ -207,10 +198,10 @@ class MusicPlayer extends React.Component {
     )
   }
 
-  volumeIcon = (muted, volume) => {
-    if (muted || volume == 0) {
-      return <FontAwesomeIcon icon="volume-mute" />
-    } else if (volume <= 0.5) {
+  volumeIcon = () => {
+    if (this.state.muted || this.state.volume == 0) {
+      return <FontAwesomeIcon icon={"volume-mute"} />
+    } else if (this.state.volume >= 0.5) {
       return <FontAwesomeIcon icon="volume-up" />
     } else {
       return <FontAwesomeIcon icon="volume-down" />
@@ -218,7 +209,21 @@ class MusicPlayer extends React.Component {
   }
 
   handleMute = (e) => {
-    this.state.muted ? this.setState({ muted: false }) : this.setState({ muted: true });
+    const mp = document.getElementById('audio');
+    const vbi = document.getElementById("volume-bar-input");
+    if (this.state.muted) {
+      this.setState({ muted: false })
+      mp.volume = this.state.volume;
+      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.volume * 100) + '%, #CCCCCC ' + (this.state.volume * 100) + '%, #CCCCCC 100%)'
+      console.log(vbi.value)
+      vbi.value = this.state.volume;
+      console.log(vbi.value)
+    } else {
+      this.setState({ muted: true });
+      mp.volume = 0;
+      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 0%, #CCCCCC 0%, #CCCCCC 100%)'
+      vbi.value = 0;
+    }
   }
 
   handleVolumeChange = (e) => {

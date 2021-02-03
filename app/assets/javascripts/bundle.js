@@ -14193,13 +14193,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
-      var mp = document.getElementById('audio');
-      if (!mp) return;
       document.addEventListener("keydown", function (e) {
         if (e.key === "Space") _this.handlePlay(e);
       });
-      var vbi = document.getElementById("volume-bar-input");
-      vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume * 100 + '%, #CCCCCC ' + _this.state.volume * 100 + '%, #CCCCCC 100%)';
     });
 
     _defineProperty(_assertThisInitialized(_this), "loadMPComponents", function () {
@@ -14387,7 +14383,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         id: "volume-bar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: _this.handleMute
-      }, _this.volumeIcon(_this.props.muted, _this.props.volume)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _this.volumeIcon()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "volume-dropdown"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         id: "volume-bar-input",
@@ -14403,12 +14399,12 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       })));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "volumeIcon", function (muted, volume) {
-      if (muted || volume == 0) {
+    _defineProperty(_assertThisInitialized(_this), "volumeIcon", function () {
+      if (_this.state.muted || _this.state.volume == 0) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
           icon: "volume-mute"
         });
-      } else if (volume <= 0.5) {
+      } else if (_this.state.volume >= 0.5) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
           icon: "volume-up"
         });
@@ -14420,11 +14416,28 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleMute", function (e) {
-      _this.state.muted ? _this.setState({
-        muted: false
-      }) : _this.setState({
-        muted: true
-      });
+      var mp = document.getElementById('audio');
+      var vbi = document.getElementById("volume-bar-input");
+
+      if (_this.state.muted) {
+        _this.setState({
+          muted: false
+        });
+
+        mp.volume = _this.state.volume;
+        vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + _this.state.volume * 100 + '%, #CCCCCC ' + _this.state.volume * 100 + '%, #CCCCCC 100%)';
+        console.log(vbi.value);
+        vbi.value = _this.state.volume;
+        console.log(vbi.value);
+      } else {
+        _this.setState({
+          muted: true
+        });
+
+        mp.volume = 0;
+        vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 0%, #CCCCCC 0%, #CCCCCC 100%)';
+        vbi.value = 0;
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleVolumeChange", function (e) {
@@ -14471,8 +14484,6 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   _createClass(MusicPlayer, [{
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      var mp = document.getElementById('audio');
-      if (!mp) return;
       document.removeEventListener("keydown", function () {});
     }
   }, {
