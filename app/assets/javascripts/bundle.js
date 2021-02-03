@@ -13545,13 +13545,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _slap_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slap_index_container */ "./frontend/components/discover/slap_index_container.js");
+ // import SlapCarouselContainer from '../slaps/slap_carousel_container';
+// import SquareSlapItem from '../slaps/square_slap_item.jsx';
 
 
 
 var DiscoverPage = function DiscoverPage(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "discover-page"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Welcome to SlapCloud"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "More of what you like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Suggestions based on what you've liked or played")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DiscoverPage);
@@ -13570,7 +13572,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _slaps_slap_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../slaps/slap_item */ "./frontend/components/slaps/slap_item.jsx");
+/* harmony import */ var _slaps_square_slap_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../slaps/square_slap_item */ "./frontend/components/slaps/square_slap_item.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13619,10 +13621,11 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index"
       }, slaps && Object.keys(slaps).map(function (id) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_square_slap_item__WEBPACK_IMPORTED_MODULE_1__.default, {
           key: id,
           slap: slaps[id]
-        });
+        }) // <SlapItem key={id} slap={slaps[id]} />
+        ;
       }));
     }
   }]);
@@ -14898,10 +14901,10 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
-/***/ "./frontend/components/slaps/slap_item.jsx":
-/*!*************************************************!*
-  !*** ./frontend/components/slaps/slap_item.jsx ***!
-  \*************************************************/
+/***/ "./frontend/components/slaps/square_slap_item.jsx":
+/*!********************************************************!*
+  !*** ./frontend/components/slaps/square_slap_item.jsx ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14910,8 +14913,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _music_player_play_button_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../music_player/play_button_container */ "./frontend/components/music_player/play_button_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -14941,15 +14943,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var SlapItem = /*#__PURE__*/function (_React$Component) {
-  _inherits(SlapItem, _React$Component);
+var SquareSlapItem = /*#__PURE__*/function (_React$Component) {
+  _inherits(SquareSlapItem, _React$Component);
 
-  var _super = _createSuper(SlapItem);
+  var _super = _createSuper(SquareSlapItem);
 
-  function SlapItem() {
+  function SquareSlapItem() {
     var _this;
 
-    _classCallCheck(this, SlapItem);
+    _classCallCheck(this, SquareSlapItem);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -14960,39 +14962,51 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "loadSlapImage", function () {
       if (!_this.props.slap.image) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "square-slap-image"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "default-slap-image"
-        });
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "square-item-screen"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+          slap: _this.props.slap
+        }));
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "square-slap-image"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
           className: "slap-item-image",
           src: _this.props.slap.image
-        });
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "square-item-screen"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+          slap: _this.props.slap
+        }));
       }
     });
 
     return _this;
   }
 
-  _createClass(SlapItem, [{
+  _createClass(SquareSlapItem, [{
     key: "render",
     value: function render() {
       var slap = this.props.slap;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "slap-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
-        to: "".concat(slap.uploader.id, "/").concat(slap.name)
-      }, this.loadSlapImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-        slap: slap
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "slap-item-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, slap.name)));
+        className: "square-slap-item"
+      }, this.loadSlapImage(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "square-slap-info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "square-slap-name"
+      }, slap.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "square-slap-uploader"
+      }, slap.uploader.email)));
     }
   }]);
 
-  return SlapItem;
+  return SquareSlapItem;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)(SlapItem));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)(SquareSlapItem));
 
 /***/ }),
 
