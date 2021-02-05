@@ -6,6 +6,7 @@ class UploadForm extends React.Component {
     super(props);
 
     this.state = {
+      name: props.file.name,
       imageUrl: '',
       imageFile: null,
     }
@@ -18,13 +19,13 @@ class UploadForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const slap = {
-      title: e.target[1].value,
+      title: this.state.name,
       description: e.target[2].value,
       audio: this.props.file,
       image: e.target[0].files[0],
       imageUrl: this.state.imageUrl
-    }
-    this.props.saveSlap(this.props.file, slap)
+    };
+    this.props.saveSlap(this.props.file, slap);
   }
 
   handleChange = e => {
@@ -39,7 +40,6 @@ class UploadForm extends React.Component {
     } else {
       this.setState({ imageUrl: "", imageFile: null })
     }
-    
   }
 
   loadImage() {
@@ -54,8 +54,12 @@ class UploadForm extends React.Component {
     }
   }
 
+  updateName = (e) => {
+    this.setState({ name: e.currentTarget.value })
+  }
+
   render() {
-    const { file } = this.props;
+    const { name } = this.state;
 
     return (
       <div className="upload-form-container">
@@ -63,15 +67,15 @@ class UploadForm extends React.Component {
           <div className="upload-form-input-container">
             <div className="image-container">
               {this.loadImage()}
-              <label htmlFor="image-upload" className="input-upload-label">
+              <label className="input-upload-label">
                 <div>Upload Image</div>
+                <input
+                  className="image-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={this.handleChange}
+                />
               </label>
-              <input
-                id="image-upload"
-                type="file"
-                accept="image/*"
-                onChange={this.handleChange}
-              />
             </div>
 
             <div className="upload-form-slap-inputs">
@@ -81,7 +85,8 @@ class UploadForm extends React.Component {
                   type="text"
                   placeholder="Name your slap"
                   minLength="1"
-                  defaultValue={file.name}
+                  value={name}
+                  onChange={this.updateName}
                 />
               </label>
               <label>Description

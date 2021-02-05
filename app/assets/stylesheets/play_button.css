@@ -1,0 +1,14 @@
+.play-button {
+  color: #FF4500;
+  background: white;
+  font-size: 45px;
+  border: none;
+}
+
+.play-button:hover {
+  cursor: pointer;
+}
+
+.play-button:focus {
+  outline: none;
+}

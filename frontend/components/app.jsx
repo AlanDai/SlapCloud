@@ -9,14 +9,15 @@ import MusicPlayerContainer from "./music_player/music_player_container"
 // import LandingPage from "./landing_page";
 import DiscoverPage from "./discover/discover_page";
 import UploadPage from "./upload/upload_page";
+import ShowPageContainer from "./show/show_page_container";
 
 const App = () => (
-  <div>
+  <div id="app">
     <Route path="/" component={NavBarContainer} />
     <Route path="/" component={ModalContainer} />
     
     <Switch>
-      <Route exact path={`${slap.uploader.id}/${slap.name}`} component={ShowPage}/>
+      <Route exact path="/slap/:slapId" component={ShowPageContainer}/>
       <AuthRoute exact path="/" component={DiscoverPage} />
       <Route path="/discover" component={DiscoverPage} />
       <ProtectedRoute path="/upload" component={UploadPage} />

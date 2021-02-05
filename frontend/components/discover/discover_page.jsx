@@ -1,7 +1,12 @@
 import React from "react";
 
+import SlapIndexContainer from "./slap_index_container";
+
 const DiscoverPage = (props) => (
-  <h1>Discover Page</h1>
+  <div id="discover-page">
+    <h1>Welcome to SlapCloud</h1>
+    <SlapIndexContainer />
+  </div>
 )
 
 export default DiscoverPage;

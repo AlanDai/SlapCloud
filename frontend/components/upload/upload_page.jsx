@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { createSlap } from "../../actions/slap_actions";
 
 import DragDrop from "../../util/drag_drop";
 import UploadForm from "./upload_form";
@@ -74,7 +73,7 @@ class UploadPage extends React.Component {
       return(
         <div className="upload-form-list">
           {this.state.files.map((file, idx) => (
-            <UploadForm key={idx} file={file} saveSlap={this.saveSlap} cancelUpload={this.cancelUpload}/>
+            <UploadForm key={file.name} file={file} saveSlap={this.saveSlap} cancelUpload={this.cancelUpload}/>
           ))}
         </div>
       )
@@ -92,7 +91,7 @@ class UploadPage extends React.Component {
 
   // for rendering saved items
 
-  saveSlap(file, slap) {
+  saveSlap = (file, slap) => {
     let fileList = this.state.files;
     fileList = fileList.filter(currentFile => currentFile !== file);
 
@@ -218,12 +217,8 @@ class UploadPage extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  createSlap: slap => dispatch(createSlap(slap))
-})
-
 const mapStateToProps = ({ session }) => ({
   userId: session.id
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UploadPage));
+export default withRouter(connect(mapStateToProps)(UploadPage));

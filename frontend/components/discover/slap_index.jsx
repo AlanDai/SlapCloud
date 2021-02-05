@@ -1,7 +1,6 @@
 import React from "react";
 
-import SlapsCarousel from "./slaps_carousel";
-import SquareSlapItem from "./square_slap_item";
+import SlapItem from "../slaps/slap_item";
 
 class SlapsIndex extends React.Component {
   componentDidMount() {
@@ -13,7 +12,6 @@ class SlapsIndex extends React.Component {
 
     return(
       <div className="slap-index" >
-        <SlapsCarousel slaps={slaps} />
         {slaps && Object.keys(slaps).map((id) => (
           <SlapItem key={id} slap={slaps[id]} />
         ))}
