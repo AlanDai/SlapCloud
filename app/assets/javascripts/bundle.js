@@ -13508,7 +13508,9 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "background"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
     path: "/",
     component: _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
@@ -14888,7 +14890,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faRedo, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeDown, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlayCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPauseCircle);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faRedo, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeDown, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlayCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPauseCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faHeart, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faUser);
 
 var Root = function Root(_ref) {
   var store = _ref.store;
@@ -14915,7 +14917,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _music_player_play_button_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../music_player/play_button_container */ "./frontend/components/music_player/play_button_container.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _music_player_play_button_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../music_player/play_button_container */ "./frontend/components/music_player/play_button_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14944,6 +14947,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var ShowPage = /*#__PURE__*/function (_React$Component) {
   _inherits(ShowPage, _React$Component);
 
@@ -14962,20 +14966,24 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
           slap: action.payload.slap
         });
 
-        if (!_this.props.currSong) {
-          _this.props.setCurrentSlap(action.payload.slap.id);
-        }
+        if (!_this.props.currSong) _this.props.setCurrentSlap(action.payload.slap.id);
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "commentForm", function () {
+    _defineProperty(_assertThisInitialized(_this), "inputForm", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "input-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "comment-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         placeholder: "Write a comment"
-      }));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
+        icon: "heart"
+      }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, " Like")));
     });
+
+    _defineProperty(_assertThisInitialized(_this), "likeButton", function () {});
 
     return _this;
   }
@@ -14992,7 +15000,7 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         id: "show-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-header-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_3__.default, {
         slap: slap
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-header-info"
@@ -15002,7 +15010,24 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         src: slap.image
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-body"
-      }, currUser && this.commentForm()));
+      }, currUser && this.inputForm(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "show-body-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "show-user-info"
+      }, slap.uploader.image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "user-image-medallion",
+        src: slap.uploader.image
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "default-user-medallion"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
+        icon: "user"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, " Follow"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "show-slap-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "show-description"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "show-comments"
+      })))));
     }
   }]);
 

@@ -18,6 +18,8 @@ import {
   faVolumeMute,
   faPlayCircle,
   faPauseCircle,
+  faHeart,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   fab,
@@ -31,6 +33,8 @@ library.add(
   faVolumeMute,
   faPlayCircle,
   faPauseCircle,
+  faHeart,
+  faUser,
 )
 
 const Root = ({ store }) => (

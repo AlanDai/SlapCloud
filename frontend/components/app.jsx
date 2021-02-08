@@ -13,6 +13,7 @@ import ShowPageContainer from "./show/show_page_container";
 
 const App = () => (
   <div id="app">
+    <div id="background" />
     <Route path="/" component={NavBarContainer} />
     <Route path="/" component={ModalContainer} />
     
