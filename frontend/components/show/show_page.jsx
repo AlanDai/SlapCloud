@@ -9,14 +9,25 @@ class ShowPage extends React.Component {
   }
 
   componentDidMount = () => {
-    this.props.fetchSlap(this.props.match.params.slapId).then(action => this.setState({ slap: action.payload.slap }))
+    this.props.fetchSlap(this.props.match.params.slapId).then(action => {
+      this.setState({ slap: action.payload.slap })
+      if (!this.props.currSong) this.props.setCurrentSlap(action.payload.slap.id)
+    })
+  }
+
+  commentForm = () => {
+    return (
+      <div id="comment-form">
+        <input type="text" placeholder="Write a comment"/>
+      </div>
+    )
   }
 
   render() {
-    console.log(this.state);
     if (!this.state) return (<div></div>);
 
     const { slap } = this.state;
+    const { currUser } = this.props;
 
     return (
       <div id="show-page">
@@ -39,7 +50,7 @@ class ShowPage extends React.Component {
           
         </div>
         <div id="show-body">
-
+          {currUser && this.commentForm()}
         </div>
       </div>
     )

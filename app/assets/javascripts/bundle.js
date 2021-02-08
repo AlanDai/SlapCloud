@@ -14959,10 +14959,21 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       _this.props.fetchSlap(_this.props.match.params.slapId).then(function (action) {
-        return _this.setState({
+        _this.setState({
           slap: action.payload.slap
         });
+
+        if (!_this.props.currSong) _this.props.setCurrentSlap(action.payload.slap.id);
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "commentForm", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "comment-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        placeholder: "Write a comment"
+      }));
     });
 
     return _this;
@@ -14971,9 +14982,9 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
   _createClass(ShowPage, [{
     key: "render",
     value: function render() {
-      console.log(this.state);
       if (!this.state) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
       var slap = this.state.slap;
+      var currUser = this.props.currUser;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-page"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14990,7 +15001,7 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         src: slap.image
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-body"
-      }));
+      }, currUser && this.commentForm()));
     }
   }]);
 
@@ -15013,19 +15024,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _actions_slap_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/slap_actions */ "./frontend/actions/slap_actions.js");
-/* harmony import */ var _show_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./show_page */ "./frontend/components/show/show_page.jsx");
+/* harmony import */ var _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/music_player_actions */ "./frontend/actions/music_player_actions.js");
+/* harmony import */ var _show_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./show_page */ "./frontend/components/show/show_page.jsx");
+
 
 
 
 
 
 var mapStateToProps = function mapStateToProps(_ref, ownProps) {
-  var entities = _ref.entities;
-  var slaps = entities.slaps;
+  var entities = _ref.entities,
+      session = _ref.session,
+      ui = _ref.ui;
+  var currUser = null;
+  if (session.id) currUser = entities.users[session.id];
+  var currSong = null;
+  if (ui.musicPlayer) currSong = ui.musicPlayer.curr;
   return {
-    slap: slaps[ownProps.match.params.slapId]
+    slap: entities.slaps[ownProps.match.params.slapId],
+    currUser: currUser,
+    currSong: currSong
   };
 };
 
@@ -15033,11 +15053,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchSlap: function fetchSlap(slapId) {
       return dispatch((0,_actions_slap_actions__WEBPACK_IMPORTED_MODULE_1__.fetchSlap)(slapId));
+    },
+    setCurrentSlap: function setCurrentSlap(slapId) {
+      return dispatch((0,_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_2__.setCurrentSlap)(slapId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_show_page__WEBPACK_IMPORTED_MODULE_2__.default)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_show_page__WEBPACK_IMPORTED_MODULE_3__.default)));
 
 /***/ }),
 
