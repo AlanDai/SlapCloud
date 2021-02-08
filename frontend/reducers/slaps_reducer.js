@@ -3,17 +3,17 @@ import {
   RECEIVE_SLAP
 } from "../actions/slap_actions";
 
-const initialState = {
-  slaps: []
-}
+const initialState = {}
 
 const slapsReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_SLAPS:
-      return Object.assign({}, action.payload);
+      return Object.assign({}, action.payload.slaps);
     case RECEIVE_SLAP:
-      return Object.assign({}, state, { [action.payload.id]: action.payload });
+      const newState = Object.assign({}, state)
+      newState[action.payload.slap.id] = action.payload.slap;
+      return newState;
     default:
       return state;
   }

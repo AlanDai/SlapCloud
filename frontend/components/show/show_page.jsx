@@ -1,6 +1,6 @@
 import React from "react";
+import moment from "moment";
 
-import { fetchSlap } from "../../util/slap_api_util";
 import PlayButtonContainer from "../music_player/play_button_container"
 
 class ShowPage extends React.Component {
@@ -9,10 +9,11 @@ class ShowPage extends React.Component {
   }
 
   componentDidMount = () => {
-    fetchSlap(this.props.match.params.slapId).then(slap => this.setState({ slap }));
+    this.props.fetchSlap(this.props.match.params.slapId).then(action => this.setState({ slap: action.payload.slap }))
   }
 
   render() {
+    console.log(this.state);
     if (!this.state) return (<div></div>);
 
     const { slap } = this.state;
@@ -20,22 +21,22 @@ class ShowPage extends React.Component {
     return (
       <div id="show-page">
         <div id="show-header">
-          <div>
-            <div>
-              <PlayButtonContainer slap={slap} />
-              <div>
-                <span>{slap.uploader.email}</span>
-                <span>{slap.name}</span>
-              </div>
-              <div>
-                <span>{slap.uploader.created_at}</span>
-              </div>
+
+          <div id="show-header-content">
+            <PlayButtonContainer slap={slap} />
+            <div id="show-header-info">
+              <div><span>{slap.uploader.email}</span></div>
+              <div><span>{slap.name}</span></div>
             </div>
-            <div id="show-waveform"></div>
+            <div>
+              <span>{moment(slap.uploader.created_at).fromNow()}</span>
+            </div>
           </div>
-          <div>
+
+          <div id="show-header-image">
             <img src={slap.image} />
           </div>
+          
         </div>
         <div id="show-body">
 

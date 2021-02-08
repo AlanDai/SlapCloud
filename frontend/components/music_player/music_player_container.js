@@ -11,7 +11,7 @@ import {
 } from '../../actions/music_player_actions';
 
 const mapStateToProps = ({entities, ui}) => {
-  const { slaps } = entities.slaps;
+  const { slaps } = entities;
   const { playing, next, prev, curr } = ui.musicPlayer;
 
   return {

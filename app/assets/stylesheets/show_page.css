@@ -1,0 +1,57 @@
+#show-page {
+  width: 960px;
+  height: 250px;
+  margin: 0 auto;
+  background: rgb(79,79,79);
+  background: linear-gradient(90deg, rgba(79,79,79,1) 0%, rgba(145,68,4,1) 76%, rgba(189,81,19,1) 95%);
+}
+
+#show-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#show-header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 700px;
+  font-family: 'Overpass', sans-serif;
+  color: white;
+}
+
+#show-header-content .play-button {
+  margin-left: 20px;
+  font-size: 80px;
+  background: transparent;
+}
+
+#show-header-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+#show-header-info div:nth-child(2) {
+  font-size: 25px;
+  width: 400px;
+}
+
+#show-header-info * {
+  margin-top: 5px;
+}
+
+#show-header-info span {
+  background-color: black;
+}
+
+#show-header-image img {
+  width: 200px;
+  height: 200px;
+  margin: 25px;
+}

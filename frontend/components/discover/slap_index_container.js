@@ -4,7 +4,7 @@ import { fetchSlaps } from '../../actions/slap_actions'
 import SlapIndex from './slap_index'
 
 const mapStateToProps = ({ entities }) => ({
-  slaps: entities.slaps.slaps,
+  slaps: entities.slaps,
 })
 
 const mapDispatchToProps = dispatch => ({
