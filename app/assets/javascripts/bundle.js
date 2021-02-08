@@ -14607,7 +14607,6 @@ var PlayButton = function PlayButton(_ref) {
   function handleClick(e) {
     if (slap.id != curr) {
       setCurrentSlap(slap.id);
-      setQueue([]);
       setTimeout(function () {
         handlePlay(e);
       }, 1);
@@ -14963,7 +14962,9 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
           slap: action.payload.slap
         });
 
-        if (!_this.props.currSong) _this.props.setCurrentSlap(action.payload.slap.id);
+        if (!_this.props.currSong) {
+          _this.props.setCurrentSlap(action.payload.slap.id);
+        }
       });
     });
 

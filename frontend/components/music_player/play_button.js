@@ -6,7 +6,6 @@ const PlayButton = ({ playing, curr, slap, setCurrentSlap, setQueue, playSlap, p
   function handleClick(e) {
     if (slap.id != curr) {
       setCurrentSlap(slap.id);
-      setQueue([]);
       setTimeout(()=>{handlePlay(e)}, 1);
     } else {
       handlePlay(e);

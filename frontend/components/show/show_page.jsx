@@ -11,7 +11,9 @@ class ShowPage extends React.Component {
   componentDidMount = () => {
     this.props.fetchSlap(this.props.match.params.slapId).then(action => {
       this.setState({ slap: action.payload.slap })
-      if (!this.props.currSong) this.props.setCurrentSlap(action.payload.slap.id)
+      if (!this.props.currSong) {
+        this.props.setCurrentSlap(action.payload.slap.id)
+      }
     })
   }
 
