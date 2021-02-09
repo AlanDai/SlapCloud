@@ -34,13 +34,21 @@ class ShowPage extends React.Component {
 
   handleKeyUp = (e) => {
     if (e.key === "Enter") {
+      console.log(e)
+      
       const comment = {
         body: e.target.value,
         commenter_id: this.props.currUser.id,
         slap_id: this.state.slap.id,
       }
-      console.log(comment);
-      createComment(comment).then(payload => console.log(payload));
+      createComment(comment).then(comment => { 
+        e.target.value = '';
+        const slap = this.state.slap
+        slap["comments"][comment.id] = comment 
+        this.setState({
+          slap
+        })
+      });
     }
   }
 

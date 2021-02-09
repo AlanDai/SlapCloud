@@ -14989,14 +14989,20 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyUp", function (e) {
       if (e.key === "Enter") {
+        console.log(e);
         var comment = {
           body: e.target.value,
           commenter_id: _this.props.currUser.id,
           slap_id: _this.state.slap.id
         };
-        console.log(comment);
-        (0,_util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__.createComment)(comment).then(function (payload) {
-          return console.log(payload);
+        (0,_util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__.createComment)(comment).then(function (comment) {
+          e.target.value = '';
+          var slap = _this.state.slap;
+          slap["comments"][comment.id] = comment;
+
+          _this.setState({
+            slap: slap
+          });
         });
       }
     });

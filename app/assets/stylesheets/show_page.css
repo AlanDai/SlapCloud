@@ -72,7 +72,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
+  margin: 20px 0 0 0;
 }
 
 #input-body *:focus {
@@ -116,6 +116,7 @@
   flex-direction: row;
   justify-content: flex-start;
   width: 960px;
+  margin-top: 20px;
 }
 
 #show-user-info {
