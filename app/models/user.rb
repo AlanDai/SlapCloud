@@ -51,4 +51,8 @@ class User < ApplicationRecord
         foreign_key: :uploader_id,
         class_name: :Album
 
+    has_many :comments,
+        primary_key: :id,
+        foreign_key: :commenter_id,
+        class_name: :Comment
 end
