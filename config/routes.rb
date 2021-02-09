@@ -7,10 +7,8 @@ Rails.application.routes.draw do
     resources :albums, only: [:index, :create, :create]
     resources :slaps, only: [:index, :show, :create]
     
-    resources :comments, only: [:show, :create, :update, :destroy]
+    resources :comments, only: [:create, :update, :destroy]
   end
-
-
 
   root "static_pages#root"
 end

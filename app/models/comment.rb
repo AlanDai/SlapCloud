@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   validates :body, :commenter_id, :slap_id, presence: true
-  validates_length_of :body, length: 1..200
+  validates :body, length: 1..200
 
   belongs_to :commenter,
     primary_key: :id,

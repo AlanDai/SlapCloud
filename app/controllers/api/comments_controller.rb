@@ -5,11 +5,6 @@ class Api::CommentsController < ApplicationController
     render :show
   end
 
-  def show
-    @comment = Comment.find(params[:id])
-    render :show
-  end
-
   def update
     @comment = Comment.find(params[:id])
     if @comment

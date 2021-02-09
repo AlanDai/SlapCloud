@@ -7,6 +7,7 @@ class Api::SlapsController < ApplicationController
 
   def show
     @slap = Slap.find(params[:id])
+    @comments = Comment.where(slap_id: params[:id])
     render :show
   end
 
