@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import { fetchSlap } from "../../actions/slap_actions";
-import { setCurrentSlap, setQueue } from "../../actions/music_player_actions";
+import { setCurrentSlap } from "../../actions/music_player_actions";
 import ShowPage from "./show_page";
 
 const mapStateToProps = ({ entities, session, ui }, ownProps) => {

@@ -3,6 +3,7 @@ import React from "react";
 import moment from "moment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { createComment, updateComment, deleteComment } from "../../util/comments_api_util";
 import PlayButtonContainer from "../music_player/play_button_container"
 
 class ShowPage extends React.Component {
@@ -21,7 +22,7 @@ class ShowPage extends React.Component {
     return (
       <div id="input-body">
         <div id="comment-form">
-          <input type="text" placeholder="Write a comment"/>
+          <input id="comment-form-input" type="text" placeholder="Write a comment" onKeyUp={this.handleKeyUp} />
         </div>
         <button>
           <FontAwesomeIcon icon="heart" /> <span> Like</span>
@@ -29,6 +30,18 @@ class ShowPage extends React.Component {
         {/* {this.likeButton()} */}
       </div>
     )
+  }
+
+  handleKeyUp = (e) => {
+    if (e.key === "Enter") {
+      const comment = {
+        body: e.target.value,
+        commenter_id: this.props.currUser.id,
+        slap_id: this.state.slap.id,
+      }
+      console.log(comment);
+      createComment(comment).then(payload => console.log(payload));
+    }
   }
 
   likeButton = () => {}

@@ -14918,7 +14918,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _music_player_play_button_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../music_player/play_button_container */ "./frontend/components/music_player/play_button_container.js");
+/* harmony import */ var _util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/comments_api_util */ "./frontend/util/comments_api_util.js");
+/* harmony import */ var _music_player_play_button_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../music_player/play_button_container */ "./frontend/components/music_player/play_button_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14942,6 +14943,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -14976,11 +14978,27 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "comment-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        id: "comment-form-input",
         type: "text",
-        placeholder: "Write a comment"
+        placeholder: "Write a comment",
+        onKeyUp: _this.handleKeyUp
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
         icon: "heart"
       }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, " Like")));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleKeyUp", function (e) {
+      if (e.key === "Enter") {
+        var comment = {
+          body: e.target.value,
+          commenter_id: _this.props.currUser.id,
+          slap_id: _this.state.slap.id
+        };
+        console.log(comment);
+        (0,_util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__.createComment)(comment).then(function (payload) {
+          return console.log(payload);
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "likeButton", function () {});
@@ -15000,7 +15018,7 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         id: "show-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-header-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_4__.default, {
         slap: slap
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-header-info"
@@ -16219,6 +16237,46 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/comments_api_util.js":
+/*!********************************************!*
+  !*** ./frontend/util/comments_api_util.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createComment": () => /* binding */ createComment,
+/* harmony export */   "updateComment": () => /* binding */ updateComment,
+/* harmony export */   "deleteComment": () => /* binding */ deleteComment
+/* harmony export */ });
+var createComment = function createComment(comment) {
+  return $.ajax({
+    url: "/api/comments",
+    method: "POST",
+    data: {
+      comment: comment
+    }
+  });
+};
+var updateComment = function updateComment(commentId, comment) {
+  return $.ajax({
+    url: "/api/comments/".concat(commentId),
+    method: "PATCH",
+    data: {
+      comment: comment
+    }
+  });
+};
+var deleteComment = function deleteComment(commentId) {
+  return $.ajax({
+    url: "/api/comments/".concat(commentId),
+    method: 'DELETE'
+  });
+};
 
 /***/ }),
 
