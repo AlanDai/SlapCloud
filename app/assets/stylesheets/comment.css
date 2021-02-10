@@ -64,7 +64,7 @@
 
 .comment-buttons button:hover {
   cursor: pointer;
-  color: black;
+  color: #FF4500;
 }
 
 .comment-buttons button:focus {
