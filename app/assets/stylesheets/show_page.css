@@ -164,6 +164,10 @@
   color: #666666;
 }
 
+.unlike-button {
+  color: #FF4500;
+}
+
 #show-comments-header {
   color: #999999;
   border-bottom: solid 1px #e5e5e5;

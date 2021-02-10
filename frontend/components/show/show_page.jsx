@@ -3,7 +3,9 @@ import React from "react";
 import moment from "moment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { createComment, updateComment, deleteComment } from "../../util/comments_api_util";
+import { createComment } from "../../util/comments_api_util";
+import { createLike, deleteLike } from "../../util/like_api_util";
+
 import PlayButtonContainer from "../music_player/play_button_container"
 import CommentItem from "./comment_item";
 
@@ -14,7 +16,10 @@ class ShowPage extends React.Component {
 
   componentDidMount = () => {
     this.props.fetchSlap(this.props.match.params.slapId).then(action => {
-      this.setState({ slap: action.payload.slap });
+      this.setState({
+        slap: action.payload.slap,
+        liked: this.props.currUser && action.payload.slap.likes[this.props.currUser.id]
+      });
       if (!this.props.currSong) this.props.setCurrentSlap(action.payload.slap.id);
     })
   }
@@ -25,10 +30,15 @@ class ShowPage extends React.Component {
         <div id="comment-form">
           <input id="comment-form-input" type="text" placeholder="Write a comment" onKeyUp={this.handleKeyUp} />
         </div>
-        <button>
-          <FontAwesomeIcon icon="heart" /> <span> Like</span>
-        </button>
-        {/* {this.likeButton()} */}
+        {this.props.currUser && 
+          this.state.liked ?
+            <button className="unlike-button" onClick={this.handleUnlike}>
+              <FontAwesomeIcon icon="heart" /> <span> Liked</span>
+            </button> :
+            <button className="like-button" onClick={this.handleLike}>
+              <FontAwesomeIcon icon="heart" /> <span> Like</span>
+            </button>
+        }
       </div>
     )
   }
@@ -52,7 +62,25 @@ class ShowPage extends React.Component {
     }
   }
 
-  likeButton = () => {}
+  handleLike = (e) => {
+    this.setState({ liked: true })
+    createLike({
+      liker_id: this.props.currUser.id,
+      slap_id: this.state.slap.id
+    }).then(like => {
+      this.state.slap.likes[like.liker_id] = {id: like.id};
+      this.setState({ slap: this.state.slap });
+    })
+  }
+
+  handleUnlike = (e) => {
+    this.setState({ liked: false })
+    deleteLike(this.state.slap.likes[this.props.currUser.id].id)
+    .then(like => {
+      delete this.state.slap.likes[like.liker_id];
+      this.setState({ slap: this.state.slap });
+    })
+  }
 
   render() {
     if (!this.state) return (<div></div>);
@@ -101,7 +129,7 @@ class ShowPage extends React.Component {
                   <span>{slap.description}</span>
                 </div>
                 <span id="show-likes">
-                  <FontAwesomeIcon icon="heart" /> {slap.likes.length}
+                  <FontAwesomeIcon icon="heart" /> {Object.values(slap.likes).length}
                 </span>  
               </div>
               <div id="show-comments">
