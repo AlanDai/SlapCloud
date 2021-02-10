@@ -11,5 +11,4 @@ class Like < ApplicationRecord
     primary_key: :id,
     foreign_key: :slap_id,
     class_name: :Slap
-
 end
