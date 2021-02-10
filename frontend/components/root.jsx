@@ -20,6 +20,9 @@ import {
   faPauseCircle,
   faHeart,
   faUser,
+  faCommentAlt,
+  faEdit,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   fab,
@@ -35,6 +38,9 @@ library.add(
   faPauseCircle,
   faHeart,
   faUser,
+  faCommentAlt,
+  faEdit,
+  faTrash,
 )
 
 const Root = ({ store }) => (

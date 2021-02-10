@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { createComment, updateComment, deleteComment } from "../../util/comments_api_util";
 import PlayButtonContainer from "../music_player/play_button_container"
+import CommentItem from "./comment_item";
 
 class ShowPage extends React.Component {
   constructor(props) {
@@ -34,7 +35,6 @@ class ShowPage extends React.Component {
 
   handleKeyUp = (e) => {
     if (e.key === "Enter") {
-      console.log(e)
       
       const comment = {
         body: e.target.value,
@@ -96,10 +96,21 @@ class ShowPage extends React.Component {
             </div>
             <div id="show-slap-content">
               <div id="show-description">
+                <div><b>Description:</b></div>
                 <span>{slap.description}</span>
               </div>
               <div id="show-comments">
-
+                <div id="show-comments-header">
+                  <FontAwesomeIcon icon="comment-alt" />
+                  {slap.comments && 
+                    <span> {Object.keys(slap.comments).length} comments</span>
+                  }
+                </div>
+                <div>
+                  {Object.values(slap.comments).map((comment, idx) =>
+                    <CommentItem key={idx} user={currUser} comment={comment} />
+                  )}
+                </div>
               </div>
             </div>
           </div>

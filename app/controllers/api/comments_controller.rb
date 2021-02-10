@@ -5,6 +5,15 @@ class Api::CommentsController < ApplicationController
     render :show
   end
 
+  def show
+    @comment = Comment.find(params[:id])
+    if @comment
+      render :show
+    else
+      render json: { message: 'Comment not found', status: 400 }
+    end
+  end
+
   def update
     @comment = Comment.find(params[:id])
     if @comment
