@@ -11,6 +11,15 @@ class Api::UsersController < ApplicationController
         end
     end
 
+    def show
+        @user = User.find(params[:id])
+        if @user
+            render :show
+        else
+            render json: { "User not found" }
+        end
+    end
+
     def checkEmail
         emailExists = User.find_by(email: params[:email]) ? true : false
         render json: { emailExists: emailExists }
