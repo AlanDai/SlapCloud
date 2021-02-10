@@ -8,6 +8,7 @@ class Api::SlapsController < ApplicationController
   def show
     @slap = Slap.find(params[:id])
     @comments = @slap.comments
+    @likes = @slap.likes
     render :show
   end
 

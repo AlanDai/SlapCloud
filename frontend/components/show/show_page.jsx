@@ -96,8 +96,13 @@ class ShowPage extends React.Component {
             </div>
             <div id="show-slap-content">
               <div id="show-description">
-                <div><b>Description:</b></div>
-                <span>{slap.description}</span>
+                <div>
+                  <div><b>Description:</b></div>
+                  <span>{slap.description}</span>
+                </div>
+                <span id="show-likes">
+                  <FontAwesomeIcon icon="heart" /> {slap.likes.length}
+                </span>  
               </div>
               <div id="show-comments">
                 <div id="show-comments-header">

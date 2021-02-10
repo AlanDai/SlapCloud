@@ -8,3 +8,5 @@ json.set! :comments do
     end
   end
 end
+
+json.likes @likes
