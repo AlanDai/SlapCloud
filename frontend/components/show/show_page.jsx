@@ -53,7 +53,8 @@ class ShowPage extends React.Component {
         commenter_id: this.props.currUser.id,
         slap_id: this.state.slap.id,
       }
-      createComment(comment).then(comment => { 
+      createComment(comment)
+      .then(comment => { 
         e.target.value = '';
         const slap = this.state.slap
         slap.comments ?

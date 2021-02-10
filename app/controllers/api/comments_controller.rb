@@ -2,7 +2,11 @@ class Api::CommentsController < ApplicationController
   
   def create
     @comment = Comment.create!(comment_params)
-    render :show
+    if @comment
+      render :show
+    else
+      render json: @comment.errors.full_messages, status: 422
+    end
   end
 
   def show
