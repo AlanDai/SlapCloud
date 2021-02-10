@@ -15126,7 +15126,7 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
       _this.props.fetchSlap(_this.props.match.params.slapId).then(function (action) {
         _this.setState({
           slap: action.payload.slap,
-          liked: _this.props.currUser && action.payload.slap.likes[_this.props.currUser.id]
+          liked: _this.props.currUser && action.payload.slap.likes && action.payload.slap.likes[_this.props.currUser.id]
         });
 
         if (!_this.props.currSong) _this.props.setCurrentSlap(action.payload.slap.id);
@@ -15166,7 +15166,7 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         (0,_util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__.createComment)(comment).then(function (comment) {
           e.target.value = '';
           var slap = _this.state.slap;
-          slap["comments"][comment.id] = comment;
+          slap.comments ? slap["comments"][comment.id] = comment : slap["comments"] = _defineProperty({}, comment.id, comment);
 
           _this.setState({
             slap: slap
@@ -15184,9 +15184,11 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         liker_id: _this.props.currUser.id,
         slap_id: _this.state.slap.id
       }).then(function (like) {
-        _this.state.slap.likes[like.liker_id] = {
+        _this.state.slap.likes ? _this.state.slap.likes[like.liker_id] = {
           id: like.id
-        };
+        } : _this.state.slap.likes = _defineProperty({}, like.liker_id, {
+          id: like.id
+        });
 
         _this.setState({
           slap: _this.state.slap
@@ -15252,13 +15254,13 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         id: "show-likes"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
         icon: "heart"
-      }), " ", Object.values(slap.likes).length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), " ", slap.likes ? Object.values(slap.likes).length : 0)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-comments"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-comments-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
         icon: "comment-alt"
-      }), slap.comments && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, " ", Object.keys(slap.comments).length, " comments")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, Object.values(slap.comments).map(function (comment, idx) {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, " ", slap.comments ? Object.keys(slap.comments).length : 0, " comments ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, slap.comments && Object.values(slap.comments).map(function (comment, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_comment_item__WEBPACK_IMPORTED_MODULE_6__.default, {
           key: idx,
           user: currUser,

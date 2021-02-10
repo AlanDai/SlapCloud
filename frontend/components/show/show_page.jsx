@@ -18,7 +18,9 @@ class ShowPage extends React.Component {
     this.props.fetchSlap(this.props.match.params.slapId).then(action => {
       this.setState({
         slap: action.payload.slap,
-        liked: this.props.currUser && action.payload.slap.likes[this.props.currUser.id]
+        liked: this.props.currUser &&
+                action.payload.slap.likes &&
+                action.payload.slap.likes[this.props.currUser.id]
       });
       if (!this.props.currSong) this.props.setCurrentSlap(action.payload.slap.id);
     })
@@ -54,7 +56,9 @@ class ShowPage extends React.Component {
       createComment(comment).then(comment => { 
         e.target.value = '';
         const slap = this.state.slap
-        slap["comments"][comment.id] = comment 
+        slap.comments ?
+          slap["comments"][comment.id] = comment:
+          slap["comments"] = { [comment.id] : comment } 
         this.setState({
           slap
         })
@@ -68,7 +72,9 @@ class ShowPage extends React.Component {
       liker_id: this.props.currUser.id,
       slap_id: this.state.slap.id
     }).then(like => {
-      this.state.slap.likes[like.liker_id] = {id: like.id};
+      this.state.slap.likes ? 
+        this.state.slap.likes[like.liker_id] = {id: like.id} :
+        this.state.slap.likes = { [like.liker_id] : {id: like.id} }        
       this.setState({ slap: this.state.slap });
     })
   }
@@ -129,18 +135,16 @@ class ShowPage extends React.Component {
                   <span>{slap.description}</span>
                 </div>
                 <span id="show-likes">
-                  <FontAwesomeIcon icon="heart" /> {Object.values(slap.likes).length}
+                  <FontAwesomeIcon icon="heart" /> { slap.likes ? Object.values(slap.likes).length : 0 }
                 </span>  
               </div>
               <div id="show-comments">
                 <div id="show-comments-header">
                   <FontAwesomeIcon icon="comment-alt" />
-                  {slap.comments && 
-                    <span> {Object.keys(slap.comments).length} comments</span>
-                  }
+                  <span> {slap.comments ? Object.keys(slap.comments).length : 0 } comments </span>
                 </div>
                 <div>
-                  {Object.values(slap.comments).map((comment, idx) =>
+                  {slap.comments && Object.values(slap.comments).map((comment, idx) =>
                     <CommentItem key={idx} user={currUser} comment={comment} />
                   )}
                 </div>
