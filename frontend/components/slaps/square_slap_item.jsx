@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import PlayButtonContainer from '../music_player/play_button_container';
 
@@ -31,7 +31,9 @@ class SquareSlapItem extends React.Component {
       <div className="square-slap-item">
         {this.loadSlapImage()}
         <div className="square-slap-info">  
-          <p className="square-slap-name">{slap.name}</p>
+          <Link to={"/slap/" + slap.id} style={{ textDecoration: 'none' }}>
+            <p className="square-slap-name">{slap.name}</p>
+          </Link>
           <p className="square-slap-uploader">{slap.uploader.email}</p>
         </div>
       </div>

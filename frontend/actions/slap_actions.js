@@ -18,7 +18,7 @@ export const fetchSlaps = () => dispatch => (
   .then(slaps => dispatch(receiveSlaps(slaps)))
 )
 
-export const fetchSlap = slap => dispatch => (
-  APIUtil.fetchSlap(slap.id)
+export const fetchSlap = slapId => dispatch => (
+  APIUtil.fetchSlap(slapId)
   .then(slap => dispatch(receiveSlap(slap)))
 )

@@ -16,4 +16,14 @@ class Slap < ApplicationRecord
     primary_key: :id,
     foreign_key: :album_id
 
+  has_many :comments,
+    primary_key: :id,
+    foreign_key: :slap_id,
+    class_name: :Comment
+
+  has_many :likes,
+    primary_key: :id,
+    foreign_key: :slap_id,
+    class_name: :Like
+
 end

@@ -6,7 +6,9 @@ class Api::SlapsController < ApplicationController
   end
 
   def show
-    @slaps = Slap.find_by(id: params[:id])
+    @slap = Slap.find(params[:id])
+    @comments = @slap.comments
+    @likes = @slap.likes
     render :show
   end
 

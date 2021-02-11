@@ -215,9 +215,7 @@ class MusicPlayer extends React.Component {
       this.setState({ muted: false })
       mp.volume = this.state.volume;
       vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + (this.state.volume * 100) + '%, #CCCCCC ' + (this.state.volume * 100) + '%, #CCCCCC 100%)'
-      console.log(vbi.value)
       vbi.value = this.state.volume;
-      console.log(vbi.value)
     } else {
       this.setState({ muted: true });
       mp.volume = 0;

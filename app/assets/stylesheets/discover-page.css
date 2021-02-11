@@ -1,6 +1,7 @@
 #discover-page {
-  text-align: center;
-
+  width: 960px;
+  margin: 0 auto;
+  background-color: white;
   font-family: 'Overpass', sans-serif;
 }
 
@@ -40,15 +41,22 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 100px;
+  height: 60px;
 }
 
 .square-slap-name {
   font-size: 15px;
-  color: #444444;
+  color: #555555;
   text-overflow: ellipsis;
   margin: 0px;
   text-decoration: none;
+  white-space:nowrap;
+  overflow: hidden;
+}
+
+.square-slap-name:hover {
+  cursor: pointer;
+  color: black;
 }
 
 .square-slap-uploader {
@@ -56,4 +64,6 @@
   color: #888888;
   text-overflow: ellipsis;
   margin: 0px;
+  white-space:nowrap;
+  overflow: hidden;
 }
