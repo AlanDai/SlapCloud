@@ -1,11 +1,12 @@
 import React from "react";
 
-import SlapIndexContainer from "./slap_index_container";
+import SlapIndexContainer from "../slaps/slap_index_container";
 
 const DiscoverPage = (props) => (
   <div id="discover-page">
-    <h1>Welcome to SlapCloud</h1>
-    <SlapIndexContainer />
+    <div>
+      <SlapIndexContainer />
+    </div>
   </div>
 )
 

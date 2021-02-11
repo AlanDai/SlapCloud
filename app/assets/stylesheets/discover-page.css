@@ -1,5 +1,69 @@
 #discover-page {
-  text-align: center;
-
+  width: 960px;
+  margin: 0 auto;
+  background-color: white;
   font-family: 'Overpass', sans-serif;
+}
+
+.square-slap-image {
+  position: relative;
+}
+
+.square-slap-image .default-slap-image, .square-slap-image .slap-item-image {
+  width: 170px;
+  height: 170px;
+}
+
+.square-slap-image:hover .square-item-screen {
+  position: absolute;
+  top: 0;
+  width: 170px;
+  height: 170px;
+  background-color: rgba(255, 255, 255);
+  opacity: 0.2;
+}
+
+.square-slap-image .play-button {
+  display: none;
+}
+
+.square-slap-image:hover .play-button {
+  display: block;
+  position: absolute;
+  background-color: transparent;
+  top: 37%;
+  left: 33%;
+  z-index: 3
+}
+
+.square-slap-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 60px;
+}
+
+.square-slap-name {
+  font-size: 15px;
+  color: #555555;
+  text-overflow: ellipsis;
+  margin: 0px;
+  text-decoration: none;
+  white-space:nowrap;
+  overflow: hidden;
+}
+
+.square-slap-name:hover {
+  cursor: pointer;
+  color: black;
+}
+
+.square-slap-uploader {
+  font-size: 12px;
+  color: #888888;
+  text-overflow: ellipsis;
+  margin: 0px;
+  white-space:nowrap;
+  overflow: hidden;
 }

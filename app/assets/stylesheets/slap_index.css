@@ -39,10 +39,39 @@
   margin: 0;
 }
 
-/* .slap-item-info audio {
+.slap-index-section {
+  margin-top: 20px;
+}
+
+.slap-carousel {
+  width: 900px;
+  margin-bottom: 30px;
+}
+
+.carousel-header {
+  font-size: 20px;
+}
+
+.carousel-subheader {
+  color: #888888;
   margin-bottom: 10px;
 }
 
-.slap-item-info audio:focus {
-  outline: none;
-} */
+.slap-carousel-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;  
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.carousel-spacer {
+  color: white;
+  background-color: white;
+  width: 10px;
+}
+
+.slap-carousel-content > * {
+  margin-right: 15px;
+}
