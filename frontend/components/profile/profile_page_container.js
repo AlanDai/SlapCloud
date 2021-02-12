@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfilePage));

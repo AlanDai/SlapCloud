@@ -14,9 +14,21 @@ class Api::UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
         if @user
+            @slaps = Slap.where(uploader: params[:id])
             render :show
         else
-            render json: { message: "User not found" status: 400 }
+            render json: { message: "User not found", status: 400 }
+        end
+    end
+
+    def update
+        @user = User.find(params[:id])
+        if @user
+            @user.update(user_params)
+            @slaps = Slap.where(uploader: params[:id])
+            render :show
+        else
+            render json: json: @user.errors.full_messages, status: 400
         end
     end
 
@@ -28,6 +40,6 @@ class Api::UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email, :password)
+        params.require(:user).permit(:email, :password, :location, :profile_image, :cover_image)
     end
 end

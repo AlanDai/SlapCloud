@@ -1,7 +1,8 @@
 class User < ApplicationRecord
     validates :email, :password_digest, :session_token, presence: true
     validates :email, :session_token, uniqueness: true 
-    validates :password, length: { minimum: 6 }, allow_nil: true
+    validates :password, length: 6..30, allow_nil: true
+    validates :location, length: 1..100, allow_nil: true
 
     attr_reader :password
 
@@ -39,7 +40,8 @@ class User < ApplicationRecord
         self.session_token
     end
 
-    has_one_attached :audio
+    has_one_attached :profile_image
+    has_one_attached :cover_image
 
     has_many :slaps,
         primary_key: :id,

@@ -13566,7 +13566,7 @@ var App = function App() {
     component: _upload_upload_page__WEBPACK_IMPORTED_MODULE_6__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     exact: true,
-    path: "/profile/:userId",
+    path: "/user/:userId",
     component: _profile_profile_page_container__WEBPACK_IMPORTED_MODULE_8__.default
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/",
@@ -14801,6 +14801,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/user_api_util */ "./frontend/util/user_api_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14827,6 +14828,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
  // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+
+
 var ProfilePage = /*#__PURE__*/function (_React$Component) {
   _inherits(ProfilePage, _React$Component);
 
@@ -14839,7 +14842,18 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {// this.props.fetchUser
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_1__.fetchUser)(_this.props.match.params.userId).then(function (_ref) {
+        var email = _ref.email,
+            username = _ref.username,
+            slaps = _ref.slaps;
+
+        _this.setState({
+          email: email,
+          username: username,
+          slaps: slaps
+        });
+      });
     });
 
     return _this;
@@ -14848,7 +14862,18 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
   _createClass(ProfilePage, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Profile Page!");
+      if (!this.state.email) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+      var _this$state = this.state,
+          email = _this$state.email,
+          username = _this$state.username,
+          slaps = _this$state.slaps;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "profile-page"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "profile-header"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "profile-content"
+      }));
     }
   }]);
 
@@ -15788,7 +15813,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -17066,12 +17090,22 @@ var fetchSlap = function fetchSlap(slapId) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchUser": () => /* binding */ fetchUser
+/* harmony export */   "fetchUser": () => /* binding */ fetchUser,
+/* harmony export */   "updateUser": () => /* binding */ updateUser
 /* harmony export */ });
 var fetchUser = function fetchUser(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId),
     action: "GET"
+  });
+};
+var updateUser = function updateUser(userId, user) {
+  return $.ajax({
+    url: "/api/users/".concat(userId),
+    action: "PATCH",
+    data: {
+      user: user
+    }
   });
 };
 

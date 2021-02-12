@@ -24,7 +24,7 @@ class Api::CommentsController < ApplicationController
       @comment.update(comment_params)
       render :show
     else
-      render json: { message: 'Comment not found', status: 400 }
+      render json: @comment.errors.full_messages, status: 400
     end
   end
 

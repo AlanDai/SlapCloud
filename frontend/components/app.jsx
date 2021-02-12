@@ -23,7 +23,7 @@ const App = () => (
       <AuthRoute exact path="/" component={DiscoverPage} />
       <Route path="/discover" component={DiscoverPage} />
       <ProtectedRoute path="/upload" component={UploadPage} />
-      <Route exact path="/profile/:userId" component={ProfilePageContainer} />
+      <Route exact path="/user/:userId" component={ProfilePageContainer} />
     </Switch>
 
     <Route path="/" component={MusicPlayerContainer} />
