@@ -24,7 +24,7 @@ class Api::UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user
-            @user.update(user_params)
+            @user.update!(user_params)
             @slaps = Slap.where(uploader: params[:id])
             render :show
         else

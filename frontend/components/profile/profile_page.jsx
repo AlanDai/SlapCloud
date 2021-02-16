@@ -75,6 +75,10 @@ class ProfilePage extends React.Component {
   handleProfileChange = (e) => {
     const formData = new FormData();
     formData.append('user[profile_image]', e.currentTarget.files[0]);
+
+    // testing
+    console.log(formData.getAll('user'));
+
     updateUserImage(this.state.user.id, formData).then(res => console.log(res));
   }
 
