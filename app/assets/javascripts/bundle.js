@@ -14860,6 +14860,8 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           user: user,
           slaps: slaps
         });
+
+        _this.props.receiveSlaps(slaps);
       });
     });
 
@@ -14910,9 +14912,8 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleProfileChange", function (e) {
-      var file = e.currentTarget.files[0];
       var formData = new FormData();
-      formData.append('user[profile_image]', file);
+      formData.append('user[profile_image]', e.currentTarget.files[0]);
       (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.user.id, formData).then(function (res) {
         return console.log(res);
       });
@@ -14923,7 +14924,13 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
       cu.click();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleCoverChange", function (e) {});
+    _defineProperty(_assertThisInitialized(_this), "handleCoverChange", function (e) {
+      var formData = new FormData();
+      formData.append('user[cover_image]', e.currentTarget.files[0]);
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.user.id, formData).then(function (res) {
+        return console.log(res);
+      });
+    });
 
     return _this;
   }
@@ -14932,7 +14939,6 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (!this.state) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
-      console.log(this.state);
       var _this$state = this.state,
           user = _this$state.user,
           slaps = _this$state.slaps;
@@ -14968,8 +14974,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _profile_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile_page */ "./frontend/components/profile/profile_page.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_slap_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/slap_actions */ "./frontend/actions/slap_actions.js");
+/* harmony import */ var _profile_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile_page */ "./frontend/components/profile/profile_page.jsx");
+
 
 
 
@@ -14979,10 +14987,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    receiveSlaps: function receiveSlaps(slaps) {
+      return dispatch((0,_actions_slap_actions__WEBPACK_IMPORTED_MODULE_1__.receiveSlaps)(slaps));
+    }
+  };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_profile_page__WEBPACK_IMPORTED_MODULE_1__.default)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_profile_page__WEBPACK_IMPORTED_MODULE_2__.default)));
 
 /***/ }),
 

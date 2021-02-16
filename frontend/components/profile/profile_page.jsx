@@ -17,6 +17,7 @@ class ProfilePage extends React.Component {
           user,
           slaps,
         })
+        this.props.receiveSlaps(slaps);
       })
   }
 
@@ -72,10 +73,8 @@ class ProfilePage extends React.Component {
   }
 
   handleProfileChange = (e) => {
-    const file = e.currentTarget.files[0];
-
     const formData = new FormData();
-    formData.append('user[profile_image]', file)
+    formData.append('user[profile_image]', e.currentTarget.files[0]);
     updateUserImage(this.state.user.id, formData).then(res => console.log(res));
   }
 
@@ -85,13 +84,13 @@ class ProfilePage extends React.Component {
   }
 
   handleCoverChange = (e) => {
-
+    const formData = new FormData();
+    formData.append('user[cover_image]', e.currentTarget.files[0]);
+    updateUserImage(this.state.user.id, formData).then(res => console.log(res));
   }
 
   render() {
     if (!this.state) return (<div></div>)
-    console.log(this.state);
-
     const { user, slaps } = this.state;
 
     return (
