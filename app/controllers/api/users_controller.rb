@@ -28,7 +28,7 @@ class Api::UsersController < ApplicationController
             @slaps = Slap.where(uploader: params[:id])
             render :show
         else
-            render json: json: @user.errors.full_messages, status: 400
+            render json: @user.errors.full_messages, status: 400
         end
     end
 

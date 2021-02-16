@@ -3,7 +3,7 @@ json.extract! slap, :id, :name, :description
 
 json.audio url_for(slap.audio_file) 
 
-if slap.image_file
+if slap.image_file.attached?
   json.image url_for(slap.image_file)
 end
 

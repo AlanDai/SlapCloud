@@ -4,9 +4,18 @@ export const fetchUser = (userId) =>
     action: "GET"
   })
 
-export const updateUser = (userId, user) =>
+export const updateUserImage = (userId, updatedFields) =>
   $.ajax({
     url: `/api/users/${userId}`,
     action: "PATCH",
-    data: { user }
+    data: updatedFields,
+    contentType: false,
+    processData: false,
+  })
+
+  export const updateUserInfo = (userId, updatedFields) =>
+  $.ajax({
+    url: `/api/users/${userId}`,
+    action: "PATCH",
+    data: updatedFields,
   })
