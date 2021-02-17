@@ -248,8 +248,8 @@ class MusicPlayer extends React.Component {
       return (<div id="song-info-container">
         <div id="song-img" />
         <div id="song-info">
-          <p>{slap.uploader.email}</p>
-          <p>{slap.name}</p>
+          <Link to={`/user/${slap.uploader.id}`}><p>{slap.uploader.email}</p></Link>
+          <Link to={`/slap/${slap.id}`}><p>{slap.name}</p></Link>
         </div>
       </div>)
     }
