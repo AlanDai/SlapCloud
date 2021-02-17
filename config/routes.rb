@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     resources :comments, only: [:create, :show, :update, :destroy]
     resources :likes, only: [:create, :destroy]
+    get '/likes/slap/:slapId', to: 'likes#slapLikes'
   end
 
   root "static_pages#root"

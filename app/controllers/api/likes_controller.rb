@@ -4,6 +4,11 @@ class Api::LikesController < ApplicationController
     render json: @like
   end
 
+  def slapLikes
+    @likes = Slap.find(params[:slapId]).likes
+    render :slap_likes
+  end
+
   def destroy
     @like = Like.find(params[:id])
     if @like

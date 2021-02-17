@@ -2,7 +2,7 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import SlapItem from "../slaps/slap_item";
+import SlapItemContainer from "../slaps/slap_item_container";
 import { fetchUser, updateUserImage } from "../../util/user_api_util";
 
 class ProfilePage extends React.Component {
@@ -102,9 +102,10 @@ class ProfilePage extends React.Component {
         {this.profileHeader()}
         <div id="profile-content">
           {slaps && Object.values(slaps).map((slap, id) =>
-            <SlapItem key={id} slap={slap} />
+            <SlapItemContainer key={id} slap={slap} />
           )}
         </div>
+        <div style={{ height: 49 }}/>
       </div>
     )
   }
