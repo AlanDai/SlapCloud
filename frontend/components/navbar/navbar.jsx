@@ -48,7 +48,7 @@ class NavBar extends React.Component {
         </Link>
           <Link to="/discover">Home</Link>
           <Link to="/profile">Profile</Link> 
-          <Link to="/discover">Slaps</Link>
+          <Link to="/discover">Discover</Link>
         <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Search" />
         </form>

@@ -1,6 +1,7 @@
 import React from "react";
 
 import moment from "moment";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { createComment } from "../../util/comments_api_util";
@@ -102,8 +103,8 @@ class ShowPage extends React.Component {
           <div id="show-header-content">
             <PlayButtonContainer slap={slap} />
             <div id="show-header-info">
-              <div><span>{slap.uploader.email}</span></div>
-              <div><span>{slap.name}</span></div>
+              <Link to={`/user/${slap.uploader.id}`}><span>{slap.uploader.email}</span></Link>
+              <Link to={`/slap/${slap.id}`}><span>{slap.name}</span></Link>
             </div>
             <div>
               <span>{moment(slap.uploader.created_at).fromNow()}</span>
@@ -123,11 +124,11 @@ class ShowPage extends React.Component {
               {slap.uploader.image ?
                 <img className="user-image-medallion" src={slap.uploader.image} /> :
                 <div className="default-user-medallion"/>}
-              <span>{slap.uploader.email}</span>
-              <button>
+              <Link to={`/user/${slap.uploader.id}`}><span>{slap.uploader.email}</span></Link>
+              {/* <button>
                 <FontAwesomeIcon icon="user" />
                 <span> Follow</span>
-              </button>
+              </button> */}
             </div>
             <div id="show-slap-content">
               <div id="show-description">

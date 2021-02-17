@@ -21,6 +21,12 @@
   width: 70%;
 }
 
+.comment-content * {
+  outline: none;
+  text-decoration: none;
+  color: #999999;
+}
+
 .comment-edit-input {
   width: 100%;
   border: solid 1px #999999;

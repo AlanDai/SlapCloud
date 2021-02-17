@@ -38,13 +38,16 @@
   font-size: 20px;
 }
 
-#show-header-info div:nth-child(2) {
+#show-header-info Link:nth-child(2) {
   font-size: 25px;
   width: 400px;
 }
 
 #show-header-info * {
   margin-top: 5px;
+  color: white;
+  text-decoration: none;
+  outline: none;
 }
 
 #show-header-info span {
@@ -132,6 +135,9 @@
 
 #show-user-info > * {
   margin-bottom: 10px;
+  text-decoration: none;
+  outline: none;
+  color: black;
 }
 
 #show-user-info .default-user-medallion {

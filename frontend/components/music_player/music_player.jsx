@@ -238,7 +238,7 @@ class MusicPlayer extends React.Component {
   songInfo = (slap) => {
     if (slap.image) {
       return (<div id="song-info-container">
-        <img id="song-img" src={slap.image} alt={default_slap_image}/>
+        <img id="song-img" src={slap.image} />
         <div id="song-info">
           <Link to={`/user/${slap.uploader.id}`}><p>{slap.uploader.email}</p></Link>
           <Link to={`/slap/${slap.id}`}><p>{slap.name}</p></Link>
