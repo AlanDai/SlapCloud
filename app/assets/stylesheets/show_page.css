@@ -54,10 +54,14 @@
   background-color: black;
 }
 
-#show-header-image img {
+#show-header-image * {
   width: 200px;
   height: 200px;
   margin: 25px;
+}
+
+#show-header-image div{
+  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8);
 }
 
 #show-body {

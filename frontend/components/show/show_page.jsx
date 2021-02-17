@@ -112,7 +112,10 @@ class ShowPage extends React.Component {
           </div>
 
           <div id="show-header-image">
-            <img src={slap.image} />
+            {slap.image ?
+              <img src={slap.image} /> :
+              <div />
+            }
           </div>
           
         </div>
