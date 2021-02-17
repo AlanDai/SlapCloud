@@ -4,7 +4,9 @@ import { withRouter } from "react-router-dom";
 import { receiveSlaps } from "../../actions/slap_actions";
 import ProfilePage from "./profile_page";
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = ({ session }) => ({
+  currUser: session.id
+})
 
 
 const mapDispatchToProps = (dispatch) => ({

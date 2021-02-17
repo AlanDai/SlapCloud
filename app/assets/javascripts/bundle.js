@@ -13824,11 +13824,6 @@ var ConnectForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ConnectForm, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.props.emailUncheck();
-    }
-  }, {
     key: "handleDemoClick",
     value: function handleDemoClick(e) {
       e.preventDefault();
@@ -13949,7 +13944,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var user = {
         email: this.props.email,
-        password: e.target[0].value
+        password: e.target[0].value,
+        username: this.props.email
       };
       this.props.action(user);
     }
@@ -14895,9 +14891,11 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
         id: "profile-default-image"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-header-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.email), user.location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.location)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.email), user.location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.location)), user.id === _this.props.currUser && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-image-buttons"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "profile-update-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Update Info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         id: "profile-upload-button",
         onClick: _this.handleProfileClick
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
@@ -15008,8 +15006,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session;
+  return {
+    currUser: session.id
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -15147,8 +15148,6 @@ var CommentItem = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyUp", function (e) {
-      console.log(e.key);
-
       if (e.key === "Enter") {
         (0,_util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__.updateComment)(_this.state.comment.id, {
           "body": e.target.value
@@ -15566,7 +15565,7 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
       }, "More of what you like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "carousel-subheader"
       }, "Suggestions based on what you've liked or played"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_carousel__WEBPACK_IMPORTED_MODULE_1__.default, {
-        slaps: slaps
+        slaps: Object.values(slaps)
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15574,7 +15573,7 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
       }, "Discover new music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "carousel-subheader"
       }, "A compilation of our picks of the week"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_carousel__WEBPACK_IMPORTED_MODULE_1__.default, {
-        slaps: slaps
+        slaps: Object.values(slaps).reverse()
       })));
     }
   }]);
@@ -15884,20 +15883,17 @@ var SlapsCarousel = /*#__PURE__*/function (_React$Component) {
   _createClass(SlapsCarousel, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          slaps = _this$props.slaps,
-          header = _this$props.header,
-          subheader = _this$props.subheader;
+      var slaps = this.props.slaps;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-carousel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-carousel-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "carousel-spacer"
-      }, "spacer"), slaps && Object.keys(slaps).map(function (id) {
+      }, "spacer"), slaps && slaps.map(function (slap, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_square_slap_item__WEBPACK_IMPORTED_MODULE_1__.default, {
-          key: id,
-          slap: slaps[id]
+          key: idx,
+          slap: slap
         });
       })));
     }

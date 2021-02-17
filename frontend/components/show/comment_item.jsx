@@ -39,7 +39,6 @@ class CommentItem extends React.Component {
   }
 
   handleKeyUp = (e) => {
-    console.log(e.key);
     if (e.key === "Enter") {
       updateComment(this.state.comment.id, { "body": e.target.value })
         .then(comment => this.setState({ comment, editing: false }))

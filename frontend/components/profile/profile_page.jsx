@@ -35,34 +35,41 @@ class ProfilePage extends React.Component {
           <span>{user.email}</span>
           {user.location && <span>{user.location}</span>}
         </div>
-        <div id="profile-image-buttons">
-          <button
-            id="profile-upload-button"
-            onClick={this.handleProfileClick}
-          >
-            <span><FontAwesomeIcon icon="camera" /> Update profile</span>
-          </button>
-          <input
-            id="profile-upload"
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={this.handleProfileChange}
-          />
-          <button
-            id="cover-upload-button"
-            onClick={this.handleCoverClick}
-          >
-            <span><FontAwesomeIcon icon="camera" /> Update cover</span>
-          </button>
-          <input
-            id="cover-upload"
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={this.handleCoverChange}
-          />
-        </div>
+        {user.id === this.props.currUser && 
+          <div id="profile-image-buttons">
+            <button
+              id="profile-update-button"
+            >
+              <span>Update Info</span>
+            </button>
+            <button
+              id="profile-upload-button"
+              onClick={this.handleProfileClick}
+            >
+              <span><FontAwesomeIcon icon="camera" /> Update profile</span>
+            </button>
+            <input
+              id="profile-upload"
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={this.handleProfileChange}
+            />
+            <button
+              id="cover-upload-button"
+              onClick={this.handleCoverClick}
+            >
+              <span><FontAwesomeIcon icon="camera" /> Update cover</span>
+            </button>
+            <input
+              id="cover-upload"
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={this.handleCoverChange}
+            />
+          </div>
+        }
       </div>
     )
   }
