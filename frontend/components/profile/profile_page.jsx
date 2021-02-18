@@ -8,6 +8,10 @@ import { fetchUser, updateUserImage } from "../../util/user_api_util";
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      updating: false,
+    }
   }
 
   componentDidMount = () => {
@@ -27,7 +31,7 @@ class ProfilePage extends React.Component {
   }
 
   profileHeader = () => {
-    const { id, email, username, location, profile_image, cover_image } = this.state
+    const { id, email, username, location, profile_image, cover_image, updating } = this.state
 
     return (
       <div id="profile-header" >
@@ -36,17 +40,20 @@ class ProfilePage extends React.Component {
             <img src={profile_image} />:
             <div id="profile-default-image" />
         }
-        <div id="profile-header-info" >
-          <span>{email}</span>
-          {location && <span>{location}</span>}
-        </div>
-        {id === this.props.currUser && 
+
+        {updating ?
+          this.userInfoForm() :
+          this.userInfo()
+        }
+
+        {id === this.props.currUser && !updating &&
           <div id="profile-image-buttons">
-            <button
-              id="profile-update-button"
-            >
-              <span>Update Info</span>
-            </button>
+              <button
+                id="profile-update-button"
+                onClick={this.handleInfoClick}
+              >
+                <span>Update Info</span>
+              </button>
             <button
               id="profile-upload-button"
               onClick={this.handleProfileClick}
@@ -79,14 +86,39 @@ class ProfilePage extends React.Component {
     )
   }
 
+  userInfo = () => (
+    <div id="profile-header-info" >
+      <span id="info-username">{this.state.username ? this.state.username : this.state.email}</span>
+      {this.state.location &&
+        <span id="info-location">{this.state.location}</span>
+      }
+    </div>
+  )
+
+  userInfoForm = () => (
+    <form id="profile-header-info" onSubmit={this.handleUpdate} >
+      <input type="text" defaultValue={ this.state.username ? this.state.username : this.state.email } /> 
+      <input type="text" defaultValue={this.state.location ? this.state.location : ""} />
+      <input type="submit" value="Update"/>
+    </form>
+  )
+
+  handleUpdate = (e) => {
+    console.log(e.target);
+  }
+
+  handleInfoClick = (e) => {
+    this.setState({ updating: !this.state.updating });
+  }
+
   handleProfileClick = (e) => {
-    const pu = document.getElementById('profile-upload')
+    const pu = document.getElementById('profile-upload');
     pu.click()
   }
 
   handleProfileChange = (e) => {
     const formData = new FormData();
-    formData.append('user[profile_image]', e.currentTarget.files[0]);
+    formData.append('user[profile_image]', e.currentTarget.files[0]);  
     updateUserImage(this.state.id, formData).then(res => console.log(res));
   }
 

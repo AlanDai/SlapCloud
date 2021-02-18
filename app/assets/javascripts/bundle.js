@@ -14898,19 +14898,19 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           username = _this$state.username,
           location = _this$state.location,
           profile_image = _this$state.profile_image,
-          cover_image = _this$state.cover_image;
+          cover_image = _this$state.cover_image,
+          updating = _this$state.updating;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-header"
       }, profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: profile_image
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-default-image"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "profile-header-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, email), location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, location)), id === _this.props.currUser && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), updating ? _this.userInfoForm() : _this.userInfo(), id === _this.props.currUser && !updating && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-image-buttons"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        id: "profile-update-button"
+        id: "profile-update-button",
+        onClick: _this.handleInfoClick
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Update Info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         id: "profile-upload-button",
         onClick: _this.handleProfileClick
@@ -14940,6 +14940,42 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
       })));
     });
 
+    _defineProperty(_assertThisInitialized(_this), "userInfo", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "profile-header-info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        id: "info-username"
+      }, _this.state.username ? _this.state.username : _this.state.email), _this.state.location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        id: "info-location"
+      }, _this.state.location));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "userInfoForm", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        id: "profile-header-info",
+        onSubmit: _this.handleUpdate
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        defaultValue: _this.state.username ? _this.state.username : _this.state.email
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        defaultValue: _this.state.location ? _this.state.location : ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: "Update"
+      }));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdate", function (e) {
+      console.log(e.target);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInfoClick", function (e) {
+      _this.setState({
+        updating: !_this.state.updating
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleProfileClick", function (e) {
       var pu = document.getElementById('profile-upload');
       pu.click();
@@ -14966,6 +15002,9 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _this.state = {
+      updating: false
+    };
     return _this;
   }
 

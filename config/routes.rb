@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resource :users, only: [:create]
     post '/user/email', to: 'users#checkEmail'
-    resources :users, only: [:show, :update]
-
     resource :session, only: [:create, :destroy]
+
+    resources :users, only: [:show, :update]
     
     resources :albums, only: [:index, :create]
     resources :slaps, only: [:index, :show, :create]
