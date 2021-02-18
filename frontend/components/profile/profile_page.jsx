@@ -12,9 +12,14 @@ class ProfilePage extends React.Component {
 
   componentDidMount = () => {
     fetchUser(this.props.match.params.userId)
-      .then(({ user, slaps }) => {
+      .then(({ id, email, username, location, profile_image, cover_image, slaps }) => {
         this.setState({
-          user,
+          id,
+          email,
+          username,
+          location,
+          profile_image,
+          cover_image,
           slaps,
         })
         this.props.receiveSlaps(slaps);
@@ -22,20 +27,20 @@ class ProfilePage extends React.Component {
   }
 
   profileHeader = () => {
-    const { user } = this.state
+    const { id, email, username, location, profile_image, cover_image } = this.state
 
     return (
       <div id="profile-header" >
         {
-          user.profile_image ?
-            <img src={user.profile_image} />:
+          profile_image ?
+            <img src={profile_image} />:
             <div id="profile-default-image" />
         }
         <div id="profile-header-info" >
-          <span>{user.email}</span>
-          {user.location && <span>{user.location}</span>}
+          <span>{email}</span>
+          {location && <span>{location}</span>}
         </div>
-        {user.id === this.props.currUser && 
+        {id === this.props.currUser && 
           <div id="profile-image-buttons">
             <button
               id="profile-update-button"
@@ -82,11 +87,7 @@ class ProfilePage extends React.Component {
   handleProfileChange = (e) => {
     const formData = new FormData();
     formData.append('user[profile_image]', e.currentTarget.files[0]);
-
-    // testing
-    console.log(formData.getAll('user'));
-
-    updateUserImage(this.state.user.id, formData).then(res => console.log(res));
+    updateUserImage(this.state.id, formData).then(res => console.log(res));
   }
 
   handleCoverClick = (e) => {
@@ -97,12 +98,12 @@ class ProfilePage extends React.Component {
   handleCoverChange = (e) => {
     const formData = new FormData();
     formData.append('user[cover_image]', e.currentTarget.files[0]);
-    updateUserImage(this.state.user.id, formData).then(res => console.log(res));
+    updateUserImage(this.state.id, formData).then(res => console.log(res));
   }
 
   render() {
     if (!this.state) return (<div></div>)
-    const { user, slaps } = this.state;
+    const { slaps } = this.state;
 
     return (
       <div id="profile-page">

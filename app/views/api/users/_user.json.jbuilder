@@ -1,8 +1,8 @@
-json.user do
-  json.extract! user, :id, :email, :username
-  if user.location
-    json.location user.location
-  end
+
+json.extract! user, :id, :email, :username
+
+if user.location
+  json.location user.location
 end
 
 if user.profile_image.attached?

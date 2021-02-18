@@ -14746,7 +14746,7 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/discover"
       }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/profile"
+        to: "/user/".concat(this.props.sessionId)
       }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/discover"
       }, "Discover"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -14869,11 +14869,21 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.fetchUser)(_this.props.match.params.userId).then(function (_ref) {
-        var user = _ref.user,
+        var id = _ref.id,
+            email = _ref.email,
+            username = _ref.username,
+            location = _ref.location,
+            profile_image = _ref.profile_image,
+            cover_image = _ref.cover_image,
             slaps = _ref.slaps;
 
         _this.setState({
-          user: user,
+          id: id,
+          email: email,
+          username: username,
+          location: location,
+          profile_image: profile_image,
+          cover_image: cover_image,
           slaps: slaps
         });
 
@@ -14882,16 +14892,22 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "profileHeader", function () {
-      var user = _this.state.user;
+      var _this$state = _this.state,
+          id = _this$state.id,
+          email = _this$state.email,
+          username = _this$state.username,
+          location = _this$state.location,
+          profile_image = _this$state.profile_image,
+          cover_image = _this$state.cover_image;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-header"
-      }, user.profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: user.profile_image
+      }, profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: profile_image
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-default-image"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-header-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.email), user.location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.location)), user.id === _this.props.currUser && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, email), location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, location)), id === _this.props.currUser && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-image-buttons"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         id: "profile-update-button"
@@ -14931,10 +14947,8 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleProfileChange", function (e) {
       var formData = new FormData();
-      formData.append('user[profile_image]', e.currentTarget.files[0]); // testing
-
-      console.log(formData.getAll('user'));
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.user.id, formData).then(function (res) {
+      formData.append('user[profile_image]', e.currentTarget.files[0]);
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (res) {
         return console.log(res);
       });
     });
@@ -14947,7 +14961,7 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleCoverChange", function (e) {
       var formData = new FormData();
       formData.append('user[cover_image]', e.currentTarget.files[0]);
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.user.id, formData).then(function (res) {
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (res) {
         return console.log(res);
       });
     });
@@ -14959,9 +14973,7 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (!this.state) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
-      var _this$state = this.state,
-          user = _this$state.user,
-          slaps = _this$state.slaps;
+      var slaps = this.state.slaps;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-page"
       }, this.profileHeader(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
