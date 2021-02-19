@@ -14946,6 +14946,9 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           if (cover_image) {
             ph.style.backgroundImage = "url(".concat(cover_image, ")");
             ph.style.backgroundSize = 'cover';
+          } else {
+            ph.style.backgroundImage = null;
+            ph.style.backgroundSize = null;
           }
 
           _this.props.receiveSlaps(slaps);

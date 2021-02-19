@@ -55,6 +55,9 @@ class ProfilePage extends React.Component {
         if (cover_image) {
           ph.style.backgroundImage = `url(${cover_image})`;
           ph.style.backgroundSize = 'cover';
+        } else {
+          ph.style.backgroundImage = null;
+          ph.style.backgroundSize = null;
         }
 
         this.props.receiveSlaps(slaps);
