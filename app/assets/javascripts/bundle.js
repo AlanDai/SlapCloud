@@ -14920,6 +14920,39 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "componentDidUpdate", function (prevProps) {
+      if (prevProps.match.params.userId !== _this.props.match.params.userId) {
+        (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.fetchUser)(_this.props.match.params.userId).then(function (_ref2) {
+          var id = _ref2.id,
+              email = _ref2.email,
+              username = _ref2.username,
+              location = _ref2.location,
+              profile_image = _ref2.profile_image,
+              cover_image = _ref2.cover_image,
+              slaps = _ref2.slaps;
+
+          _this.setState({
+            id: id,
+            email: email,
+            username: username,
+            location: location,
+            profile_image: profile_image,
+            cover_image: cover_image,
+            slaps: slaps
+          });
+
+          var ph = document.getElementById("profile-header");
+
+          if (cover_image) {
+            ph.style.backgroundImage = "url(".concat(cover_image, ")");
+            ph.style.backgroundSize = 'cover';
+          }
+
+          _this.props.receiveSlaps(slaps);
+        });
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_this), "profileHeader", function () {
       var _this$state = _this.state,
           id = _this$state.id,
@@ -15003,9 +15036,9 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           updating: false
         });
       } else {
-        (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
-          var username = _ref2.username,
-              location = _ref2.location;
+        (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref3) {
+          var username = _ref3.username,
+              location = _ref3.location;
 
           _this.setState({
             username: username,
@@ -15030,8 +15063,8 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleProfileChange", function (e) {
       var formData = new FormData();
       formData.append('user[profile_image]', e.currentTarget.files[0]);
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref3) {
-        var profile_image = _ref3.profile_image;
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref4) {
+        var profile_image = _ref4.profile_image;
         return _this.setState({
           profile_image: profile_image
         });
@@ -15046,8 +15079,8 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleCoverChange", function (e) {
       var formData = new FormData();
       formData.append('user[cover_image]', e.currentTarget.files[0]);
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref4) {
-        var cover_image = _ref4.cover_image;
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref5) {
+        var cover_image = _ref5.cover_image;
 
         _this.setState({
           cover_image: cover_image
