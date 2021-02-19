@@ -10,7 +10,7 @@ export const REMOVE_EMAIL_CHECK = "REMOVE_EMAIL_CHECK";
 
 export const fetchCurrentUser = (payload) => ({
   type: FETCH_CURRENT_USER,
-  payload: payload.user,
+  payload: payload,
 });
 
 export const logoutCurrentUser = () => ({

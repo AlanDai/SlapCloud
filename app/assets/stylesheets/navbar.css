@@ -32,12 +32,12 @@ body {
   padding: 10px;
 }
 
-.navbar a:not(:first-child), .user-btns * {
+.navbar a:not(:first-child), #upload-button, .user-btns * {
   text-decoration: none;
   text-align: center;
 } 
 
-.navbar a:not(:first-child) {
+.navbar a:not(:first-child), #upload-button {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,10 +50,14 @@ body {
   color: #C8C8C8;
 }
 
+#upload-button {
+  background-color: #383838;
+  border: none;
+}
+
 .navbar > a:not(:first-child):hover {
   color: whitesmoke;
 }
-
 
 .user-btns * {
   vertical-align: middle;
@@ -69,7 +73,7 @@ body {
   color: whitesmoke;
 }
 
-.user-btns *:focus {
+#upload-button, .user-btns *:focus {
   outline: none;
 }
 
@@ -112,7 +116,7 @@ body {
 
 .navbar form input[type="text"] {
   padding: 5px;
-  width: 350px;
+  width: 500px;
   border: none;
   border-radius: 5px;
   background-color: #E0E0E0;
