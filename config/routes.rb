@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :slaps, only: [:index, :show, :create]
     get '/slaps/user/:userId', to: 'slaps#userIndex'
 
+    get '/search/:searchParams', to: 'search#searchByParams'
+
     resources :comments, only: [:create, :show, :update, :destroy]
     resources :likes, only: [:create, :destroy]
     get '/likes/slap/:slapId', to: 'likes#slapLikes'

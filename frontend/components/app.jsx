@@ -10,7 +10,7 @@ import DiscoverPage from "./discover/discover_page";
 import UploadPage from "./upload/upload_page";
 import ShowPageContainer from "./show/show_page_container";
 import ProfilePageContainer from "./profile/profile_page_container";
-// import SearchPageContainer from "./search/search_page_container";
+import SearchPageContainer from "./search/search_page_container";
 
 const App = () => (
   <div id="app">
@@ -24,7 +24,7 @@ const App = () => (
       <Route path="/discover" component={DiscoverPage} />
       <ProtectedRoute path="/upload" component={UploadPage} />
       <Route exact path="/user/:userId" component={ProfilePageContainer} />
-      {/* <Route exact path="/search/:searchParams" component={SearchPageContainer} /> */}
+      <Route exact path="/search/:searchParams" component={SearchPageContainer} />
     </Switch>
 
     <Route path="/" component={MusicPlayerContainer} />

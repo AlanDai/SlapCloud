@@ -133,26 +133,27 @@ body {
 
 /* for form */
 
-.navbar form {
+#search-bar {
   padding: 0 8px 0 8px;
 }
 
-.navbar form input[type="text"] {
+#search-bar input[type="text"] {
   padding: 5px;
   width: 425px;
   border: none;
   border-radius: 5px;
   background-color: #E0E0E0;
-  color: #383838;
+  color: #666666;
   font-size: 15px;
 }
 
-.navbar form input[type="text"]:focus {
+#search-bar input[type="text"]:focus {
   outline: none;
+  background-color: white;
 }
 
 .navbar ::placeholder {
-  color: gray;
+  color: #777777;
 }
 
 #logout-button {

@@ -4,22 +4,24 @@ import { Link } from "react-router-dom";
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
-  
-    this.handleClick = this.handleClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleLogout(e) {
+  handleLogout = (e) => {
     this.props.logout();
   }
   
-  handleClick(e) {
+  handleClick = (e) => {
     this.props.openUserModal();
   }
 
-  handleSubmit(e) {
+
+  handleKeyUp = (e) => {
     e.preventDefault();
+
+    if (e.key === "Enter") {
+      const params = e.target.value;
+      this.props.history.push(`/search/${params}`)
+    }
   }
 
   userButtons() {
@@ -65,9 +67,9 @@ class NavBar extends React.Component {
           <Link to="/upload">Upload</Link> :
           <button id="upload-button" onClick={this.handleClick}>Upload</button>
         }
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Search" />
-        </form>
+        <div id="search-bar">
+          <input type="text" placeholder="Search" onKeyUp={this.handleKeyUp}/>
+        </div>
         {this.userButtons()}
       </div>
     )
