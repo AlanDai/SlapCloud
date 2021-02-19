@@ -180,7 +180,6 @@ class ProfilePage extends React.Component {
       </div>
     )
   }
-
 }
 
 export default ProfilePage;
