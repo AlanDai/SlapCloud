@@ -1,5 +1,64 @@
 #search-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Overpass', sans-serif;
   width: 1100px;
   margin: 0 auto;
+  padding-bottom: 50px;
   background: white;
+}
+
+#search-page *:focus {
+  outline: none;
+}
+
+#search-header {
+  width: 95%;
+  padding-top: 30px;
+  margin-bottom: 30px;
+  border-bottom: solid 1px #e5e5e5;
+}
+
+#search-header span {
+  font-size: 25px;
+  color: #333333;
+}
+
+#search-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#search-categories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 17%;
+}
+
+#search-categories span {
+  margin-left: 6px;
+}
+
+#search-categories > * {
+  width: 100%;
+  text-align: start;
+  font-family: 'Overpass', sans-serif;
+  font-size: 16px;
+  padding: 3px 10px;
+  margin-bottom: 5px;
+  background-color: white;
+  border: none;
+}
+
+#search-categories > button:hover {
+  cursor: pointer;
+}
+
+#search-content {
+  width: 77%;
 }

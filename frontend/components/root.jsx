@@ -25,8 +25,9 @@ import {
   faTrash,
   faCamera,
   faUserPlus,
-  faUserCheck
-
+  faUserCheck,
+  faSearch,
+  faHandPaper,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   fab,
@@ -47,7 +48,9 @@ library.add(
   faTrash,
   faCamera,
   faUserPlus,
-  faUserCheck
+  faUserCheck,
+  faSearch,
+  faHandPaper,
 )
 
 const Root = ({ store }) => (
