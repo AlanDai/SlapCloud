@@ -9,6 +9,10 @@ end
 
 json.uploader slap.uploader
 
+if slap.uploader.profile_image.attached?
+  json.profile_image url_for(slap.uploader.profile_image)
+end
+
 if slap.album
   json.album slap.album
 end

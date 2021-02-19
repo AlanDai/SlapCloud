@@ -144,7 +144,7 @@
   color: black;
 }
 
-#show-user-info .default-user-medallion {
+#show-user-info .default-user-medallion, .user-image-medallion {
   width: 120px; height: 120px;
   background: rgb(79,79,79);
   background: linear-gradient(90deg, rgba(79,79,79,1) 0%, rgba(145,68,4,1) 76%, rgba(189,81,19,1) 95%);
