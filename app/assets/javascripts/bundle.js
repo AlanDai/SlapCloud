@@ -15166,7 +15166,7 @@ var Root = function Root(_ref) {
   var store = _ref.store;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__.Provider, {
     store: store
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_app__WEBPACK_IMPORTED_MODULE_2__.default, null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_app__WEBPACK_IMPORTED_MODULE_2__.default, null)));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Root);
@@ -15258,40 +15258,42 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
       if (category === "users") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           id: "search-content"
-        }, users ? _this.state.users.map(function (user, id) {
+        }, users.length > 0 ? _this.state.users.map(function (user, id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_user_item__WEBPACK_IMPORTED_MODULE_4__.default, {
             key: id,
             user: user
           });
-        }) : "No users found!");
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "No users found!"));
       } else if (category === "slaps") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           id: "search-content"
-        }, slaps ? _this.state.slaps.map(function (slap, id) {
+        }, slaps.length > 0 ? _this.state.slaps.map(function (slap, id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_3__.default, {
             key: id,
             slap: slap
           });
-        }) : "No slaps found!");
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "No slaps found!"));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           id: "search-content"
-        }, users && _this.state.users.slice(0, 3).map(function (user, id) {
+        }, users.length > 0 && _this.state.users.slice(0, 3).map(function (user, id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_user_item__WEBPACK_IMPORTED_MODULE_4__.default, {
             key: id,
             user: user
           });
-        }), slaps && _this.state.slaps.map(function (slap, id) {
+        }), slaps.length > 0 && _this.state.slaps.map(function (slap, id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_3__.default, {
             key: id,
             slap: slap
           });
-        }), !users && !slaps && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No matches found!"));
+        }), users.length === 0 && slaps.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "No matches found!"));
       }
     });
 
     _this.state = {
-      category: "all"
+      category: "all",
+      slaps: [],
+      users: []
     };
     return _this;
   }

@@ -87,3 +87,9 @@
 #search-content > * {
   margin-bottom: 10px;
 }
+
+#search-content span {
+  width: 100%;
+  font-size: 30px;
+  margin-left: 160px;
+}

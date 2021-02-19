@@ -11,7 +11,9 @@ class SearchPage extends React.Component {
     super(props);
 
     this.state = {
-      category: "all"
+      category: "all",
+      slaps: [],
+      users: [],
     }
   }
 
@@ -30,29 +32,29 @@ class SearchPage extends React.Component {
 
     if (category === "users") {
       return ( <div id="search-content">
-          {users ?
+          {users.length > 0 ?
             this.state.users.map((user, id) => <UserItem key={id} user={user} />) :
-            "No users found!"
+            <span>No users found!</span>
           }
         </div>
       )
     } else if (category === "slaps") {
       return ( <div id="search-content">
-          {slaps ? 
+          {slaps.length > 0 ? 
             this.state.slaps.map((slap, id) => <SlapItemContainer key={id} slap={slap} />) :
-            "No slaps found!"
+            <span>No slaps found!</span>
           }
         </div>
       )
     } else {
       return ( <div id="search-content">
-          {users &&
+          {users.length > 0 &&
             this.state.users.slice(0, 3).map((user, id) => <UserItem key={id} user={user} />)
           }
-          {slaps &&
+          {slaps.length > 0 &&
             this.state.slaps.map((slap, id) => <SlapItemContainer key={id} slap={slap} />)
           }
-          {!users && !slaps && <div>No matches found!</div>}
+          {users.length === 0 && slaps.length === 0 && <span>No matches found!</span>}
         </div>
       )
     }
