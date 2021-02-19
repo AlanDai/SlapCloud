@@ -26,8 +26,18 @@ class NavBar extends React.Component {
     if(this.props.currentUser){
       return (
         <div className="user-btns">
-          <span>{this.props.currentUser.email}</span>
-          <button onClick={this.handleLogout}>Logout</button>
+          {this.props.currentUser.profile_image &&
+            <img id="navbar-profile-image" src={this.props.currentUser.profile_image}/>
+          }
+          <Link id="navbar-username-link" to={`/user/${this.props.sessionId}`} >
+            <div id="navbar-username">
+              {this.props.currentUser.username ?
+                this.props.currentUser.username :
+                this.props.currentUser.email
+              }
+            </div>
+          </Link>
+          <button id="logout-button" onClick={this.handleLogout}>Logout</button>
         </div>
       )
     } else {

@@ -32,6 +32,25 @@ body {
   padding: 10px;
 }
 
+#navbar-profile-image {
+  width: 30px; height: 30px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+
+#navbar-user-link {
+  padding: 0 10px 0 0;
+}
+
+#navbar-username {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0px;
+}
+
 .navbar a:not(:first-child), #upload-button, .user-btns * {
   text-decoration: none;
   text-align: center;
@@ -116,7 +135,7 @@ body {
 
 .navbar form input[type="text"] {
   padding: 5px;
-  width: 500px;
+  width: 425px;
   border: none;
   border-radius: 5px;
   background-color: #E0E0E0;
@@ -130,4 +149,12 @@ body {
 
 .navbar ::placeholder {
   color: gray;
+}
+
+#logout-button {
+  margin-left: 10px;
+}
+
+#logout-button:hover {
+  cursor: pointer;
 }
