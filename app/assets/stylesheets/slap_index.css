@@ -33,11 +33,16 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;  
+  align-items: center; 
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
 
 .slap-carousel-content > * {
   margin-right: 15px;
+}
+
+.slap-carousel-content > *:first-child {
+  margin-left: 220px;
 }
