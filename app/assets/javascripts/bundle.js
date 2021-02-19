@@ -14978,7 +14978,6 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
       (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
         var username = _ref2.username,
             location = _ref2.location;
-        console.log(username);
 
         _this.setState({
           username: username,
