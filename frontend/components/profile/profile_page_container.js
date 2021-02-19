@@ -8,7 +8,6 @@ const mapStateToProps = ({ session }) => ({
   currUser: session.id
 })
 
-
 const mapDispatchToProps = (dispatch) => ({
   receiveSlaps: slaps => dispatch(receiveSlaps(slaps)),
 })

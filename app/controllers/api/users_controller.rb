@@ -13,7 +13,6 @@ class Api::UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        debugger
         if @user
             @slaps = Slap.where(uploader: params[:id])
             render :show
@@ -41,7 +40,6 @@ class Api::UsersController < ApplicationController
     private
 
     def user_params
-        debugger
-        params.require(:user).permit(:email, :password, :location, :profile_image, :cover_image)
+        params.require(:user).permit(:username, :email, :password, :location, :profile_image, :cover_image)
     end
 end

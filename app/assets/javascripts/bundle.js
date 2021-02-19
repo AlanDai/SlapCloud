@@ -14894,15 +14894,19 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "profileHeader", function () {
       var _this$state = _this.state,
           id = _this$state.id,
-          email = _this$state.email,
-          username = _this$state.username,
-          location = _this$state.location,
           profile_image = _this$state.profile_image,
           cover_image = _this$state.cover_image,
           updating = _this$state.updating;
+      var cover_url;
+      cover_image ? cover_url = "url(".concat(cover_image, ")") : cover_url = "none";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "profile-header"
+        id: "profile-header",
+        style: {
+          backgroundImage: cover_url,
+          backgroundSize: 'cover'
+        }
       }, profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        id: "profile-image",
         src: profile_image
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-default-image"
@@ -14967,7 +14971,21 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdate", function (e) {
-      console.log(e.target);
+      var updatedFields = {
+        username: e.target[0].value,
+        location: e.target[1].value
+      };
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
+        var username = _ref2.username,
+            location = _ref2.location;
+        console.log(username);
+
+        _this.setState({
+          username: username,
+          location: location,
+          updating: false
+        });
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInfoClick", function (e) {
@@ -14984,8 +15002,11 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleProfileChange", function (e) {
       var formData = new FormData();
       formData.append('user[profile_image]', e.currentTarget.files[0]);
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (res) {
-        return console.log(res);
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref3) {
+        var profile_image = _ref3.profile_image;
+        return _this.setState({
+          profile_image: profile_image
+        });
       });
     });
 
@@ -14997,8 +15018,15 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleCoverChange", function (e) {
       var formData = new FormData();
       formData.append('user[cover_image]', e.currentTarget.files[0]);
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (res) {
-        return console.log(res);
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref4) {
+        var cover_image = _ref4.cover_image;
+
+        _this.setState({
+          cover_image: cover_image
+        });
+
+        var ph = document.getElementById("profile-header");
+        ph.style.backgroundImage = "url(".concat(cover_image, ")");
       });
     });
 
@@ -17485,13 +17513,13 @@ __webpack_require__.r(__webpack_exports__);
 var fetchUser = function fetchUser(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId),
-    action: "GET"
+    method: "GET"
   });
 };
 var updateUserImage = function updateUserImage(userId, updatedFields) {
   return $.ajax({
     url: "/api/users/".concat(userId),
-    action: "PATCH",
+    method: "PATCH",
     data: updatedFields,
     contentType: false,
     processData: false
@@ -17500,8 +17528,10 @@ var updateUserImage = function updateUserImage(userId, updatedFields) {
 var updateUserInfo = function updateUserInfo(userId, updatedFields) {
   return $.ajax({
     url: "/api/users/".concat(userId),
-    action: "PATCH",
-    data: updatedFields
+    method: "PATCH",
+    data: {
+      user: updatedFields
+    }
   });
 };
 

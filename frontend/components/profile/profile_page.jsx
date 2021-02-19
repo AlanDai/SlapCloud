@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SlapItemContainer from "../slaps/slap_item_container";
-import { fetchUser, updateUserImage } from "../../util/user_api_util";
+import { fetchUser, updateUserInfo, updateUserImage } from "../../util/user_api_util";
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -31,13 +31,25 @@ class ProfilePage extends React.Component {
   }
 
   profileHeader = () => {
-    const { id, email, username, location, profile_image, cover_image, updating } = this.state
+    const { id, profile_image, cover_image, updating } = this.state
+
+    let cover_url;
+    
+    cover_image ?
+      cover_url = `url(${cover_image})` :
+      cover_url = "none"
 
     return (
-      <div id="profile-header" >
+      <div
+        id="profile-header"
+        style={{
+          backgroundImage: cover_url,
+          backgroundSize: 'cover'
+        }} 
+      >
         {
           profile_image ?
-            <img src={profile_image} />:
+            <img id="profile-image" src={profile_image} />:
             <div id="profile-default-image" />
         }
 
@@ -104,7 +116,15 @@ class ProfilePage extends React.Component {
   )
 
   handleUpdate = (e) => {
-    console.log(e.target);
+    const updatedFields = {
+      username: e.target[0].value,
+      location: e.target[1].value
+    }
+
+    updateUserInfo(this.state.id, updatedFields)
+      .then(({ username, location }) => {
+        this.setState({ username, location, updating: false })
+      })
   }
 
   handleInfoClick = (e) => {
@@ -119,7 +139,8 @@ class ProfilePage extends React.Component {
   handleProfileChange = (e) => {
     const formData = new FormData();
     formData.append('user[profile_image]', e.currentTarget.files[0]);  
-    updateUserImage(this.state.id, formData).then(res => console.log(res));
+    updateUserImage(this.state.id, formData)
+      .then(({ profile_image }) => this.setState({ profile_image }));
   }
 
   handleCoverClick = (e) => {
@@ -130,7 +151,14 @@ class ProfilePage extends React.Component {
   handleCoverChange = (e) => {
     const formData = new FormData();
     formData.append('user[cover_image]', e.currentTarget.files[0]);
-    updateUserImage(this.state.id, formData).then(res => console.log(res));
+    updateUserImage(this.state.id, formData)
+      .then(({ cover_image }) => {
+        this.setState({ cover_image });
+        
+        const ph = document.getElementById("profile-header")
+        ph.style.backgroundImage = `url(${cover_image})`;
+      }
+    );
   }
 
   render() {
