@@ -19,19 +19,21 @@ json.users do
 end
 
 json.slaps do
-  json.array! @slaps do |slap|
-    json.extract! slap, :id, :name, :description, :created_at
+  @slaps.each do |slap|
+    json.set! slap.id do
+      json.extract! slap, :id, :name, :description, :created_at
 
-    json.audio url_for(slap.audio_file) 
+      json.audio url_for(slap.audio_file) 
 
-    if slap.image_file.attached?
-      json.image url_for(slap.image_file)
-    end
+      if slap.image_file.attached?
+        json.image url_for(slap.image_file)
+      end
 
-    json.uploader slap.uploader
+      json.uploader slap.uploader
 
-    if slap.album
-      json.album slap.album
+      if slap.album
+        json.album slap.album
+      end
     end
   end
 end

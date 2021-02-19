@@ -15240,6 +15240,8 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
           slaps: slaps,
           users: users
         });
+
+        _this.props.receiveSlaps(slaps);
       });
     });
 
@@ -15254,6 +15256,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
           category = _this$state.category,
           users = _this$state.users,
           slaps = _this$state.slaps;
+      var slapsArray = Object.values(slaps);
 
       if (category === "users") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15267,7 +15270,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
       } else if (category === "slaps") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           id: "search-content"
-        }, slaps.length > 0 ? _this.state.slaps.map(function (slap, id) {
+        }, slapsArray.length > 0 ? slapsArray.map(function (slap, id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_3__.default, {
             key: id,
             slap: slap
@@ -15281,7 +15284,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
             key: id,
             user: user
           });
-        }), slaps.length > 0 && _this.state.slaps.map(function (slap, id) {
+        }), slapsArray.length > 0 && slapsArray.slice(0, 15).map(function (slap, id) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_3__.default, {
             key: id,
             slap: slap

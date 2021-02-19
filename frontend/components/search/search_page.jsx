@@ -20,6 +20,7 @@ class SearchPage extends React.Component {
   componentDidMount = () => {
     search(this.props.match.params.searchParams).then(({ slaps, users }) => {
       this.setState({ slaps, users })
+      this.props.receiveSlaps(slaps);
     })
   }
 
@@ -29,6 +30,7 @@ class SearchPage extends React.Component {
   
   searchItems = () => {
     const { category, users, slaps } = this.state;
+    const slapsArray = Object.values(slaps);
 
     if (category === "users") {
       return ( <div id="search-content">
@@ -40,8 +42,8 @@ class SearchPage extends React.Component {
       )
     } else if (category === "slaps") {
       return ( <div id="search-content">
-          {slaps.length > 0 ? 
-            this.state.slaps.map((slap, id) => <SlapItemContainer key={id} slap={slap} />) :
+          {slapsArray.length > 0 ? 
+            slapsArray.map((slap, id) => <SlapItemContainer key={id} slap={slap} />) :
             <span>No slaps found!</span>
           }
         </div>
@@ -51,8 +53,8 @@ class SearchPage extends React.Component {
           {users.length > 0 &&
             this.state.users.slice(0, 3).map((user, id) => <UserItem key={id} user={user} />)
           }
-          {slaps.length > 0 &&
-            this.state.slaps.map((slap, id) => <SlapItemContainer key={id} slap={slap} />)
+          {slapsArray.length > 0 &&
+            slapsArray.slice(0, 15).map((slap, id) => <SlapItemContainer key={id} slap={slap} />)
           }
           {users.length === 0 && slaps.length === 0 && <span>No matches found!</span>}
         </div>
