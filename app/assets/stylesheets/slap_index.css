@@ -5,40 +5,6 @@
   align-items: center;
 }
 
-/* slap index item */
-
-.slap-item {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  font-family: 'Overpass', sans-serif;
-
-  width: 800px;
-  border: 1px solid #E8E8E8;
-  padding: 20px;
-  margin: 10px;
-}
-
-.slap-item-image, .default-slap-image {
-  height: 160px;
-  width: 160px;
-}
-
-.default-slap-image {
-  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8)
-}
-
-.slap-item-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  height: 160px;
-  width: 250px;
-  padding: 0;
-  margin: 0;
-}
-
 .slap-index-section {
   margin-top: 20px;
 }

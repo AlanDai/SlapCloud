@@ -8,9 +8,9 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const RECEIVE_EMAIL_CHECK = "RECEIVE_EMAIL_CHECK";
 export const REMOVE_EMAIL_CHECK = "REMOVE_EMAIL_CHECK";
 
-export const fetchCurrentUser = (currentUser) => ({
+export const fetchCurrentUser = (payload) => ({
   type: FETCH_CURRENT_USER,
-  payload: currentUser,
+  payload: payload.user,
 });
 
 export const logoutCurrentUser = () => ({

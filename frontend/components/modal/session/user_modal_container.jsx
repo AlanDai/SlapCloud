@@ -10,6 +10,7 @@ const UserModal = ({ emailExists, email, error, emailCheck, emailUncheck, signup
   if (emailExists === null) {
     return <ConnectForm
       emailCheck={emailCheck}
+      emailUncheck={emailUncheck}
       login={login}
     />;
   } else if (emailExists === false) {

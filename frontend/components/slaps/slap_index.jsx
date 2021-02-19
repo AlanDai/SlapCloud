@@ -15,12 +15,12 @@ class SlapsIndex extends React.Component {
         <div className="slap-index-section">
           <div className="carousel-header">{"More of what you like"}</div>
           <div className="carousel-subheader">{"Suggestions based on what you've liked or played"}</div>
-          <SlapsCarousel slaps={slaps} />
+          <SlapsCarousel slaps={Object.values(slaps)} />
         </div>
         <div className="slap-index-section">
           <div className="carousel-header">{"Discover new music"}</div>
           <div className="carousel-subheader">{"A compilation of our picks of the week"}</div>
-          <SlapsCarousel slaps={slaps} />
+          <SlapsCarousel slaps={Object.values(slaps).reverse()} />
         </div>
       </div>
     )

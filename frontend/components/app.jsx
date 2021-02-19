@@ -10,6 +10,7 @@ import MusicPlayerContainer from "./music_player/music_player_container"
 import DiscoverPage from "./discover/discover_page";
 import UploadPage from "./upload/upload_page";
 import ShowPageContainer from "./show/show_page_container";
+import ProfilePageContainer from "./profile/profile_page_container";
 
 const App = () => (
   <div id="app">
@@ -22,6 +23,7 @@ const App = () => (
       <AuthRoute exact path="/" component={DiscoverPage} />
       <Route path="/discover" component={DiscoverPage} />
       <ProtectedRoute path="/upload" component={UploadPage} />
+      <Route exact path="/user/:userId" component={ProfilePageContainer} />
     </Switch>
 
     <Route path="/" component={MusicPlayerContainer} />

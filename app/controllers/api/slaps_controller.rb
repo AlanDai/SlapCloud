@@ -5,16 +5,29 @@ class Api::SlapsController < ApplicationController
     render :index
   end
 
+  def userIndex
+    @slaps = Slap.find_by(uploader_id: params[:userId])
+    return :index
+  end
+
   def show
     @slap = Slap.find(params[:id])
-    @comments = @slap.comments
-    @likes = @slap.likes
-    render :show
+    if @slap
+      @comments = @slap.comments
+      @likes = @slap.likes
+      render :show
+    else
+      render json: { message: "User not found", status: 400 }
+    end
   end
 
   def create
     @slap = Slap.create!(slap_params)
-    render :show
+    if @slap
+      render :show
+    else
+      render json: @slap.errors.full_messages, status: 422
+    end
   end
 
   private

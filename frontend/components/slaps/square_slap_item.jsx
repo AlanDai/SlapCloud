@@ -34,7 +34,10 @@ class SquareSlapItem extends React.Component {
           <Link to={"/slap/" + slap.id} style={{ textDecoration: 'none' }}>
             <p className="square-slap-name">{slap.name}</p>
           </Link>
-          <p className="square-slap-uploader">{slap.uploader.email}</p>
+          <Link to={"/user/" + slap.uploader.id} style={{ textDecoration: 'none' }}>
+            <p className="square-slap-uploader">{slap.uploader.email}</p>
+          </Link>
+          
         </div>
       </div>
     )

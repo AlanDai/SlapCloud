@@ -1,5 +1,4 @@
 import React from 'react';
-import { $CombinedState } from 'redux';
 
 class UploadForm extends React.Component {
   constructor(props) {

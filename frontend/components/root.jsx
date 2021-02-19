@@ -23,6 +23,10 @@ import {
   faCommentAlt,
   faEdit,
   faTrash,
+  faCamera,
+  faUserPlus,
+  faUserCheck
+
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   fab,
@@ -41,6 +45,9 @@ library.add(
   faCommentAlt,
   faEdit,
   faTrash,
+  faCamera,
+  faUserPlus,
+  faUserCheck
 )
 
 const Root = ({ store }) => (
