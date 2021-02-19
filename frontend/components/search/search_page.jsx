@@ -3,6 +3,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { search } from "../../util/search_api_util";
+import SlapItemContainer from "../slaps/slap_item_container";
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -24,12 +25,18 @@ class SearchPage extends React.Component {
   }
   
   searchItems = () => {
-    const { category } = this.state;
+    const { category, slaps } = this.state;
 
     if (category === "users") {
       return <div id="search-content">User</div>
     } else if (category === "slaps") {
-      return <div id="search-content">Slaps</div>
+      return ( <div id="search-content">
+          {slaps ? 
+              this.state.slaps.map((slap, id) => <SlapItemContainer key={id} slap={slap} />) :
+              "No slaps found!"
+          }
+        </div>
+      )
     } else {
       return <div id="search-content">All</div>
     }
