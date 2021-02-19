@@ -17,7 +17,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  width: 700px;
+  width: 100%;
   margin-top: 45px;
   font-family: 'Overpass', sans-serif;
   color: white;
@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 70%;
   margin-left: 20px;
   margin-right: 20px;
   font-size: 20px;
@@ -52,6 +53,23 @@
 
 #show-header-info span {
   background-color: black;
+}
+
+#show-header-info-2 {
+  display: flex;  
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: 'Overpass', sans-serif;
+}
+
+#show-header-info-2 > button {
+  display: none;
+}
+
+#show-header:hover #show-header-info-2 button {
+  display: block;
+  padding: 5px 10px;
+  margin-top: 15px;
 }
 
 #show-header-image * {

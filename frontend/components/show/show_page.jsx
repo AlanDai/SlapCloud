@@ -106,8 +106,13 @@ class ShowPage extends React.Component {
               <Link to={`/user/${slap.uploader.id}`}><span>{slap.uploader.email}</span></Link>
               <Link to={`/slap/${slap.id}`}><span>{slap.name}</span></Link>
             </div>
-            <div>
+            <div id="show-header-info-2">
               <span>{moment(slap.uploader.created_at).fromNow()}</span>
+              {/* {currUser.id === slap.uploader.id &&
+                <button>
+                  <span><FontAwesomeIcon icon="edit"/> Edit</span>
+                </button>
+              } */}
             </div>
           </div>
 
