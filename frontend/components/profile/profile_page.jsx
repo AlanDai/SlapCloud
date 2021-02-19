@@ -26,6 +26,13 @@ class ProfilePage extends React.Component {
           cover_image,
           slaps,
         })
+        
+        const ph = document.getElementById("profile-header");
+        if (cover_image) {
+          ph.style.backgroundImage = `url(${cover_image})`;
+          ph.style.backgroundSize = 'cover';
+        }
+
         this.props.receiveSlaps(slaps);
       })
   }
@@ -33,20 +40,8 @@ class ProfilePage extends React.Component {
   profileHeader = () => {
     const { id, profile_image, cover_image, updating } = this.state
 
-    let cover_url;
-    
-    cover_image ?
-      cover_url = `url(${cover_image})` :
-      cover_url = "none"
-
     return (
-      <div
-        id="profile-header"
-        style={{
-          backgroundImage: cover_url,
-          backgroundSize: 'cover'
-        }} 
-      >
+      <div id="profile-header" >
         {
           profile_image ?
             <img id="profile-image" src={profile_image} />:
@@ -172,9 +167,14 @@ class ProfilePage extends React.Component {
       <div id="profile-page">
         {this.profileHeader()}
         <div id="profile-content">
-          {slaps && Object.values(slaps).map((slap, id) =>
+          {slaps ?
+            Object.values(slaps).map((slap, id) =>
             <SlapItemContainer key={id} slap={slap} />
-          )}
+            ) :
+            <div id="empty-profile-content">
+              This user has not uploaded any slaps yet!
+            </div>
+        }
         </div>
         <div style={{ height: 49 }}/>
       </div>

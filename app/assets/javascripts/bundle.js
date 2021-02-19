@@ -14897,6 +14897,13 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           slaps: slaps
         });
 
+        var ph = document.getElementById("profile-header");
+
+        if (cover_image) {
+          ph.style.backgroundImage = "url(".concat(cover_image, ")");
+          ph.style.backgroundSize = 'cover';
+        }
+
         _this.props.receiveSlaps(slaps);
       });
     });
@@ -14907,14 +14914,8 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           profile_image = _this$state.profile_image,
           cover_image = _this$state.cover_image,
           updating = _this$state.updating;
-      var cover_url;
-      cover_image ? cover_url = "url(".concat(cover_image, ")") : cover_url = "none";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "profile-header",
-        style: {
-          backgroundImage: cover_url,
-          backgroundSize: 'cover'
-        }
+        id: "profile-header"
       }, profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         id: "profile-image",
         src: profile_image
@@ -15060,12 +15061,14 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
         id: "profile-page"
       }, this.profileHeader(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-content"
-      }, slaps && Object.values(slaps).map(function (slap, id) {
+      }, slaps ? Object.values(slaps).map(function (slap, id) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_2__.default, {
           key: id,
           slap: slap
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "empty-profile-content"
+      }, "This user has not uploaded any slaps yet!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {
           height: 49
         }
