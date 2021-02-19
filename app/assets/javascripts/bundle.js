@@ -15235,10 +15235,15 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
       (0,_util_search_api_util__WEBPACK_IMPORTED_MODULE_2__.search)(_this.props.match.params.searchParams).then(function (_ref) {
         var slaps = _ref.slaps,
             users = _ref.users;
-
-        _this.setState({
-          slaps: slaps,
+        slaps ? _this.setState({
+          slaps: slaps
+        }) : _this.setState({
+          slaps: []
+        });
+        users ? _this.setState({
           users: users
+        }) : _this.setState({
+          users: []
         });
 
         _this.props.receiveSlaps(slaps);
@@ -15303,9 +15308,33 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SearchPage, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this2 = this;
+
+      if (prevProps.match.params.searchParams !== this.props.match.params.searchParams) {
+        (0,_util_search_api_util__WEBPACK_IMPORTED_MODULE_2__.search)(this.props.match.params.searchParams).then(function (_ref2) {
+          var slaps = _ref2.slaps,
+              users = _ref2.users;
+          slaps ? _this2.setState({
+            slaps: slaps
+          }) : _this2.setState({
+            slaps: []
+          });
+          users ? _this2.setState({
+            users: users
+          }) : _this2.setState({
+            users: []
+          });
+
+          _this2.props.receiveSlaps(slaps);
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var category = this.state.category;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15320,7 +15349,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
         id: "all-category-button",
         className: "selected-category",
         onClick: function onClick() {
-          return _this2.switchCategory('all');
+          return _this3.switchCategory('all');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "search"
@@ -15328,7 +15357,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
         id: "all-category-button",
         className: "unselected-category",
         onClick: function onClick() {
-          return _this2.switchCategory('all');
+          return _this3.switchCategory('all');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "search"
@@ -15336,7 +15365,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
         id: "user-category-button",
         className: "selected-category",
         onClick: function onClick() {
-          return _this2.switchCategory('users');
+          return _this3.switchCategory('users');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "user"
@@ -15344,7 +15373,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
         id: "user-category-button",
         className: "unselected-category",
         onClick: function onClick() {
-          return _this2.switchCategory('users');
+          return _this3.switchCategory('users');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "user"
@@ -15352,7 +15381,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
         id: "slap-category-button",
         className: "selected-category",
         onClick: function onClick() {
-          return _this2.switchCategory('slaps');
+          return _this3.switchCategory('slaps');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "hand-paper"
@@ -15360,7 +15389,7 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
         id: "slap-category-button",
         className: "unselected-category",
         onClick: function onClick() {
-          return _this2.switchCategory('slaps');
+          return _this3.switchCategory('slaps');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "hand-paper"

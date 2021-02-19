@@ -19,9 +19,20 @@ class SearchPage extends React.Component {
 
   componentDidMount = () => {
     search(this.props.match.params.searchParams).then(({ slaps, users }) => {
-      this.setState({ slaps, users })
+      slaps ? this.setState({ slaps }) : this.setState({ slaps: [] })
+      users ? this.setState({ users }) : this.setState({ users: [] })
       this.props.receiveSlaps(slaps);
     })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.searchParams !== this.props.match.params.searchParams) {
+      search(this.props.match.params.searchParams).then(({ slaps, users }) => {
+        slaps ? this.setState({ slaps }) : this.setState({ slaps: [] })
+        users ? this.setState({ users }) : this.setState({ users: [] })
+        this.props.receiveSlaps(slaps);
+      })
+    }
   }
 
   switchCategory = (category) => {
