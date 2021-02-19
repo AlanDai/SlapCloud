@@ -13311,7 +13311,7 @@ var REMOVE_EMAIL_CHECK = "REMOVE_EMAIL_CHECK";
 var fetchCurrentUser = function fetchCurrentUser(payload) {
   return {
     type: FETCH_CURRENT_USER,
-    payload: payload.user
+    payload: payload
   };
 };
 var logoutCurrentUser = function logoutCurrentUser() {
@@ -14718,11 +14718,18 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       if (this.props.currentUser) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "user-btns"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-          to: "/upload"
-        }, "Upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        }, this.props.currentUser.profile_image && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          id: "navbar-profile-image",
+          src: this.props.currentUser.profile_image
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+          id: "navbar-username-link",
+          to: "/user/".concat(this.props.sessionId)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "navbar-username"
+        }, this.props.currentUser.username ? this.props.currentUser.username : this.props.currentUser.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "logout-button",
           onClick: this.handleLogout
-        }, this.props.currentUser.email));
+        }, "Logout"));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "session-btns"
@@ -14745,11 +14752,14 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
         src: "https://vignette.wikia.nocookie.net/super-adventure-rpg/images/b/bf/Slap.png/revision/latest/window-crop/width/200/x-offset/0/y-offset/0/window-width/421/window-height/420?cb=20190115092926"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/discover"
-      }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      }, "Discover"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/user/".concat(this.props.sessionId)
-      }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/discover"
-      }, "Discover"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }, "Profile"), this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/upload"
+      }, "Upload") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "upload-button",
+        onClick: this.handleClick
+      }, "Upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
@@ -14887,6 +14897,13 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           slaps: slaps
         });
 
+        var ph = document.getElementById("profile-header");
+
+        if (cover_image) {
+          ph.style.backgroundImage = "url(".concat(cover_image, ")");
+          ph.style.backgroundSize = 'cover';
+        }
+
         _this.props.receiveSlaps(slaps);
       });
     });
@@ -14897,14 +14914,8 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
           profile_image = _this$state.profile_image,
           cover_image = _this$state.cover_image,
           updating = _this$state.updating;
-      var cover_url;
-      cover_image ? cover_url = "url(".concat(cover_image, ")") : cover_url = "none";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "profile-header",
-        style: {
-          backgroundImage: cover_url,
-          backgroundSize: 'cover'
-        }
+        id: "profile-header"
       }, profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         id: "profile-image",
         src: profile_image
@@ -14971,20 +14982,26 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdate", function (e) {
-      var updatedFields = {
-        username: e.target[0].value,
-        location: e.target[1].value
-      };
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
-        var username = _ref2.username,
-            location = _ref2.location;
+      var updatedFields = {};
+      if (e.target[0].value) updatedFields["username"] = e.target[0].value;
+      if (e.target[1].value) updatedFields["location"] = e.target[1].value;
 
+      if (Object.keys(updatedFields).length === 0) {
         _this.setState({
-          username: username,
-          location: location,
           updating: false
         });
-      });
+      } else {
+        (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
+          var username = _ref2.username,
+              location = _ref2.location;
+
+          _this.setState({
+            username: username,
+            location: location,
+            updating: false
+          });
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInfoClick", function (e) {
@@ -15044,12 +15061,14 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
         id: "profile-page"
       }, this.profileHeader(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-content"
-      }, slaps && Object.values(slaps).map(function (slap, id) {
+      }, slaps ? Object.values(slaps).map(function (slap, id) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_2__.default, {
           key: id,
           slap: slap
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "empty-profile-content"
+      }, "This user has not uploaded any slaps yet!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {
           height: 49
         }
@@ -15589,6 +15608,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _slaps_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slaps_carousel */ "./frontend/components/slaps/slaps_carousel.jsx");
+/* harmony import */ var _slap_item_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./slap_item_container */ "./frontend/components/slaps/slap_item_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15610,6 +15630,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -15636,7 +15657,15 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
       var slaps = this.props.slaps;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index"
+      }, Object.keys(slaps).length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "slap-index-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "carousel-header"
+      }, "Featured Song"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "carousel-subheader"
+      }, "Check out this slap by Europe!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_item_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        slap: slaps[26]
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "carousel-header"
@@ -15966,9 +15995,7 @@ var SlapsCarousel = /*#__PURE__*/function (_React$Component) {
         className: "slap-carousel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-carousel-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "carousel-spacer"
-      }, "spacer"), slaps && slaps.map(function (slap, idx) {
+      }, slaps && slaps.map(function (slap, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_square_slap_item__WEBPACK_IMPORTED_MODULE_1__.default, {
           key: idx,
           slap: slap

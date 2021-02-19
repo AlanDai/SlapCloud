@@ -13,7 +13,6 @@ class SlapsCarousel extends React.Component {
     return (
       <div className="slap-carousel">
         <div className="slap-carousel-content">
-          <div className="carousel-spacer">spacer</div>
           {slaps && slaps.map((slap, idx) => (<SquareSlapItem key={idx} slap={slap} />))}
         </div>
       </div>

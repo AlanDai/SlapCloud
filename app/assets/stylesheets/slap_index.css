@@ -2,11 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .slap-index-section {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-left: 100px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.slap-index-section .slap-item {
+  width: 900px;
 }
 
 .slap-carousel {
@@ -27,17 +33,16 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;  
+  align-items: center; 
+  width: 100%;
   overflow-x: auto;
-  overflow-y: visible;
-}
-
-.carousel-spacer {
-  color: white;
-  background-color: white;
-  width: 10px;
+  overflow-y: hidden;
 }
 
 .slap-carousel-content > * {
   margin-right: 15px;
+}
+
+.slap-carousel-content > *:first-child {
+  margin-left: 220px;
 }
