@@ -15237,19 +15237,12 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
           users: users
         });
       });
-      var category = _this.state.category;
-      var ele;
+    });
 
-      if (category === "users") {
-        ele = document.getElementById("user-category-button");
-      } else if (category === "slaps") {
-        ele = document.getElementById("slap-category-button");
-      } else {
-        ele = document.getElementById("all-category-button");
-      }
-
-      ele.style.backgroundColor = "#FF4500";
-      ele.style.color = "white";
+    _defineProperty(_assertThisInitialized(_this), "switchCategory", function (category) {
+      _this.setState({
+        category: category
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "searchItems", function () {
@@ -15279,6 +15272,9 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
   _createClass(SearchPage, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var category = this.state.category;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "search-page"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15287,16 +15283,52 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
         id: "search-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "search-categories"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        id: "all-category-button"
+      }, category === "all" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "all-category-button",
+        className: "selected-category",
+        onClick: function onClick() {
+          return _this2.switchCategory('all');
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "search"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "All")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        id: "user-category-button"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "All")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "all-category-button",
+        className: "unselected-category",
+        onClick: function onClick() {
+          return _this2.switchCategory('all');
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "search"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "All")), category === "users" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "user-category-button",
+        className: "selected-category",
+        onClick: function onClick() {
+          return _this2.switchCategory('users');
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "user"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Users")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        id: "slap-category-button"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Users")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "user-category-button",
+        className: "unselected-category",
+        onClick: function onClick() {
+          return _this2.switchCategory('users');
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "user"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Users")), category === "slaps" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "slap-category-button",
+        className: "selected-category",
+        onClick: function onClick() {
+          return _this2.switchCategory('slaps');
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
+        icon: "hand-paper"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Slaps")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "slap-category-button",
+        className: "unselected-category",
+        onClick: function onClick() {
+          return _this2.switchCategory('slaps');
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
         icon: "hand-paper"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Slaps"))), this.searchItems()));

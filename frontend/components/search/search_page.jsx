@@ -17,22 +17,12 @@ class SearchPage extends React.Component {
     search(this.props.match.params.searchParams).then(({ slaps, users }) => {
       this.setState({ slaps, users })
     })
-
-    const { category } = this.state;
-    let ele;
-
-    if (category === "users") {
-      ele = document.getElementById("user-category-button")
-    } else if (category === "slaps") {
-      ele = document.getElementById("slap-category-button")
-    } else {
-      ele = document.getElementById("all-category-button")
-    }
-
-    ele.style.backgroundColor = "#FF4500";
-    ele.style.color = "white";
   }
 
+  switchCategory = (category) => {
+    this.setState({ category })
+  }
+  
   searchItems = () => {
     const { category } = this.state;
 
@@ -46,6 +36,8 @@ class SearchPage extends React.Component {
   }
 
   render() {
+    const { category } = this.state;
+
     return ( 
       <div id="search-page">
         <div id="search-header">
@@ -53,15 +45,31 @@ class SearchPage extends React.Component {
         </div>
         <div id="search-body">
           <div id="search-categories">
-            <button id="all-category-button">
-              <FontAwesomeIcon icon="search"/><span>All</span>
-            </button>
-            <button id="user-category-button">
-              <FontAwesomeIcon icon="user"/><span>Users</span>
-            </button>
-            <button id="slap-category-button">
-              <FontAwesomeIcon icon="hand-paper"/><span>Slaps</span>
-            </button>
+            { category === "all" ?
+              <button id="all-category-button" className="selected-category" onClick={() => this.switchCategory('all')}>
+                <FontAwesomeIcon icon="search"/><span>All</span>
+              </button> :
+              <button id="all-category-button" className="unselected-category" onClick={() => this.switchCategory('all')}>
+                <FontAwesomeIcon icon="search"/><span>All</span>
+              </button>
+            }
+            { category === "users" ?
+              <button id="user-category-button" className="selected-category" onClick={() => this.switchCategory('users')}>
+                <FontAwesomeIcon icon="user"/><span>Users</span>
+              </button> :
+              <button id="user-category-button" className="unselected-category" onClick={() => this.switchCategory('users')}>
+                <FontAwesomeIcon icon="user"/><span>Users</span>
+              </button>
+            }
+            { category === "slaps" ?
+              <button id="slap-category-button" className="selected-category" onClick={() => this.switchCategory('slaps')}>
+                <FontAwesomeIcon icon="hand-paper"/><span>Slaps</span>
+              </button> :
+              <button id="slap-category-button"  className="unselected-category" onClick={() => this.switchCategory('slaps')}>
+                <FontAwesomeIcon icon="hand-paper"/><span>Slaps</span>
+              </button>
+            }
+            
           </div>
 
           {this.searchItems()}

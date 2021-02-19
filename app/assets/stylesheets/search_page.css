@@ -45,18 +45,37 @@
 }
 
 #search-categories > * {
-  width: 100%;
+  position: relative;
+  width: 85%;
   text-align: start;
   font-family: 'Overpass', sans-serif;
   font-size: 16px;
   padding: 3px 10px;
   margin-bottom: 5px;
-  background-color: white;
   border: none;
 }
 
 #search-categories > button:hover {
   cursor: pointer;
+}
+
+.selected-category {
+  color: white;
+  background-color: #FF4500;
+}
+
+.selected-category:after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  left: 100%; top: 0;
+  border: 15px solid transparent;
+  border-left: 15px solid #FF4500;
+}
+
+.unselected-category {
+  color: black;
+  background-color: white;
 }
 
 #search-content {
