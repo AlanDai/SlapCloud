@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
-    resource :users, only: [:create]
+    resources :users, only: [:create, :show, :update]
     post '/user/email', to: 'users#checkEmail'
-    resources :users, only: [:show, :update]
-
     resource :session, only: [:create, :destroy]
     
     resources :albums, only: [:index, :create]
@@ -12,6 +10,7 @@ Rails.application.routes.draw do
 
     resources :comments, only: [:create, :show, :update, :destroy]
     resources :likes, only: [:create, :destroy]
+    get '/likes/slap/:slapId', to: 'likes#slapLikes'
   end
 
   root "static_pages#root"

@@ -1,8 +1,8 @@
-json.user do
-  json.extract! user, :id, :email, :username
-  if user.location
-    json.location user.location
-  end
+
+json.extract! user, :id, :email, :username
+
+if user.location
+  json.location user.location
 end
 
 if user.profile_image.attached?
@@ -10,5 +10,5 @@ if user.profile_image.attached?
 end 
 
 if user.cover_image.attached?
-  json.cover_image url_form(user.cover_image)
+  json.cover_image url_for(user.cover_image)
 end

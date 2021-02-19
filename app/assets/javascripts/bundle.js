@@ -13311,7 +13311,7 @@ var REMOVE_EMAIL_CHECK = "REMOVE_EMAIL_CHECK";
 var fetchCurrentUser = function fetchCurrentUser(payload) {
   return {
     type: FETCH_CURRENT_USER,
-    payload: payload.user
+    payload: payload
   };
 };
 var logoutCurrentUser = function logoutCurrentUser() {
@@ -13824,11 +13824,6 @@ var ConnectForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ConnectForm, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.props.emailUncheck();
-    }
-  }, {
     key: "handleDemoClick",
     value: function handleDemoClick(e) {
       e.preventDefault();
@@ -13949,7 +13944,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var user = {
         email: this.props.email,
-        password: e.target[0].value
+        password: e.target[0].value,
+        username: this.props.email
       };
       this.props.action(user);
     }
@@ -14091,6 +14087,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -14115,6 +14112,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -14391,14 +14389,32 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "songInfo", function (slap) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "song-info-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        id: "song-img",
-        src: slap.image
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "song-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.name)));
+      if (slap.image) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "song-info-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          id: "song-img",
+          src: slap.image
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "song-info"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          to: "/user/".concat(slap.uploader.id)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          to: "/slap/".concat(slap.id)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.name))));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "song-info-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "song-img"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "song-info"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          to: "/user/".concat(slap.uploader.id)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          to: "/slap/".concat(slap.id)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.name))));
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleMetaData", function (e) {
@@ -14702,11 +14718,18 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       if (this.props.currentUser) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "user-btns"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-          to: "/upload"
-        }, "Upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        }, this.props.currentUser.profile_image && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          id: "navbar-profile-image",
+          src: this.props.currentUser.profile_image
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+          id: "navbar-username-link",
+          to: "/user/".concat(this.props.sessionId)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "navbar-username"
+        }, this.props.currentUser.username ? this.props.currentUser.username : this.props.currentUser.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "logout-button",
           onClick: this.handleLogout
-        }, this.props.currentUser.email));
+        }, "Logout"));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "session-btns"
@@ -14729,11 +14752,14 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
         src: "https://vignette.wikia.nocookie.net/super-adventure-rpg/images/b/bf/Slap.png/revision/latest/window-crop/width/200/x-offset/0/y-offset/0/window-width/421/window-height/420?cb=20190115092926"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/discover"
-      }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/profile"
-      }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/discover"
-      }, "Slaps"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }, "Discover"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/user/".concat(this.props.sessionId)
+      }, "Profile"), this.props.currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/upload"
+      }, "Upload") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "upload-button",
+        onClick: this.handleClick
+      }, "Upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
@@ -14808,7 +14834,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _slaps_slap_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../slaps/slap_item */ "./frontend/components/slaps/slap_item.jsx");
+/* harmony import */ var _slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../slaps/slap_item_container */ "./frontend/components/slaps/slap_item_container.js");
 /* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/user_api_util */ "./frontend/util/user_api_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -14853,31 +14879,54 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.fetchUser)(_this.props.match.params.userId).then(function (_ref) {
-        var user = _ref.user,
+        var id = _ref.id,
+            email = _ref.email,
+            username = _ref.username,
+            location = _ref.location,
+            profile_image = _ref.profile_image,
+            cover_image = _ref.cover_image,
             slaps = _ref.slaps;
 
         _this.setState({
-          user: user,
+          id: id,
+          email: email,
+          username: username,
+          location: location,
+          profile_image: profile_image,
+          cover_image: cover_image,
           slaps: slaps
         });
+
+        var ph = document.getElementById("profile-header");
+
+        if (cover_image) {
+          ph.style.backgroundImage = "url(".concat(cover_image, ")");
+          ph.style.backgroundSize = 'cover';
+        }
 
         _this.props.receiveSlaps(slaps);
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "profileHeader", function () {
-      var user = _this.state.user;
+      var _this$state = _this.state,
+          id = _this$state.id,
+          profile_image = _this$state.profile_image,
+          cover_image = _this$state.cover_image,
+          updating = _this$state.updating;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-header"
-      }, user.profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: user.profile_image
+      }, profile_image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        id: "profile-image",
+        src: profile_image
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-default-image"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "profile-header-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.email), user.location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, user.location)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), updating ? _this.userInfoForm() : _this.userInfo(), id === _this.props.currUser && !updating && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-image-buttons"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        id: "profile-update-button",
+        onClick: _this.handleInfoClick
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Update Info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         id: "profile-upload-button",
         onClick: _this.handleProfileClick
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon, {
@@ -14906,6 +14955,61 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
       })));
     });
 
+    _defineProperty(_assertThisInitialized(_this), "userInfo", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "profile-header-info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        id: "info-username"
+      }, _this.state.username ? _this.state.username : _this.state.email), _this.state.location && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        id: "info-location"
+      }, _this.state.location));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "userInfoForm", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        id: "profile-header-info",
+        onSubmit: _this.handleUpdate
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        defaultValue: _this.state.username ? _this.state.username : _this.state.email
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        defaultValue: _this.state.location ? _this.state.location : ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: "Update"
+      }));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdate", function (e) {
+      var updatedFields = {};
+      if (e.target[0].value) updatedFields["username"] = e.target[0].value;
+      if (e.target[1].value) updatedFields["location"] = e.target[1].value;
+
+      if (Object.keys(updatedFields).length === 0) {
+        _this.setState({
+          updating: false
+        });
+      } else {
+        (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
+          var username = _ref2.username,
+              location = _ref2.location;
+
+          _this.setState({
+            username: username,
+            location: location,
+            updating: false
+          });
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInfoClick", function (e) {
+      _this.setState({
+        updating: !_this.state.updating
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleProfileClick", function (e) {
       var pu = document.getElementById('profile-upload');
       pu.click();
@@ -14914,8 +15018,11 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleProfileChange", function (e) {
       var formData = new FormData();
       formData.append('user[profile_image]', e.currentTarget.files[0]);
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.user.id, formData).then(function (res) {
-        return console.log(res);
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref3) {
+        var profile_image = _ref3.profile_image;
+        return _this.setState({
+          profile_image: profile_image
+        });
       });
     });
 
@@ -14927,11 +15034,21 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleCoverChange", function (e) {
       var formData = new FormData();
       formData.append('user[cover_image]', e.currentTarget.files[0]);
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.user.id, formData).then(function (res) {
-        return console.log(res);
+      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserImage)(_this.state.id, formData).then(function (_ref4) {
+        var cover_image = _ref4.cover_image;
+
+        _this.setState({
+          cover_image: cover_image
+        });
+
+        var ph = document.getElementById("profile-header");
+        ph.style.backgroundImage = "url(".concat(cover_image, ")");
       });
     });
 
+    _this.state = {
+      updating: false
+    };
     return _this;
   }
 
@@ -14939,19 +15056,23 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (!this.state) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
-      var _this$state = this.state,
-          user = _this$state.user,
-          slaps = _this$state.slaps;
+      var slaps = this.state.slaps;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-page"
       }, this.profileHeader(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "profile-content"
-      }, slaps && Object.values(slaps).map(function (slap, id) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item__WEBPACK_IMPORTED_MODULE_2__.default, {
+      }, slaps ? Object.values(slaps).map(function (slap, id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_slap_item_container__WEBPACK_IMPORTED_MODULE_2__.default, {
           key: id,
           slap: slap
         });
-      })));
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "empty-profile-content"
+      }, "This user has not uploaded any slaps yet!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        style: {
+          height: 49
+        }
+      }));
     }
   }]);
 
@@ -14982,8 +15103,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return {};
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session;
+  return {
+    currUser: session.id
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -15024,7 +15148,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faRedo, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeDown, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlayCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPauseCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faHeart, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faUser, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faCommentAlt, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faEdit, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faTrash, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faCamera);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__.library.add(_fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_4__.fab, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepBackward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlay, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPause, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faStepForward, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faRedo, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeUp, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeDown, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faVolumeMute, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlayCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPauseCircle, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faHeart, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faUser, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faCommentAlt, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faEdit, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faTrash, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faCamera, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faUserPlus, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faUserCheck);
 
 var Root = function Root(_ref) {
   var store = _ref.store;
@@ -15049,6 +15173,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
@@ -15082,6 +15207,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var CommentItem = /*#__PURE__*/function (_React$Component) {
   _inherits(CommentItem, _React$Component);
 
@@ -15097,7 +15223,9 @@ var CommentItem = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "editField", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "comment-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _this.state.comment.email), _this.state.editing ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+        to: "/user/".concat(_this.state.comment.commenter_id)
+      }, _this.state.comment.email), _this.state.editing ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         className: "comment-edit-input",
         defaultValue: _this.state.comment.body,
@@ -15117,8 +15245,6 @@ var CommentItem = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleKeyUp", function (e) {
-      console.log(e.key);
-
       if (e.key === "Enter") {
         (0,_util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__.updateComment)(_this.state.comment.id, {
           "body": e.target.value
@@ -15207,6 +15333,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 /* harmony import */ var _util_comments_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/comments_api_util */ "./frontend/util/comments_api_util.js");
 /* harmony import */ var _util_like_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/like_api_util */ "./frontend/util/like_api_util.js");
@@ -15235,6 +15362,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -15363,11 +15491,15 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         slap: slap
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-header-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.uploader.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, moment__WEBPACK_IMPORTED_MODULE_1___default()(slap.uploader.created_at).fromNow()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        to: "/user/".concat(slap.uploader.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.uploader.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        to: "/slap/".concat(slap.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, moment__WEBPACK_IMPORTED_MODULE_1___default()(slap.uploader.created_at).fromNow()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-header-image"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }, slap.image ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: slap.image
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-body"
       }, currUser && this.inputForm(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-body-content"
@@ -15378,9 +15510,9 @@ var ShowPage = /*#__PURE__*/function (_React$Component) {
         src: slap.uploader.image
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "default-user-medallion"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
-        icon: "user"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, " Follow"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        to: "/user/".concat(slap.uploader.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, slap.uploader.email))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-slap-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "show-description"
@@ -15476,6 +15608,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _slaps_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slaps_carousel */ "./frontend/components/slaps/slaps_carousel.jsx");
+/* harmony import */ var _slap_item_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./slap_item_container */ "./frontend/components/slaps/slap_item_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15497,6 +15630,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -15523,14 +15657,22 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
       var slaps = this.props.slaps;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index"
+      }, Object.keys(slaps).length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "slap-index-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "carousel-header"
+      }, "Featured Song"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "carousel-subheader"
+      }, "Check out this slap by Europe!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slap_item_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        slap: slaps[26]
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "carousel-header"
       }, "More of what you like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "carousel-subheader"
       }, "Suggestions based on what you've liked or played"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_carousel__WEBPACK_IMPORTED_MODULE_1__.default, {
-        slaps: slaps
+        slaps: Object.values(slaps)
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-index-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15538,7 +15680,7 @@ var SlapsIndex = /*#__PURE__*/function (_React$Component) {
       }, "Discover new music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "carousel-subheader"
       }, "A compilation of our picks of the week"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_slaps_carousel__WEBPACK_IMPORTED_MODULE_1__.default, {
-        slaps: slaps
+        slaps: Object.values(slaps).reverse()
       })));
     }
   }]);
@@ -15599,9 +15741,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _music_player_play_button_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../music_player/play_button_container */ "./frontend/components/music_player/play_button_container.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _util_like_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/like_api_util */ "./frontend/util/like_api_util.js");
+/* harmony import */ var _music_player_play_button_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../music_player/play_button_container */ "./frontend/components/music_player/play_button_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15630,21 +15776,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
 var SlapItem = /*#__PURE__*/function (_React$Component) {
   _inherits(SlapItem, _React$Component);
 
   var _super = _createSuper(SlapItem);
 
-  function SlapItem() {
+  function SlapItem(props) {
     var _this;
 
     _classCallCheck(this, SlapItem);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    _this = _super.call(this, props);
 
-    _this = _super.call.apply(_super, [this].concat(args));
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      (0,_util_like_api_util__WEBPACK_IMPORTED_MODULE_3__.showSlapLikes)(_this.props.slap.id).then(function (likes) {
+        return _this.setState({
+          likes: likes
+        });
+      });
+    });
 
     _defineProperty(_assertThisInitialized(_this), "loadSlapImage", function () {
       if (!_this.props.slap.image) {
@@ -15659,6 +15812,67 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "likeButton", function () {
+      if (!_this.state) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+      var likes = _this.state.likes;
+      if (!_this.props.currUser) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
+        icon: "heart"
+      }), " ", _this.state ? Object.keys(_this.state.likes).length : 0));
+
+      if (likes[_this.props.currUser]) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this.handleLike,
+          className: "slap-item-like-button",
+          style: {
+            color: "#FF4500"
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
+          icon: "heart"
+        }), " ", _this.state ? Object.keys(_this.state.likes).length : 0));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: _this.handleLike,
+          className: "slap-item-like-button",
+          style: {
+            color: "#e6e6e6"
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
+          icon: "heart"
+        }), " ", _this.state ? Object.keys(_this.state.likes).length : 0));
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleLike", function (e) {
+      var likes = _this.state.likes;
+      var _this$props = _this.props,
+          slap = _this$props.slap,
+          currUser = _this$props.currUser;
+
+      if (!likes[currUser]) {
+        var like = {
+          liker_id: currUser,
+          slap_id: slap.id
+        };
+        (0,_util_like_api_util__WEBPACK_IMPORTED_MODULE_3__.createLike)(like).then(function (res) {
+          var likes = _this.state.likes;
+          likes[currUser] = res;
+
+          _this.setState({
+            likes: likes
+          });
+        });
+      } else {
+        (0,_util_like_api_util__WEBPACK_IMPORTED_MODULE_3__.deleteLike)(likes[currUser].id).then(function (res) {
+          var likes = _this.state.likes;
+          delete likes[res.liker_id];
+
+          _this.setState({
+            likes: likes
+          });
+        });
+      }
+    });
+
     return _this;
   }
 
@@ -15668,20 +15882,59 @@ var SlapItem = /*#__PURE__*/function (_React$Component) {
       var slap = this.props.slap;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.NavLink, {
         to: "slap/".concat(slap.id)
-      }, this.loadSlapImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+      }, this.loadSlapImage()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_music_player_play_button_container__WEBPACK_IMPORTED_MODULE_4__.default, {
         slap: slap
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-item-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, slap.uploader.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, slap.name)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+        to: "/user/".concat(slap.uploader.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "slap-item-user"
+      }, slap.uploader.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+        to: "/slap/".concat(slap.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "slap-item-title"
+      }, slap.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "slap-item-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "slap-item-time"
+      }, moment__WEBPACK_IMPORTED_MODULE_1___default()(slap.created_at).fromNow()), this.likeButton()));
     }
   }]);
 
   return SlapItem;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)(SlapItem));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)(SlapItem));
+
+/***/ }),
+
+/***/ "./frontend/components/slaps/slap_item_container.js":
+/*!**********************************************************!*
+  !*** ./frontend/components/slaps/slap_item_container.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _slap_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slap_item */ "./frontend/components/slaps/slap_item.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session;
+  return {
+    currUser: session.id
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps)(_slap_item__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -15737,20 +15990,15 @@ var SlapsCarousel = /*#__PURE__*/function (_React$Component) {
   _createClass(SlapsCarousel, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          slaps = _this$props.slaps,
-          header = _this$props.header,
-          subheader = _this$props.subheader;
+      var slaps = this.props.slaps;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-carousel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "slap-carousel-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "carousel-spacer"
-      }, "spacer"), slaps && Object.keys(slaps).map(function (id) {
+      }, slaps && slaps.map(function (slap, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_square_slap_item__WEBPACK_IMPORTED_MODULE_1__.default, {
-          key: id,
-          slap: slaps[id]
+          key: idx,
+          slap: slap
         });
       })));
     }
@@ -17109,6 +17357,7 @@ var DragDrop = /*#__PURE__*/function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createLike": () => /* binding */ createLike,
+/* harmony export */   "showSlapLikes": () => /* binding */ showSlapLikes,
 /* harmony export */   "deleteLike": () => /* binding */ deleteLike
 /* harmony export */ });
 var createLike = function createLike(like) {
@@ -17118,6 +17367,12 @@ var createLike = function createLike(like) {
     data: {
       like: like
     }
+  });
+};
+var showSlapLikes = function showSlapLikes(slapId) {
+  return $.ajax({
+    url: "api/likes/slap/".concat(slapId),
+    method: "GET"
   });
 };
 var deleteLike = function deleteLike(likeId) {
@@ -17284,13 +17539,13 @@ __webpack_require__.r(__webpack_exports__);
 var fetchUser = function fetchUser(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId),
-    action: "GET"
+    method: "GET"
   });
 };
 var updateUserImage = function updateUserImage(userId, updatedFields) {
   return $.ajax({
     url: "/api/users/".concat(userId),
-    action: "PATCH",
+    method: "PATCH",
     data: updatedFields,
     contentType: false,
     processData: false
@@ -17299,8 +17554,10 @@ var updateUserImage = function updateUserImage(userId, updatedFields) {
 var updateUserInfo = function updateUserInfo(userId, updatedFields) {
   return $.ajax({
     url: "/api/users/".concat(userId),
-    action: "PATCH",
-    data: updatedFields
+    method: "PATCH",
+    data: {
+      user: updatedFields
+    }
   });
 };
 

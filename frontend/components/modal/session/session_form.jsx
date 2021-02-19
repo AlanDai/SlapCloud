@@ -16,7 +16,8 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = {
       email: this.props.email,
-      password: e.target[0].value
+      password: e.target[0].value,
+      username: this.props.email,
     }
     this.props.action(user);
   }

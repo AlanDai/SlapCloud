@@ -24,7 +24,7 @@ class Api::UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user
-            @user.update(user_params)
+            @user.update!(user_params)
             @slaps = Slap.where(uploader: params[:id])
             render :show
         else
@@ -40,6 +40,6 @@ class Api::UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email, :password, :location, :profile_image, :cover_image)
+        params.require(:user).permit(:username, :email, :password, :location, :profile_image, :cover_image)
     end
 end

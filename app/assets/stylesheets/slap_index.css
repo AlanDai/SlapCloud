@@ -2,44 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-
-/* slap index item */
-
-.slap-item {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  font-family: 'Overpass', sans-serif;
-
-  width: 100%;
-  padding: 20px;
-  margin: 10px;
-}
-
-.slap-item-image, .default-slap-image {
-  height: 160px;
-  width: 160px;
-}
-
-.default-slap-image {
-  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8)
-}
-
-.slap-item-info {
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  height: 160px;
-  width: 250px;
-  padding: 0;
-  margin: 0;
 }
 
 .slap-index-section {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-left: 100px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.slap-index-section .slap-item {
+  width: 900px;
 }
 
 .slap-carousel {
@@ -60,17 +33,16 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;  
+  align-items: center; 
+  width: 100%;
   overflow-x: auto;
-  overflow-y: visible;
-}
-
-.carousel-spacer {
-  color: white;
-  background-color: white;
-  width: 10px;
+  overflow-y: hidden;
 }
 
 .slap-carousel-content > * {
   margin-right: 15px;
+}
+
+.slap-carousel-content > *:first-child {
+  margin-left: 220px;
 }

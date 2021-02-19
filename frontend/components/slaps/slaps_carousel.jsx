@@ -8,13 +8,12 @@ class SlapsCarousel extends React.Component {
   }
 
   render () {
-    const { slaps, header, subheader } = this.props;
+    const { slaps } = this.props;
 
     return (
       <div className="slap-carousel">
         <div className="slap-carousel-content">
-          <div className="carousel-spacer">spacer</div>
-          {slaps && Object.keys(slaps).map((id) => (<SquareSlapItem key={id} slap={slaps[id]} />))}
+          {slaps && slaps.map((slap, idx) => (<SquareSlapItem key={idx} slap={slap} />))}
         </div>
       </div>
     )

@@ -158,15 +158,19 @@
   margin-left: 15px;
 }
 
+#song-info > * {
+  text-decoration: none;
+}
+
 #song-info p {
   margin: 0px;
 }
 
-#song-info p:first-child {
+#song-info > *:first-child {
   color: #999999
 }
 
-#song-info p:nth-child(2) {
+#song-info > *:nth-child(2) {
   color: #666666
 }
 

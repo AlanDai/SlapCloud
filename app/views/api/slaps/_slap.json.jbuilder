@@ -1,5 +1,5 @@
 # json.set! :id do
-json.extract! slap, :id, :name, :description
+json.extract! slap, :id, :name, :description, :created_at
 
 json.audio url_for(slap.audio_file) 
 

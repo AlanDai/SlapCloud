@@ -1,5 +1,5 @@
 #show-page {
-  width: 960px;
+  width: 1100px;
   margin: 0 auto;
   background: rgb(89,89,89);
   background: linear-gradient(90deg, rgba(89,89,89,1) 0%, rgba(0,0,0,1) 100%);
@@ -38,23 +38,30 @@
   font-size: 20px;
 }
 
-#show-header-info div:nth-child(2) {
+#show-header-info Link:nth-child(2) {
   font-size: 25px;
   width: 400px;
 }
 
 #show-header-info * {
   margin-top: 5px;
+  color: white;
+  text-decoration: none;
+  outline: none;
 }
 
 #show-header-info span {
   background-color: black;
 }
 
-#show-header-image img {
+#show-header-image * {
   width: 200px;
   height: 200px;
   margin: 25px;
+}
+
+#show-header-image div{
+  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8);
 }
 
 #show-body {
@@ -62,7 +69,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 960px;
+  width: 1100px;
   background-color: white;
   margin-top: 0px;
   margin-bottom: 49px;
@@ -116,7 +123,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 960px;
+  width: 1100px;
   margin-top: 20px;
   margin-bottom: 55px;
 }
@@ -132,6 +139,9 @@
 
 #show-user-info > * {
   margin-bottom: 10px;
+  text-decoration: none;
+  outline: none;
+  color: black;
 }
 
 #show-user-info .default-user-medallion {

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 
@@ -16,7 +18,7 @@ class CommentItem extends React.Component {
 
   editField = () => (
     <div className="comment-content">
-      <div>{this.state.comment.email}</div>
+      <Link to={`/user/${this.state.comment.commenter_id}`}>{this.state.comment.email}</Link >
       {this.state.editing ?
         <input
           type="text"
@@ -37,7 +39,6 @@ class CommentItem extends React.Component {
   }
 
   handleKeyUp = (e) => {
-    console.log(e.key);
     if (e.key === "Enter") {
       updateComment(this.state.comment.id, { "body": e.target.value })
         .then(comment => this.setState({ comment, editing: false }))

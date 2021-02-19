@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class MusicPlayer extends React.Component {
@@ -234,15 +235,25 @@ class MusicPlayer extends React.Component {
     vbi.style.background = 'linear-gradient(to right, #FF4500 0%, #FF4500 ' + e.target.value + '%, #CCCCCC ' + e.target.value + '%, #CCCCCC 100%)'
   }
 
-  songInfo = (slap) => (
-    <div id="song-info-container">
-      <img id="song-img" src={slap.image} />
-      <div id="song-info">
-        <p>{slap.uploader.email}</p>
-        <p>{slap.name}</p>
-      </div>
-    </div>
-  )
+  songInfo = (slap) => {
+    if (slap.image) {
+      return (<div id="song-info-container">
+        <img id="song-img" src={slap.image} />
+        <div id="song-info">
+          <Link to={`/user/${slap.uploader.id}`}><p>{slap.uploader.email}</p></Link>
+          <Link to={`/slap/${slap.id}`}><p>{slap.name}</p></Link>
+        </div>
+      </div>) 
+    } else {
+      return (<div id="song-info-container">
+        <div id="song-img" />
+        <div id="song-info">
+          <Link to={`/user/${slap.uploader.id}`}><p>{slap.uploader.email}</p></Link>
+          <Link to={`/slap/${slap.id}`}><p>{slap.name}</p></Link>
+        </div>
+      </div>)
+    }
+  }
 
   handleMetaData = (e) => {
     this.setState({ duration: e.target.duration });
