@@ -15256,7 +15256,8 @@ var SearchPage = /*#__PURE__*/function (_React$Component) {
           category = _this$state.category,
           users = _this$state.users,
           slaps = _this$state.slaps;
-      var slapsArray = Object.values(slaps);
+      var slapsArray = [];
+      if (Object.values(slaps).length > 0) slapsArray = Object.values(slaps);
 
       if (category === "users") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

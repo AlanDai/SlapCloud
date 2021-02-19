@@ -30,7 +30,9 @@ class SearchPage extends React.Component {
   
   searchItems = () => {
     const { category, users, slaps } = this.state;
-    const slapsArray = Object.values(slaps);
+    
+    let slapsArray = [] 
+    if (Object.values(slaps).length > 0) slapsArray = Object.values(slaps);
 
     if (category === "users") {
       return ( <div id="search-content">
