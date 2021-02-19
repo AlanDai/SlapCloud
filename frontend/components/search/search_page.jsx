@@ -46,14 +46,13 @@ class SearchPage extends React.Component {
       )
     } else {
       return ( <div id="search-content">
-          {users ?
-            this.state.users.slice(0, 3).map((user, id) => <UserItem key={id} user={user} />) :
-            "No users found!"
+          {users &&
+            this.state.users.slice(0, 3).map((user, id) => <UserItem key={id} user={user} />)
           }
-          {slaps ? 
-            this.state.slaps.map((slap, id) => <SlapItemContainer key={id} slap={slap} />) :
-            "No slaps found!"
+          {slaps &&
+            this.state.slaps.map((slap, id) => <SlapItemContainer key={id} slap={slap} />)
           }
+          {!users && !slaps && <div>No matches found!</div>}
         </div>
       )
     }

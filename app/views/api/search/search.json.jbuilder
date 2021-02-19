@@ -12,8 +12,8 @@ json.users do
       json.location user.location
     end
 
-    if json.profile_image
-      json.profile_image user.profile_image
+    if user.profile_image.attached?
+      json.profile_image url_for(user.profile_image)
     end
   end
 end

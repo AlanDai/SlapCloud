@@ -83,3 +83,7 @@
 #search-content {
   width: 77%;
 }
+
+#search-content > * {
+  margin-bottom: 10px;
+}
