@@ -57,7 +57,10 @@ class NavBar extends React.Component {
           <img className="logo" src="https://vignette.wikia.nocookie.net/super-adventure-rpg/images/b/bf/Slap.png/revision/latest/window-crop/width/200/x-offset/0/y-offset/0/window-width/421/window-height/420?cb=20190115092926"/>
         </Link>
         <Link to="/discover">Discover</Link>
-        <Link to={`/user/${this.props.sessionId}`}>Profile</Link>
+        {this.props.currentUser ?
+          <Link to={`/user/${this.props.sessionId}`}>Profile</Link> :
+          <button id="profile-button" onClick={this.handleClick}>Profile</button>
+        }
         {this.props.currentUser ?
           <Link to="/upload">Upload</Link> :
           <button id="upload-button" onClick={this.handleClick}>Upload</button>

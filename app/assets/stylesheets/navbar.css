@@ -51,12 +51,12 @@ body {
   padding: 0px;
 }
 
-.navbar a:not(:first-child), #upload-button, .user-btns * {
+.navbar a:not(:first-child), #profile-button, #upload-button, .user-btns * {
   text-decoration: none;
   text-align: center;
 } 
 
-.navbar a:not(:first-child), #upload-button {
+.navbar a:not(:first-child), #profile-button, #upload-button {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,9 +69,13 @@ body {
   color: #C8C8C8;
 }
 
-#upload-button {
+#profile-button, #upload-button {
   background-color: #383838;
   border: none;
+}
+
+#profile-button {
+  border-right: 1px solid black;
 }
 
 .navbar > a:not(:first-child):hover {
@@ -92,7 +96,7 @@ body {
   color: whitesmoke;
 }
 
-#upload-button, .user-btns *:focus {
+#profile-button, #upload-button, .user-btns *:focus {
   outline: none;
 }
 
@@ -155,6 +159,7 @@ body {
   margin-left: 10px;
 }
 
-#logout-button:hover {
+#profile-button:hover, #upload-button:hover, #logout-button:hover {
+  color: whitesmoke;
   cursor: pointer;
 }
