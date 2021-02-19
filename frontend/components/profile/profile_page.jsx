@@ -37,6 +37,34 @@ class ProfilePage extends React.Component {
       })
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.match.params.userId !== this.props.match.params.userId) {
+      fetchUser(this.props.match.params.userId)
+      .then(({ id, email, username, location, profile_image, cover_image, slaps }) => {
+        this.setState({
+          id,
+          email,
+          username,
+          location,
+          profile_image,
+          cover_image,
+          slaps,
+        })
+        
+        const ph = document.getElementById("profile-header");
+        if (cover_image) {
+          ph.style.backgroundImage = `url(${cover_image})`;
+          ph.style.backgroundSize = 'cover';
+        } else {
+          ph.style.backgroundImage = null;
+          ph.style.backgroundSize = null;
+        }
+
+        this.props.receiveSlaps(slaps);
+      })
+    }
+  }
+
   profileHeader = () => {
     const { id, profile_image, cover_image, updating } = this.state
 
