@@ -116,15 +116,18 @@ class ProfilePage extends React.Component {
   )
 
   handleUpdate = (e) => {
-    const updatedFields = {
-      username: e.target[0].value,
-      location: e.target[1].value
-    }
+    const updatedFields = {}
+    if (e.target[0].value) updatedFields["username"] = e.target[0].value
+    if (e.target[1].value) updatedFields["location"] = e.target[1].value
 
-    updateUserInfo(this.state.id, updatedFields)
-      .then(({ username, location }) => {
-        this.setState({ username, location, updating: false })
-      })
+    if (Object.keys(updatedFields).length === 0) {
+      this.setState({ updating: false })
+    } else {
+      updateUserInfo(this.state.id, updatedFields)
+        .then(({ username, location }) => {
+          this.setState({ username, location, updating: false })
+        })
+    }
   }
 
   handleInfoClick = (e) => {

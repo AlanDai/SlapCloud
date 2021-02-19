@@ -14981,20 +14981,26 @@ var ProfilePage = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdate", function (e) {
-      var updatedFields = {
-        username: e.target[0].value,
-        location: e.target[1].value
-      };
-      (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
-        var username = _ref2.username,
-            location = _ref2.location;
+      var updatedFields = {};
+      if (e.target[0].value) updatedFields["username"] = e.target[0].value;
+      if (e.target[1].value) updatedFields["location"] = e.target[1].value;
 
+      if (Object.keys(updatedFields).length === 0) {
         _this.setState({
-          username: username,
-          location: location,
           updating: false
         });
-      });
+      } else {
+        (0,_util_user_api_util__WEBPACK_IMPORTED_MODULE_3__.updateUserInfo)(_this.state.id, updatedFields).then(function (_ref2) {
+          var username = _ref2.username,
+              location = _ref2.location;
+
+          _this.setState({
+            username: username,
+            location: location,
+            updating: false
+          });
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInfoClick", function (e) {
