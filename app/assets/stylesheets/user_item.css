@@ -1,0 +1,31 @@
+.square-user-item {
+  display: flex;
+  flex-direction: row;
+  width: 93%;
+  padding: 20px;
+  margin-left: 40px;
+}
+
+.square-user-profile, .square-user-default {
+  width: 100px; height: 100px;
+  border: none;
+  border-radius: 50%;
+}
+
+.square-user-default {
+  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8);
+}
+
+.square-user-info {
+  margin-left: 20px;
+}
+
+.square-user-info > *:first-child {
+  outline: none;
+  text-decoration: none;
+  color: black;
+}
+
+.square-user-info div {
+  color: #888888;
+}
