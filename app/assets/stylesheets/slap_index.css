@@ -1,4 +1,4 @@
-.slap-index {
+dex {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,5 +44,5 @@
 }
 
 .slap-carousel-content > *:first-child {
-  margin-left: 220px;
+  margin-left: 400px;
 }
