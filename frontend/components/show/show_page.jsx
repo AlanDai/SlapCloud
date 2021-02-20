@@ -129,8 +129,8 @@ class ShowPage extends React.Component {
           
           <div id="show-body-content">
             <div id="show-user-info">
-              {slap.uploader.image ?
-                <img className="user-image-medallion" src={slap.uploader.image} /> :
+              {slap.profile_image ?
+                <img className="user-image-medallion" src={slap.profile_image} /> :
                 <div className="default-user-medallion"/>}
               <Link to={`/user/${slap.uploader.id}`}><span>{slap.uploader.email}</span></Link>
               {/* <button>
