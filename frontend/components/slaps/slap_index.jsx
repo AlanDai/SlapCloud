@@ -17,8 +17,8 @@ class SlapsIndex extends React.Component {
         { Object.keys(slaps).length &&
           <div className="slap-index-section">
             <div className="carousel-header">Featured Song</div>
-            <div className="carousel-subheader">Check out this slap by Europe!</div>
-            <SlapItemContainer slap={slaps[Object.keys(slaps)[0]]}/>
+            <div className="carousel-subheader">Check out this slap, fresh off the press!</div>
+            <SlapItemContainer slap={slaps[Object.keys(slaps)[Object.keys(slaps).length - 1]]}/>
           </div>
         }
         <div className="slap-index-section">
