@@ -39,11 +39,6 @@
   font-size: 20px;
 }
 
-#show-header-info Link:nth-child(2) {
-  font-size: 25px;
-  width: 400px;
-}
-
 #show-header-info * {
   margin-top: 5px;
   color: white;
@@ -51,8 +46,36 @@
   outline: none;
 }
 
-#show-header-info span {
+#show-header-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#show-header-title span, #show-header-title input {
+  font-size: 24px;
+  outline: none;
+  border: none;
+}
+
+#show-header-title button {
+  display: none;
+}
+
+#show-header:hover #show-header-title button {
+  display: block;
+  width: 30px; height: 30px;
+  font-size: 10px;
+  margin-left: 20px;
   background-color: black;
+  outline: none;
+  border: none;
+}
+
+#show-header-info span, #show-header-info input {
+  background-color: black;
+  padding: 5px 10px;
 }
 
 #show-header-info-2 {

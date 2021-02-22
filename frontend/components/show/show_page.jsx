@@ -4,7 +4,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { updateSlapImage, deleteSlap } from "../../util/slap_api_util";
+import { updateSlapImage, updateSlapInfo, deleteSlap } from "../../util/slap_api_util";
 import { createComment } from "../../util/comments_api_util";
 import { createLike, deleteLike } from "../../util/like_api_util";
 
@@ -14,6 +14,10 @@ import CommentItem from "./comment_item";
 class ShowPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      editingTitle: false,
+    }
   }
 
   componentDidMount = () => {
@@ -64,7 +68,26 @@ class ShowPage extends React.Component {
     const formData = new FormData();
     formData.append('slap[image_file]', e.currentTarget.files[0]);  
     updateSlapImage(this.state.slap.id, formData)
-      .then(({ image }) => this.setState({ slap_image: image }));
+      .then(({ image }) => this.setState({ slap, slap_image: image }));
+  }
+
+  handleTitleClick = (e) => {
+    const { editingTitle, slap } = this.state;
+
+    if (editingTitle) {
+      const shi = document.getElementById('show-header-input');
+      updateSlapInfo(this.state.slap.id, shi.value)
+        .then(res => this.setState({ slap: res, editingTitle: false }));
+    } else {
+      this.setState({ editingTitle: true })
+    }
+  }
+
+  handleTitleKeyUp = (e) => {
+    if (e.key === "Enter") {
+      updateSlapInfo(this.state.slap.id, {name: e.currentTarget.value})
+        .then(res => this.setState({ slap: res, editingTitle: false }));
+    }
   }
 
   handleKeyUp = (e) => {
@@ -112,9 +135,9 @@ class ShowPage extends React.Component {
   }
 
   render() {
-    if (!this.state) return (<div></div>);
+    if (!this.state.slap) return (<div></div>);
 
-    const { slap, slap_image } = this.state;
+    const { slap, slap_image, editingTitle } = this.state;
     const { currUser } = this.props;
 
     return (
@@ -125,15 +148,24 @@ class ShowPage extends React.Component {
             <PlayButtonContainer slap={slap} />
             <div id="show-header-info">
               <Link to={`/user/${slap.uploader.id}`}><span>{slap.uploader.email}</span></Link>
-              <Link to={`/slap/${slap.id}`}><span>{slap.name}</span></Link>
+              <div id="show-header-title">
+                {editingTitle ?
+                  <input
+                    type="text"
+                    id="show-header-input"
+                    defaultValue={slap.name}
+                    onKeyUp={this.handleTitleKeyUp}
+                  /> :
+                  <Link to={`/slap/${slap.id}`}><span>{slap.name}</span></Link>
+                }
+                {currUser.id === slap.uploader.id &&
+                  <button onClick={this.handleTitleClick}><FontAwesomeIcon icon="edit"/></button>
+                }
+              </div>
+              
             </div>
             <div id="show-header-info-2">
               <span>{moment(slap.uploader.created_at).fromNow()}</span>
-              {/* {currUser.id === slap.uploader.id &&
-                <button>
-                  <span><FontAwesomeIcon icon="edit"/> Edit</span>
-                </button>
-              } */}
             </div>
           </div>
 
