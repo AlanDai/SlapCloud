@@ -1,8 +1,9 @@
-dex {
+.slap-index {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  padding-bottom: 42px;
 }
 
 .slap-index-section {
