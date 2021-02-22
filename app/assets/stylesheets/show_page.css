@@ -63,7 +63,7 @@
   display: none;
 }
 
-#show-header:hover #show-header-title button {
+#show-header-title:hover button {
   display: block;
   width: 30px; height: 30px;
   font-size: 10px;
