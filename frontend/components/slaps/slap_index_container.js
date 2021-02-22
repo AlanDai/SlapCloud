@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { fetchSlaps } from '../../actions/slap_actions'
+import { emailUncheck } from '../../actions/session_actions';
+import { fetchSlaps } from '../../actions/slap_actions';
 
 import SlapIndex from './slap_index'
 
@@ -8,7 +9,8 @@ const mapStateToProps = ({ entities }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchSlaps: () => dispatch(fetchSlaps())
+  fetchSlaps: () => dispatch(fetchSlaps()),
+  emailUncheck: () => dispatch(emailUncheck())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlapIndex);

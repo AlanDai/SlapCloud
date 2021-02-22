@@ -6,6 +6,7 @@ import SlapItemContainer from "./slap_item_container";
 class SlapsIndex extends React.Component {
   componentDidMount() {
     this.props.fetchSlaps();
+    this.props.emailUncheck();
   }
 
   render() {
