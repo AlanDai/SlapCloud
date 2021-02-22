@@ -34,7 +34,7 @@ class Api::SlapsController < ApplicationController
     @slap = Slap.find(params[:id])
     if @slap
       if @slap.update(slap_params)
-        @comments = slaps.comments
+        @comments = @slap.comments
         @likes = @slap.likes
         render :show
       else

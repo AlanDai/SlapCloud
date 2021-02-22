@@ -4,6 +4,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { updateSlapImage, deleteSlap } from "../../util/slap_api_util";
 import { createComment } from "../../util/comments_api_util";
 import { createLike, deleteLike } from "../../util/like_api_util";
 
@@ -19,6 +20,7 @@ class ShowPage extends React.Component {
     this.props.fetchSlap(this.props.match.params.slapId).then(action => {
       this.setState({
         slap: action.payload.slap,
+        slap_image: action.payload.slap.image,
         liked: this.props.currUser &&
                 action.payload.slap.likes &&
                 action.payload.slap.likes[this.props.currUser.id]
@@ -38,7 +40,7 @@ class ShowPage extends React.Component {
           type="file"
           accept="image/*"
           style={{ display: "none" }}
-          onChange={this.handleCoverChange}
+          onChange={this.handleImageChange}
         />
         { this.state.liked ?
           <button className="unlike-button" onClick={this.handleUnlike}>
@@ -50,6 +52,19 @@ class ShowPage extends React.Component {
         }
       </div>
     )
+  }
+
+  handleUpload = (e) => {
+    e.preventDefault(e);
+    const su = document.getElementById("show-upload");
+    su.click();
+  }
+
+  handleImageChange = (e) => {
+    const formData = new FormData();
+    formData.append('slap[image_file]', e.currentTarget.files[0]);  
+    updateSlapImage(this.state.slap.id, formData)
+      .then(({ image }) => this.setState({ slap_image: image }));
   }
 
   handleKeyUp = (e) => {
@@ -99,7 +114,7 @@ class ShowPage extends React.Component {
   render() {
     if (!this.state) return (<div></div>);
 
-    const { slap } = this.state;
+    const { slap, slap_image } = this.state;
     const { currUser } = this.props;
 
     return (
@@ -123,12 +138,12 @@ class ShowPage extends React.Component {
           </div>
 
           <div id="show-header-image">
-            {slap.image ?
-              <img src={slap.image} /> :
+            {slap_image ?
+              <img src={slap_image} /> :
               <div />
             }
             {currUser &&
-              <button id="show-upload-button">Upload Image</button>
+              <button id="show-upload-button" onClick={this.handleUpload}>Upload Image</button>
             }
           </div>
           
