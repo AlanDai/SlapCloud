@@ -51,7 +51,7 @@ class Api::SlapsController < ApplicationController
       @comments = @slap.comments
       @comments.each do |comment|
         if !comment.destroy
-          render json: comment.errors.full_messages, status, 422
+          render json: comment.errors.full_messages, status: 422
         end
       end
       @comments = []

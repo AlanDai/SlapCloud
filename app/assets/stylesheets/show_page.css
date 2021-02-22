@@ -72,7 +72,11 @@
   margin-top: 15px;
 }
 
-#show-header-image * {
+#show-header-image {
+  position: relative;
+}
+
+#show-header-image > div, #show-header-image > img {
   width: 200px;
   height: 200px;
   margin: 25px;
@@ -80,6 +84,33 @@
 
 #show-header-image div{
   background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8);
+}
+
+#show-header-image button {
+  display: none;
+}
+
+#show-header-image:hover button {
+  display: block;
+  position: absolute;
+  margin: 0;
+  padding: 5px 15px;
+  top: 70%; left: 50%;
+  color: #444444;
+  transform: translateY(-50%) translateX(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 3px;
+}
+
+#show-header-image button:hover {
+  cursor: pointer;
+  color: black;
+  background: rgba(255, 255, 255, 0.9)
+}
+
+#show-header-image button:focus {
+  outline: none;
 }
 
 #show-body {

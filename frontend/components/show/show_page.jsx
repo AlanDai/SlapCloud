@@ -33,14 +33,20 @@ class ShowPage extends React.Component {
         <div id="comment-form">
           <input id="comment-form-input" type="text" placeholder="Write a comment" onKeyUp={this.handleKeyUp} />
         </div>
-        {this.props.currUser && 
-          this.state.liked ?
-            <button className="unlike-button" onClick={this.handleUnlike}>
-              <FontAwesomeIcon icon="heart" /> <span> Liked</span>
-            </button> :
-            <button className="like-button" onClick={this.handleLike}>
-              <FontAwesomeIcon icon="heart" /> <span> Like</span>
-            </button>
+        <input
+          id="show-upload"
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={this.handleCoverChange}
+        />
+        { this.state.liked ?
+          <button className="unlike-button" onClick={this.handleUnlike}>
+            <FontAwesomeIcon icon="heart" /> <span> Liked</span>
+          </button> :
+          <button className="like-button" onClick={this.handleLike}>
+            <FontAwesomeIcon icon="heart" /> <span> Like</span>
+          </button>
         }
       </div>
     )
@@ -120,6 +126,9 @@ class ShowPage extends React.Component {
             {slap.image ?
               <img src={slap.image} /> :
               <div />
+            }
+            {currUser &&
+              <button id="show-upload-button">Upload Image</button>
             }
           </div>
           
