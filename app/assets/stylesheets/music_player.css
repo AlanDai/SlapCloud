@@ -154,6 +154,7 @@
 #song-img {
   height: 30px;
   width: 30px;
+  background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8);
 }
 
 #song-info {
