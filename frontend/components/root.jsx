@@ -29,6 +29,7 @@ import {
   faSearch,
   faHandPaper,
 } from "@fortawesome/free-solid-svg-icons";
+
 library.add(
   fab,
   faStepBackward,
