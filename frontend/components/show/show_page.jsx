@@ -178,7 +178,7 @@ class ShowPage extends React.Component {
                   /> :
                   <Link to={`/slap/${slap.id}`}><span>{slap.name}</span></Link>
                 }
-                {currUser.id === slap.uploader.id &&
+                {currUser && currUser.id === slap.uploader.id &&
                   <button onClick={this.handleTitleClick}><FontAwesomeIcon icon="edit"/></button>
                 }
               </div>
@@ -218,7 +218,7 @@ class ShowPage extends React.Component {
               <div id="show-description">
                 <div>
                   <div id="show-description-input"><b>Description:</b>
-                    {currUser.id === slap.uploader.id && !editingDescription &&
+                    {currUser && currUser.id === slap.uploader.id && !editingDescription &&
                       <button onClick={this.handleDescriptionClick}><FontAwesomeIcon icon="edit"/></button>
                     }
                   </div>
