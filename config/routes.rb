@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     
     resources :albums, only: [:index, :create]
-    resources :slaps, only: [:index, :show, :create]
+    resources :slaps, only: [:index, :show, :create, :update, :destroy]
     get '/slaps/user/:userId', to: 'slaps#userIndex'
 
     get '/search/:searchParams', to: 'search#searchByParams'

@@ -17,11 +17,13 @@ class Slap < ApplicationRecord
     foreign_key: :album_id
 
   has_many :comments,
+    dependent: :destroy,
     primary_key: :id,
     foreign_key: :slap_id,
     class_name: :Comment
 
   has_many :likes,
+    dependent: :destroy,
     primary_key: :id,
     foreign_key: :slap_id,
     class_name: :Like

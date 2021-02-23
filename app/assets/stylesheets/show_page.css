@@ -17,7 +17,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  width: 700px;
+  width: 100%;
   margin-top: 45px;
   font-family: 'Overpass', sans-serif;
   color: white;
@@ -33,14 +33,10 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 70%;
   margin-left: 20px;
   margin-right: 20px;
   font-size: 20px;
-}
-
-#show-header-info Link:nth-child(2) {
-  font-size: 25px;
-  width: 400px;
 }
 
 #show-header-info * {
@@ -50,11 +46,61 @@
   outline: none;
 }
 
-#show-header-info span {
-  background-color: black;
+#show-header-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-#show-header-image * {
+#show-header-title span, #show-header-title input {
+  font-size: 24px;
+  outline: none;
+  border: none;
+  max-width: 80%;
+}
+
+#show-header-title button {
+  display: none;
+}
+
+#show-header-title:hover button {
+  display: block;
+  width: 30px; height: 30px;
+  font-size: 10px;
+  margin-left: 20px;
+  background-color: black;
+  outline: none;
+  border: none;
+}
+
+#show-header-info span, #show-header-info input {
+  background-color: black;
+  padding: 5px 10px;
+}
+
+#show-header-info-2 {
+  display: flex;  
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: 'Overpass', sans-serif;
+}
+
+#show-header-info-2 > button {
+  display: none;
+}
+
+#show-header:hover #show-header-info-2 button {
+  display: block;
+  padding: 5px 10px;
+  margin-top: 15px;
+}
+
+#show-header-image {
+  position: relative;
+}
+
+#show-header-image > div, #show-header-image > img {
   width: 200px;
   height: 200px;
   margin: 25px;
@@ -62,6 +108,33 @@
 
 #show-header-image div{
   background-image: linear-gradient(to bottom right, #FF4500, #E8E8E8);
+}
+
+#show-header-image button {
+  display: none;
+}
+
+#show-header-image:hover button {
+  display: block;
+  position: absolute;
+  margin: 0;
+  padding: 5px 15px;
+  top: 75%; left: 50%;
+  color: #444444;
+  transform: translateY(-50%) translateX(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 3px;
+}
+
+#show-header-image button:hover {
+  cursor: pointer;
+  color: black;
+  background: rgba(255, 255, 255, 0.9)
+}
+
+#show-header-image button:focus {
+  outline: none;
 }
 
 #show-body {
@@ -162,6 +235,34 @@
   justify-content: space-between;
   width: 725px;
   padding: 0 10px 20px 0;
+}
+
+#show-description-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#show-body-input:focus {
+  outline: none;
+}
+
+#show-description button {
+  display: none;
+}
+
+#show-description:hover button {
+  display: block;
+  margin-left: 10px;
+  color: #444444;
+  background: white;
+  border: solid 1px #e5e5e5;
+  cursor: pointer;
+}
+
+#show-description button:focus {
+  outline: none;
 }
 
 #show-likes {

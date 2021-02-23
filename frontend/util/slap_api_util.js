@@ -11,3 +11,28 @@ export const fetchSlap = slapId => (
     method: "GET",
   })
 )
+
+export const updateSlapImage = (slapId, updatedFields) => (
+  $.ajax({
+    url: `/api/slaps/${slapId}`,
+    method: "PATCH",
+    data: updatedFields,
+    contentType: false,
+    processData: false,
+  })
+)
+
+export const updateSlapInfo = (slapId, updatedFields) => (
+  $.ajax({
+    url: `/api/slaps/${slapId}`,
+    method: "PATCH",
+    data: { slap: updatedFields },
+  })
+)
+
+export const deleteSlap = slapId => (
+  $.ajax({
+    url: `/api/slaps/${slapId}`,
+    method: "DELETE",
+  })
+)
