@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 const DEFAULT_EMAIL_INPUT = "  Your email address";
 
@@ -20,7 +21,7 @@ class ConnectForm extends React.Component {
       email: "bob@gmail.com",
       password: "thebuilder",
     }
-    this.props.login(demoUser);
+    this.props.login(demoUser).then(res => this.props.history.push('/discover'));
   }
 
   handleSubmit(e) {
@@ -53,4 +54,4 @@ class ConnectForm extends React.Component {
   }
 }
 
-export default ConnectForm;
+export default withRouter(ConnectForm);

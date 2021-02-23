@@ -20,7 +20,7 @@
   padding: 10px 20px 10px 20px;
 }
 
-.connect-input-form input[type="email"], .session-form button {
+.connect-input-form input[type="email"],.session-form input[type="text"], .session-form button {
   color: black;
   font-family: 'Overpass', sans-serif;
   font-size: 18px;

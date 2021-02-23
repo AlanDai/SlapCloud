@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { emailCheck, emailUncheck, signup, login } from "../../../actions/session_actions";
 import { closeUserModal } from '../../../actions/ui_actions';
 
@@ -15,6 +16,7 @@ const UserModal = ({ emailExists, email, error, emailCheck, emailUncheck, signup
     />;
   } else if (emailExists === false) {
     return <SessionForm
+      type={"signup"}
       action={signup}
       email={email}
       emailUncheck={emailUncheck}
@@ -23,6 +25,7 @@ const UserModal = ({ emailExists, email, error, emailCheck, emailUncheck, signup
     />
   } else {
     return <SessionForm
+      type={"login"}
       action={login}
       email={email}
       emailUncheck={emailUncheck}
