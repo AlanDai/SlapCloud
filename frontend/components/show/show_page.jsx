@@ -17,6 +17,7 @@ class ShowPage extends React.Component {
 
     this.state = {
       editingTitle: false,
+      editingDescription: false,
     }
   }
 
@@ -76,7 +77,7 @@ class ShowPage extends React.Component {
 
     if (editingTitle) {
       const shi = document.getElementById('show-header-input');
-      updateSlapInfo(this.state.slap.id, shi.value)
+      updateSlapInfo(slap.id, shi.value)
         .then(res => this.setState({ slap: res, editingTitle: false }));
     } else {
       this.setState({ editingTitle: true })
@@ -134,10 +135,29 @@ class ShowPage extends React.Component {
     })
   }
 
+  handleDescriptionClick = (e) => {
+    const { editingDescription, slap } = this.state;
+
+    const sbi = document.getElementById('show-body-input');
+    if (editingDescription && sbi && sbi.value.length > 10) {
+      updateSlapInfo(slap.id, sbi.value)
+        .then(res => this.setState({ slap: res, editingDescription: false }));
+    } else {
+      this.setState({ editingDescription: true })
+    }
+  }
+
+  handleDescriptionKeyUp = (e) => {
+    if (e.key === "Enter") {
+      updateSlapInfo(this.state.slap.id, {description: e.currentTarget.value})
+        .then(res => this.setState({ slap: res, editingDescription: false }));
+    }
+  }
+
   render() {
     if (!this.state.slap) return (<div></div>);
 
-    const { slap, slap_image, editingTitle } = this.state;
+    const { slap, slap_image, editingTitle, editingDescription } = this.state;
     const { currUser } = this.props;
 
     return (
@@ -197,8 +217,20 @@ class ShowPage extends React.Component {
             <div id="show-slap-content">
               <div id="show-description">
                 <div>
-                  <div><b>Description:</b></div>
-                  <span>{slap.description}</span>
+                  <div id="show-description-input"><b>Description:</b>
+                    {currUser.id === slap.uploader.id && !editingDescription &&
+                      <button onClick={this.handleDescriptionClick}><FontAwesomeIcon icon="edit"/></button>
+                    }
+                  </div>
+                  {editingDescription ?
+                    <input
+                      type="text"
+                      id="show-body-input"
+                      defaultValue={slap.description ? slap.description : ""}
+                      onKeyUp={this.handleDescriptionKeyUp}
+                    /> :
+                    <span>{slap.description}</span>
+                  }
                 </div>
                 <span id="show-likes">
                   <FontAwesomeIcon icon="heart" /> { slap.likes ? Object.values(slap.likes).length : 0 }

@@ -57,6 +57,7 @@
   font-size: 24px;
   outline: none;
   border: none;
+  max-width: 80%;
 }
 
 #show-header-title button {
@@ -118,7 +119,7 @@
   position: absolute;
   margin: 0;
   padding: 5px 15px;
-  top: 70%; left: 50%;
+  top: 75%; left: 50%;
   color: #444444;
   transform: translateY(-50%) translateX(-50%);
   background: rgba(255, 255, 255, 0.7);
@@ -234,6 +235,34 @@
   justify-content: space-between;
   width: 725px;
   padding: 0 10px 20px 0;
+}
+
+#show-description-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#show-body-input:focus {
+  outline: none;
+}
+
+#show-description button {
+  display: none;
+}
+
+#show-description:hover button {
+  display: block;
+  margin-left: 10px;
+  color: #444444;
+  background: white;
+  border: solid 1px #e5e5e5;
+  cursor: pointer;
+}
+
+#show-description button:focus {
+  outline: none;
 }
 
 #show-likes {
