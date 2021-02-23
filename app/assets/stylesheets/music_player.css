@@ -145,6 +145,12 @@
   margin-left: 30px;
 }
 
+#song-info-container * {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 #song-img {
   height: 30px;
   width: 30px;
@@ -156,6 +162,7 @@
   justify-content: center;
   align-items: flex-start;
   margin-left: 15px;
+  width: 200px;
 }
 
 #song-info > * {
