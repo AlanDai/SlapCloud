@@ -35,7 +35,7 @@ class SquareSlapItem extends React.Component {
             <span className="square-slap-name">{slap.name}</span>
           </Link>
           <Link to={"/user/" + slap.uploader.id} style={{ textDecoration: 'none' }}>
-            <span className="square-slap-uploader">{slap.uploader.email}</span>
+            <span className="square-slap-uploader">{slap.uploader.username ? slap.uploader.username : slap.uploader.email}</span>
           </Link>
           
         </div>
