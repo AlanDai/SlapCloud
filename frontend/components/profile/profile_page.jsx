@@ -2,6 +2,7 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import LoadingPage from "../loading/loading_page";
 import SlapItemContainer from "../slaps/slap_item_container";
 import { fetchUser, updateUserInfo, updateUserImage } from "../../util/user_api_util";
 
@@ -11,6 +12,7 @@ class ProfilePage extends React.Component {
 
     this.state = {
       updating: false,
+      loading: true,
     }
   }
 
@@ -25,6 +27,7 @@ class ProfilePage extends React.Component {
           profile_image,
           cover_image,
           slaps,
+          loading: false,
         })
         
         const ph = document.getElementById("profile-header");
@@ -188,7 +191,8 @@ class ProfilePage extends React.Component {
   }
 
   render() {
-    if (!this.state) return (<div></div>)
+    if (!this.state || this.state.loading) return <LoadingPage />
+
     const { slaps } = this.state;
 
     return (
