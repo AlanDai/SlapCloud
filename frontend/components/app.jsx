@@ -5,6 +5,7 @@ import { AuthRoute, ProtectedRoute } from "../util/route_util";
 import NavBarContainer from "./navbar/navbar_container";
 import ModalContainer from "./modal/modal_container";
 import MusicPlayerContainer from "./music_player/music_player_container"
+import About from "./navbar/about";
 
 import DiscoverPage from "./discover/discover_page";
 import UploadPage from "./upload/upload_page";
@@ -15,6 +16,7 @@ import SearchPageContainer from "./search/search_page_container";
 const App = () => (
   <div id="app">
     <div id="background" />
+    <About />
     <Route path="/" component={NavBarContainer} />
     <Route path="/" component={ModalContainer} />
     
