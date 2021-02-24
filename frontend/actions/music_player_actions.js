@@ -26,6 +26,12 @@ export const fetchNextSlap = slapId => ({
   payload: slapId
 })
 
+export const RECEIVE_PREV = 'RECEIVE_PREV';
+export const setPrev = slaps => ({
+  type: RECEIVE_PREV,
+  payload: slaps
+})
+
 export const RECEIVE_QUEUE = 'RECEIVE_QUEUE';
 export const setQueue = slaps => ({
   type: RECEIVE_QUEUE,

@@ -1,7 +1,8 @@
-import {
+ import {
   PLAY_SLAP,
   PAUSE_SLAP,
   RECEIVE_QUEUE,
+  RECEIVE_PREV,
   RECEIVE_PREV_SLAP,
   RECEIVE_CURR_SLAP,
   RECEIVE_NEXT_SLAP
@@ -16,16 +17,19 @@ const initialState = {
 
 const musicPlayerReducer = (state = initialState, action) => {
   Object.freeze(state);
+  let slaps;
   switch(action.type) {
-    
+
     case PLAY_SLAP:
       return Object.assign({}, state, {playing: true});
     case PAUSE_SLAP:
       return Object.assign({}, state, {playing: false});
     case RECEIVE_QUEUE:
-      const slaps = Object.values(action.payload);
-      let receivedQueue = slaps.map(slap => slap.id)
-      return Object.assign({}, state, {next: receivedQueue}, {playing: true})
+      slaps = Object.values(action.payload).map(slap => slap.id);
+      return Object.assign({}, state, {next: slaps}, {playing: true})
+    case RECEIVE_PREV:
+      slaps = Object.values(action.payload).map(slap => slap.id)
+      return Object.assign({}, state, {prev: slaps}, {playing: true})
 
     case RECEIVE_PREV_SLAP:
       const played = state.prev.push(action.payload)
