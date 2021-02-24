@@ -56,7 +56,7 @@ class SearchPage extends React.Component {
     } else if (category === "slaps") {
       return ( <div id="search-content">
           {slapsArray.length > 0 ? 
-            slapsArray.map((slap, id) => <SlapItemContainer key={id} slap={slap} />) :
+            slapsArray.map((slap, id) => <SlapItemContainer key={idx} idx={idx} queue={slapsArray.map(slap => slap.id)} slap={slap} />) :
             <span>No slaps found!</span>
           }
         </div>
@@ -67,7 +67,7 @@ class SearchPage extends React.Component {
             this.state.users.slice(0, 3).map((user, id) => <UserItem key={id} user={user} />)
           }
           {slapsArray.length > 0 &&
-            slapsArray.slice(0, 15).map((slap, id) => <SlapItemContainer key={id} slap={slap} />)
+            slapsArray.slice(0, 15).map((slap, idx) => <SlapItemContainer key={idx} idx={idx} queue={slapsArray.map(slap => slap.id)} slap={slap} />)
           }
           {users.length === 0 && slaps.length === 0 && <span>No matches found!</span>}
         </div>

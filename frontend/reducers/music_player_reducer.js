@@ -31,7 +31,7 @@ const musicPlayerReducer = (state = initialState, action) => {
 
     case RECEIVE_PREV_SLAP:
       const played = state.prev.push(action.payload)
-      return Object.assign({}, state, {played: played})
+      return Object.assign({}, state, {prev: played})
     case RECEIVE_CURR_SLAP:
       return Object.assign({}, state, {curr: action.payload})
     case RECEIVE_NEXT_SLAP:
