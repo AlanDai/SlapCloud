@@ -178,7 +178,7 @@ class ShowPage extends React.Component {
                   /> :
                   <Link to={`/slap/${slap.id}`}><span>{slap.name}</span></Link>
                 }
-                {currUser && currUser.id === slap.uploader.id &&
+                {currUser && currUser.id === slap.uploader.id && !editingTitle &&
                   <button onClick={this.handleTitleClick}><FontAwesomeIcon icon="edit"/></button>
                 }
               </div>
