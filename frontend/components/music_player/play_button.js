@@ -1,11 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const PlayButton = ({ playing, curr, slap, setCurrentSlap, setQueue, playSlap, pauseSlap }) => {
+const PlayButton = ({ idx, queue, playing, curr, slap, setCurrentSlap, setQueue, setPrev, playSlap, pauseSlap }) => {
   
   function handleClick(e) {
     if (slap.id != curr) {
       setCurrentSlap(slap.id);
+      
+      if (idx !== undefined && queue !== undefined) {
+        setPrev(queue.slice(0, idx));
+        if (idx + 1 < queue.length) setQueue(queue.slice(idx+1, queue.length))
+      }
+      
       setTimeout(()=>{handlePlay()}, 1);
     } else {
       handlePlay();

@@ -25,11 +25,9 @@ const musicPlayerReducer = (state = initialState, action) => {
     case PAUSE_SLAP:
       return Object.assign({}, state, {playing: false});
     case RECEIVE_QUEUE:
-      slaps = Object.values(action.payload).map(slap => slap.id);
-      return Object.assign({}, state, {next: slaps}, {playing: true})
+      return Object.assign({}, state, {next: action.payload})
     case RECEIVE_PREV:
-      slaps = Object.values(action.payload).map(slap => slap.id)
-      return Object.assign({}, state, {prev: slaps}, {playing: true})
+      return Object.assign({}, state, {prev: action.payload})
 
     case RECEIVE_PREV_SLAP:
       const played = state.prev.push(action.payload)

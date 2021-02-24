@@ -10,7 +10,7 @@ class SquareSlapItem extends React.Component {
         <div className="square-slap-image">
           <div className="default-slap-image" />
           <div className="square-item-screen" />
-          <PlayButtonContainer slap={this.props.slap} />
+          <PlayButtonContainer slap={this.props.slap} queue={this.props.queue} idx={this.props.idx}/>
         </div>
       )
     } else {
@@ -18,7 +18,7 @@ class SquareSlapItem extends React.Component {
         <div className="square-slap-image">
           <img className="slap-item-image" src={this.props.slap.image} />
           <div className="square-item-screen" />
-          <PlayButtonContainer slap={this.props.slap} />
+          <PlayButtonContainer slap={this.props.slap} queue={this.props.queue} idx={this.props.idx}/>
         </div>
       )
     }
