@@ -6,13 +6,13 @@ const PlayButton = ({ playing, curr, slap, setCurrentSlap, setQueue, playSlap, p
   function handleClick(e) {
     if (slap.id != curr) {
       setCurrentSlap(slap.id);
-      setTimeout(()=>{handlePlay(e)}, 1);
+      setTimeout(()=>{handlePlay()}, 1);
     } else {
-      handlePlay(e);
+      handlePlay();
     }
   }
 
-  function handlePlay (e) {
+  function handlePlay () {
     const mp = document.getElementById('audio');
     if(playing && slap.id === curr) {
       pauseSlap();
