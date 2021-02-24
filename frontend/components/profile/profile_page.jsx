@@ -150,8 +150,9 @@ class ProfilePage extends React.Component {
       this.setState({ updating: false })
     } else {
       updateUserInfo(this.state.id, updatedFields)
-        .then(({ username, location }) => {
+        .then(({ id, username, email, profile_image, location }) => {
           this.setState({ username, location, updating: false })
+          this.props.receiveUser({id, email, username, profile_image})
         })
     }
   }

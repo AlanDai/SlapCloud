@@ -7,18 +7,19 @@ import SlapItemContainer from "./slap_item_container";
 class SlapsIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-    }
+    // this.state = {
+      // loading: true,
+    // }
   }
 
   componentDidMount() {
-    this.props.fetchSlaps().then(res => this.setState({ loading: false }));
+    this.props.fetchSlaps()
+    // this.props.fetchSlaps().then(res => this.setState({ loading: false }));
     this.props.emailUncheck();
   }
 
   render() {
-    if (this.state.loading) return <LoadingPage />
+    // if (this.state.loading) return <LoadingPage />
 
     const { slaps } = this.props;
 
