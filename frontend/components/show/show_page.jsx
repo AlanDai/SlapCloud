@@ -167,7 +167,7 @@ class ShowPage extends React.Component {
           <div id="show-header-content">
             <PlayButtonContainer slap={slap} />
             <div id="show-header-info">
-              <Link to={`/user/${slap.uploader.id}`}><span>{slap.uploader.email}</span></Link>
+              <Link to={`/user/${slap.uploader.id}`}><span>{slap.uploader.username ? slap.uploader.username : slap.uploader.email}</span></Link>
               <div id="show-header-title">
                 {editingTitle ?
                   <input
