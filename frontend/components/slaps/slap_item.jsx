@@ -81,12 +81,12 @@ class SlapItem extends React.Component {
   }
 
   render () {
-    const { slap } = this.props;
+    const { slap, idx, queue } = this.props;
 
     return (
       <div className="slap-item">
         <NavLink to={`slap/${slap.id}`}>{this.loadSlapImage()}</NavLink>
-        <PlayButtonContainer slap={slap}/>
+        <PlayButtonContainer slap={slap} idx={idx} queue={queue}/>
         <div className="slap-item-info">  
           <Link to={`/user/${slap.uploader.id}`}><p className="slap-item-user">{slap.uploader.username ? slap.uploader.username : slap.uploader.email}</p></Link>
           <Link to={`/slap/${slap.id}`}><p className="slap-item-title">{slap.name}</p></Link>

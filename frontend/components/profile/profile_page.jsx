@@ -195,14 +195,15 @@ class ProfilePage extends React.Component {
     if (!this.state || this.state.loading) return <LoadingPage />
 
     const { slaps } = this.state;
+    let songIds = Object.values(slaps).reverse().map(slap => slap.id);
 
     return (
       <div id="profile-page">
         {this.profileHeader()}
         <div id="profile-content">
           {slaps ?
-            Object.values(slaps).map((slap, id) =>
-            <SlapItemContainer key={id} slap={slap} />
+            Object.values(slaps).reverse().map((slap, idx) =>
+            <SlapItemContainer key={idx} idx={idx} slap={slap} queue={songIds} />
             ) :
             <div id="empty-profile-content">
               This user has not uploaded any slaps yet!

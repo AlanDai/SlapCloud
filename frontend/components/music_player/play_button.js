@@ -10,6 +10,9 @@ const PlayButton = ({ idx, queue, playing, curr, slap, setCurrentSlap, setQueue,
       if (idx !== undefined && queue !== undefined) {
         setPrev(queue.slice(0, idx));
         if (idx + 1 < queue.length) setQueue(queue.slice(idx+1, queue.length))
+      } else {
+        setPrev([]);
+        setQueue([]);
       }
       
       setTimeout(()=>{handlePlay()}, 1);
