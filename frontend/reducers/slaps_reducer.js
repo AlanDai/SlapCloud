@@ -7,11 +7,14 @@ const initialState = {}
 
 const slapsReducer = (state = initialState, action) => {
   Object.freeze(state);
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_SLAPS:
-      return Object.assign({...state}, action.payload.slaps);
+      Object.keys(action.payload.slaps).forEach(key => {
+        newState[key] = action.payload.slaps[key];
+      })
+      return newState;
     case RECEIVE_SLAP:
-      const newState = Object.assign({}, state)
       newState[action.payload.slap.id] = action.payload.slap;
       return newState;
     default:

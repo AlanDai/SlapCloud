@@ -41,6 +41,15 @@
   margin-bottom: 5px;
 }
 
+#profile-header-info > input {
+  border: solid 2px #FF4500;
+  border-radius: 3px;
+}
+
+#profile-header-info > input[type="submit"] {
+  font-size: 15px;
+}
+
 #info-username {
   font-size: 24px;
 }

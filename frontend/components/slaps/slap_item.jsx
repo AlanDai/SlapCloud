@@ -88,7 +88,7 @@ class SlapItem extends React.Component {
         <NavLink to={`slap/${slap.id}`}>{this.loadSlapImage()}</NavLink>
         <PlayButtonContainer slap={slap}/>
         <div className="slap-item-info">  
-          <Link to={`/user/${slap.uploader.id}`}><p className="slap-item-user">{slap.uploader.email}</p></Link>
+          <Link to={`/user/${slap.uploader.id}`}><p className="slap-item-user">{slap.uploader.username ? slap.uploader.username : slap.uploader.email}</p></Link>
           <Link to={`/slap/${slap.id}`}><p className="slap-item-title">{slap.name}</p></Link>
         </div>
         <div className="slap-item-right">
