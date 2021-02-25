@@ -48,7 +48,7 @@ class MusicPlayer extends React.Component {
   }
 
   rewindButton = () => {
-    if (this.props.prev.length && this.state.currentTime != 0) {
+    if (!this.state.currentTime || (this.props.prev.length && this.state.currentTime != 0)) {
       return (
         <button onClick={this.handleRewind}>
           <FontAwesomeIcon icon="step-backward" />
