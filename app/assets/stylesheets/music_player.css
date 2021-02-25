@@ -8,6 +8,7 @@
   height: 48px;
   background-color: #F2F2F2;
   border-top: 1px solid #CECECE;
+  z-index: 99;
 }
 
 #music-player *:focus {

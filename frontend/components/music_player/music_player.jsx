@@ -16,15 +16,22 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Space") this.handlePlay(e);
-    });
+  // componentDidMount = () => {
+  //   document.addEventListener("keydown", (e) => {
+  //     if(e.key === "Space") this.handlePlay(e);
+  //   });
+  // }
+
+  componentDidUpdate = (prevProps) => {
+    if(prevProps.curr != this.props.curr) {
+      const mp = document.getElementById('audio');
+      mp.play();
+    }
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("keydown", () => {})
-  }
+  // componentWillUnmount() {
+  //   document.removeEventListener("keydown", () => {})
+  // }
 
   loadMPComponents = () => {
     return (
@@ -40,24 +47,36 @@ class MusicPlayer extends React.Component {
     )
   }
 
-  rewindButton = () => (
-    <button onClick={this.handleRewind}>
-      <FontAwesomeIcon icon="step-backward" />
-    </button>
-  )
+  rewindButton = () => {
+    if (!this.state.currentTime || (this.props.prev.length && this.state.currentTime != 0)) {
+      return (
+        <button onClick={this.handleRewind}>
+          <FontAwesomeIcon icon="step-backward" />
+        </button>
+      )
+    } else {
+      return (
+        <button>
+          <FontAwesomeIcon icon="step-backward" style={{ color: "#888888" }} />
+        </button>
+      )
+    }
+  }
+    
 
   handleRewind = e => {
     const mp = document.getElementById('audio');
 
-    if(mp.currentTime > 10 && this.props.prev.length > 0) {
-      this.props.addPreviousSlap(this.props.curr.id);
-      this.props.setCurrentSlap(this.props.prev.pop());
+    if(mp.currentTime < 10 && this.props.prev.length > 0) {
+      this.setState({ currentTime: 0 });
+      mp.currentTime = 0;
+      this.props.addNextSlap(this.props.curr.id);
+      this.props.takePrevSlap();
     } else {
       mp.currentTime = 0;
       this.props.playSlap();
       mp.play();
     }
-
   }
 
   playButton = () => (
@@ -97,28 +116,37 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  fastForwardButton = () => (
-    <button onClick={this.handleNextSong}>
-      <FontAwesomeIcon icon="step-forward" />
-    </button>
-  )
+  fastForwardButton = () => {
+    if (this.props.next.length && this.state.currentTime != this.state.duration) {
+      return (
+        <button onClick={this.handleFastForward}>
+          <FontAwesomeIcon icon="step-forward" />
+        </button>
+      )
+    } else {
+      return (
+        <button>
+          <FontAwesomeIcon icon="step-forward" style={{ color: "#888888" }} />
+        </button>
+      )
+    }
+  }
 
-  handleNextSong = (e) => {
+  handleFastForward = (e) => {
+    const mp = document.getElementById('audio')
+
     if (!this.props.next.length) {
+      this.setState({ currentTime: this.state.duration })
+      mp.currentTime = this.state.duration;
+      mp.pause();
       this.props.pauseSlap();
-      return;
-    }
-
-    const mp = document.getElementById('audio');
-
-    if (!this.state.looping) {
+      
+    } else {
+      this.setState({ currentTime: 0 })
+      mp.currentTime = 0;
       this.props.addPreviousSlap(this.props.curr.id);
-      this.props.setCurrentSlap(this.props.next.shift());
+      this.props.takeNextSlap();
     }
-
-    mp.currentTime = 0;
-    this.props.playSlap();
-    mp.play();
   }
 
   loopButton = () => (
@@ -257,6 +285,24 @@ class MusicPlayer extends React.Component {
 
   handleMetaData = (e) => {
     this.setState({ duration: e.target.duration });
+  }
+
+  handleNextSong = (e) => {
+    if (!this.props.next.length) {
+      this.props.pauseSlap();
+      return;
+    }
+
+    const mp = document.getElementById('audio');
+    mp.currentTime = 0;
+    this.setState({ currentTime: 0 });
+
+    if (this.state.looping) {
+      mp.play();
+    } else {
+      this.props.addPreviousSlap(this.props.curr.id);
+      this.props.takeNextSlap();
+    }
   }
 
   render() {

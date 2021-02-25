@@ -14,16 +14,32 @@ export const setCurrentSlap = slapId => ({
   payload: slapId
 })
 
+export const PULL_PREV_SLAP = 'PULL_PREV_SLAP';
+export const takePrevSlap = () => ({
+  type: PULL_PREV_SLAP,
+})
+
 export const RECEIVE_PREV_SLAP = 'RECEIVE_PREV_SLAP';
 export const addPreviousSlap = slapId => ({
   type: RECEIVE_PREV_SLAP,
   payload: slapId
 })
 
+export const PULL_NEXT_SLAP = 'PULL_NEXT_SLAP';
+export const takeNextSlap = () => ({
+  type: PULL_NEXT_SLAP,
+})
+
 export const RECEIVE_NEXT_SLAP = 'RECEIVE_NEXT_SLAP';
-export const fetchNextSlap = slapId => ({
+export const addNextSlap = slapId => ({
   type: RECEIVE_NEXT_SLAP,
   payload: slapId
+})
+
+export const RECEIVE_PREV = 'RECEIVE_PREV';
+export const setPrev = slaps => ({
+  type: RECEIVE_PREV,
+  payload: slaps
 })
 
 export const RECEIVE_QUEUE = 'RECEIVE_QUEUE';
