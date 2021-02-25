@@ -20,6 +20,11 @@ export const addPreviousSlap = slapId => ({
   payload: slapId
 })
 
+export const PULL_NEXT_SLAP = 'PULL_NEXT_SLAP';
+export const takeNextSlap = () => ({
+  type: PULL_NEXT_SLAP,
+})
+
 export const RECEIVE_NEXT_SLAP = 'RECEIVE_NEXT_SLAP';
 export const fetchNextSlap = slapId => ({
   type: RECEIVE_NEXT_SLAP,

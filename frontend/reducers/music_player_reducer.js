@@ -5,6 +5,7 @@
   RECEIVE_PREV,
   RECEIVE_PREV_SLAP,
   RECEIVE_CURR_SLAP,
+  PULL_NEXT_SLAP,
   RECEIVE_NEXT_SLAP
 } from '../actions/music_player_actions'
 
@@ -17,7 +18,6 @@ const initialState = {
 
 const musicPlayerReducer = (state = initialState, action) => {
   Object.freeze(state);
-  let slaps;
   switch(action.type) {
 
     case PLAY_SLAP:
@@ -30,10 +30,14 @@ const musicPlayerReducer = (state = initialState, action) => {
       return Object.assign({}, state, {prev: action.payload})
 
     case RECEIVE_PREV_SLAP:
-      const played = state.prev.push(action.payload)
+      const played = state.prev + action.payload;
       return Object.assign({}, state, {prev: played})
     case RECEIVE_CURR_SLAP:
       return Object.assign({}, state, {curr: action.payload})
+    case PULL_NEXT_SLAP:
+      if (!state.next.length) return state;
+      var nextSlap = state.next.pop();
+      return Object.assign({}, state, {curr: nextSlap}, { next: state.next })
     case RECEIVE_NEXT_SLAP:
       let updatedQueue = state.next.unshift(action.payload)
       return Object.assign({}, state, {next: updatedQueue})

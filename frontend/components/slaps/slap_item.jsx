@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import { NavLink, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { showSlapLikes, createLike, deleteLike } from '../../util/like_api_util';
@@ -85,7 +85,7 @@ class SlapItem extends React.Component {
 
     return (
       <div className="slap-item">
-        <NavLink to={`slap/${slap.id}`}>{this.loadSlapImage()}</NavLink>
+        <Link to={`/slap/${slap.id}`}>{this.loadSlapImage()}</Link>
         <PlayButtonContainer slap={slap} idx={idx} queue={queue}/>
         <div className="slap-item-info">  
           <Link to={`/user/${slap.uploader.id}`}><p className="slap-item-user">{slap.uploader.username ? slap.uploader.username : slap.uploader.email}</p></Link>

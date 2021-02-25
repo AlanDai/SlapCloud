@@ -6,6 +6,7 @@ import {
   pauseSlap,
   addPreviousSlap,
   setCurrentSlap,
+  takeNextSlap,
   fetchNextSlap,
   setQueue
 } from '../../actions/music_player_actions';
@@ -27,6 +28,7 @@ const mapDispatchToProps = dispatch => ({
   pauseSlap: () => dispatch(pauseSlap()),
   addPreviousSlap: slapId => dispatch(addPreviousSlap(slapId)), 
   setCurrentSlap: slapId => dispatch(setCurrentSlap(slapId)),
+  takeNextSlap: () => dispatch(takeNextSlap()),
   fetchNextSlap: slapId => dispatch(fetchNextSlap(slapId)),
   setQueue: slaps => dispatch(setQueue(slaps)),
 })
