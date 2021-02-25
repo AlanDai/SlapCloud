@@ -16,11 +16,11 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Space") this.handlePlay(e);
-    });
-  }
+  // componentDidMount = () => {
+  //   document.addEventListener("keydown", (e) => {
+  //     if(e.key === "Space") this.handlePlay(e);
+  //   });
+  // }
 
   componentDidUpdate = (prevProps) => {
     if(prevProps.curr != this.props.curr) {
@@ -29,9 +29,9 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("keydown", () => {})
-  }
+  // componentWillUnmount() {
+  //   document.removeEventListener("keydown", () => {})
+  // }
 
   loadMPComponents = () => {
     return (
@@ -47,24 +47,36 @@ class MusicPlayer extends React.Component {
     )
   }
 
-  rewindButton = () => (
-    <button onClick={this.handleRewind}>
-      <FontAwesomeIcon icon="step-backward" />
-    </button>
-  )
+  rewindButton = () => {
+    if (this.props.prev.length) {
+      return (
+        <button onClick={this.handleRewind}>
+          <FontAwesomeIcon icon="step-backward" />
+        </button>
+      )
+    } else {
+      return (
+        <button>
+          <FontAwesomeIcon icon="step-backward" style={{ color: "#888888" }} />
+        </button>
+      )
+    }
+  }
+    
 
   handleRewind = e => {
     const mp = document.getElementById('audio');
 
-    if(mp.currentTime > 10 && this.props.prev.length > 0) {
-      this.props.addPreviousSlap(this.props.curr.id);
-      this.props.setCurrentSlap(this.props.prev.pop());
+    if(mp.currentTime < 10 && this.props.prev.length > 0) {
+      this.setState({ currentTime: 0 });
+      mp.currentTime = 0;
+      this.props.addNextSlap(this.props.curr.id);
+      this.props.takePrevSlap();
     } else {
       mp.currentTime = 0;
       this.props.playSlap();
       mp.play();
     }
-
   }
 
   playButton = () => (
@@ -104,11 +116,21 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  fastForwardButton = () => (
-    <button onClick={this.handleFastForward}>
-      <FontAwesomeIcon icon="step-forward" />
-    </button>
-  )
+  fastForwardButton = () => {
+    if (this.props.next.length) {
+      return (
+        <button onClick={this.handleFastForward}>
+          <FontAwesomeIcon icon="step-forward" />
+        </button>
+      )
+    } else {
+      return (
+        <button>
+          <FontAwesomeIcon icon="step-forward" style={{ color: "#888888" }} />
+        </button>
+      )
+    }
+  }
 
   handleFastForward = (e) => {
     const mp = document.getElementById('audio')

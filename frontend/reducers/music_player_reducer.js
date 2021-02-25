@@ -3,6 +3,7 @@
   PAUSE_SLAP,
   RECEIVE_QUEUE,
   RECEIVE_PREV,
+  PULL_PREV_SLAP,
   RECEIVE_PREV_SLAP,
   RECEIVE_CURR_SLAP,
   PULL_NEXT_SLAP,
@@ -18,6 +19,7 @@ const initialState = {
 
 const musicPlayerReducer = (state = initialState, action) => {
   Object.freeze(state);
+  const newState = Object.assign({}, state)
   switch(action.type) {
 
     case PLAY_SLAP:
@@ -29,18 +31,22 @@ const musicPlayerReducer = (state = initialState, action) => {
     case RECEIVE_PREV:
       return Object.assign({}, state, {prev: action.payload})
 
+    case PULL_PREV_SLAP:
+      if (!newState.prev.length) return newState;
+      var prevSlap = newState.prev.pop();
+      return Object.assign({}, newState, {curr: prevSlap}, {prev: newState.prev})
     case RECEIVE_PREV_SLAP:
-      const played = state.prev + action.payload;
-      return Object.assign({}, state, {prev: played})
+      newState.prev.push(action.payload);
+      return newState;
     case RECEIVE_CURR_SLAP:
       return Object.assign({}, state, {curr: action.payload})
     case PULL_NEXT_SLAP:
-      if (!state.next.length) return state;
-      var nextSlap = state.next.pop();
-      return Object.assign({}, state, {curr: nextSlap}, { next: state.next })
+      if (!newState.next.length) return newState;
+      var nextSlap = newState.next.shift();
+      return Object.assign({}, newState, {curr: nextSlap}, {next: newState.next})
     case RECEIVE_NEXT_SLAP:
-      let updatedQueue = state.next.unshift(action.payload)
-      return Object.assign({}, state, {next: updatedQueue})
+      newState.next.unshift(action.payload)
+      return newState;
 
     default:
       return state
