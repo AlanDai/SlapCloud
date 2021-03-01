@@ -38,11 +38,7 @@ To accomplish the first goal, I created a custom music player that utilized a hi
 
 Another direction I could've taken would be to create individual components for larger pieces of the player, like the slider bar. I thought against this approach not only because I couldn't see another place where these components would be used but becaues I wanted the logic of the music player to be consolidated in one file. Each function renders a different bunch of elementse with its own event handlers.
 
-For the persisting music player goal, I utilized a mix of redux and JavaScript. My state management was pretty straight forward, handling slap ids that would reference the slaps slice: 
-
-![Screen Shot 2021-03-01 at 9 54 54 AM](https://user-images.githubusercontent.com/10728663/109537806-32ae2280-7a74-11eb-9d82-b8df1576fa8b.png)
-
-I would have break down the music player queue into three parts: prev for previous played, curr for currently playing, and next for queued up songs. The gave me flexibility to future features that would need to insert songs into the queue. Playing songs via any page would change the queue and thus cause the music player to rerender.
+For the persisting music player goal, I utilized a mix of redux and JavaScript. I would have break down the music player queue into three parts: prev for previous played, curr for currently playing, and next for queued up songs. The gave me flexibility to future features that would need to insert songs into the queue. Playing songs via any page would change the queue and thus cause the music player to rerender.
 
 
 Features still in development:
