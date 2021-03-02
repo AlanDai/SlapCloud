@@ -1,8 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactGA from "react-ga";
 import configureStore from "./store/store";
 
 import Root from "./components/root";
+
+const TRACKING_ID = "G-YWD05BBW47";
+function initializeReactGA() {
+    ReactGA.initialize(TRACKING_ID);
+    ReactGA.pageview('/');
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
@@ -24,5 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
     store = configureStore();
   }
 
+  initializeReactGA();
+
   ReactDOM.render(<Root store={store} />, root);
 });
+
