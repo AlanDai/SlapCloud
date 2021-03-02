@@ -8,9 +8,8 @@ import Root from "./components/root";
 const TRACKING_ID = "G-YWD05BBW47";
 function initializeReactGA() {
     ReactGA.initialize(TRACKING_ID);
-    ReactGA.pageview('/');
+    ReactGA.pageview('/homepage');
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
