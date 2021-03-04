@@ -6,6 +6,8 @@ body {
 }
 
 .navbar {
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +17,10 @@ body {
   background-color: #383838;
   font-family: 'Overpass', sans-serif;
   font-size: 14.5px;
+}
+
+#discover-page, #profile-page, #show-page, #search-page {
+  padding-top: 45px;
 }
 
 .logo {
